@@ -1,0 +1,12 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="58f3668a-4b3a-414e-b5a5-5978219e8f98"
+  Name="Go To ParameterizedSDL Demo"
+  Description="Go to a page that contains a demo of a parameterized SDL"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="100"
+  >
+  <c:ShowPage PageID="3650853b-6296-49f0-bee0-79a55a9645db"/>
+</TaskSpec>

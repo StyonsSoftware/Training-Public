@@ -1,0 +1,6 @@
+C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\bin\debug\Training.Catalog.dll
+C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\bin\debug\Training.Catalog.pdb
+C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.vbprojAssemblyReference.cache
+C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.vbproj.CoreCompileInputs.cache
+C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.dll
+C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.pdb

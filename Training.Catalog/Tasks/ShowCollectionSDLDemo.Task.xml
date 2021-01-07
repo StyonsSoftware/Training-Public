@@ -1,0 +1,12 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="e115f3fb-e367-47f9-b3cf-627249508eb3"
+  Name="Show Collection SDL Demo"
+  Description="Show the test add form that includes a parameter-driven SDL in a collection"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="200"
+  >
+  <c:ShowAddDataForm DataFormID="3f94c107-99a8-4574-9b0d-3d95e75f8f21"/>
+</TaskSpec>

@@ -1,0 +1,6 @@
+C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\bin\debug\Training.UIModel.dll
+C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\bin\debug\Training.UIModel.pdb
+C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.vbproj.CoreCompileInputs.cache
+C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.dll
+C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.pdb
+C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.vbprojAssemblyReference.cache

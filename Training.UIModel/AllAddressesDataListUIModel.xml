@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>AllAddresses.Datalist.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>AllAddressesDataListUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>AllAddressesDataList.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

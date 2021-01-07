@@ -1,0 +1,72 @@
+<AddDataFormTemplateSpec 
+    xmlns="bb_appfx_adddataformtemplate"
+    xmlns:c="bb_appfx_commontypes"
+    ID="4c259b92-0f57-40f3-bf9a-6d0e853c2932"
+    Name="Collection Driven SDL Add Data Form"
+    Description="Demo of a collection field, where SDLs drive each other within the grid"
+    Author="Styons Software"
+    DataFormInstanceID="3f94c107-99a8-4574-9b0d-3d95e75f8f21"
+    RecordType="Collection Driven SDL"
+    c:SecurityUIFolder="Collection Driven SDL"
+    FormHeader="Driven SDL within a collection"
+    >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_COLLECTIONDRIVENSDL">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_ADD_COLLECTIONDRIVENSDL
+(
+  @ID            uniqueidentifier = null output
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@LOCATIONS     xml              = null
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  begin try
+    select 1--don't need to save anything, this is a UI demo
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="LOCATIONS" Caption="Locations" DataType="XML">
+        <Collection>
+          <Fields>
+            <FormField FieldID="NAME" DataType="String" Caption="Name"/>
+            <FormField FieldID="COUNTRYID" DataType="Guid" Caption="Country">
+              <SimpleDataList SimpleDataListID="c9649672-353d-42e8-8c25-4d34bbabfbba"/>
+            </FormField>
+            <FormField FieldID="STATEID" DataType="Guid" Caption="State">
+              <SimpleDataList SimpleDataListID="b46d36d1-d3ed-4f6e-91da-89b6c88ca0c6">
+                <Params>
+                  <Param ID="COUNTRYID">
+                    <Value>Fields!COUNTRYID</Value>
+                  </Param>
+                </Params>
+              </SimpleDataList>
+            </FormField>
+          </Fields>
+        </Collection>
+      </FormField>
+    </FormFields>
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.CollectionDrivenSDLAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/CollectionDrivenSDLAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</AddDataFormTemplateSpec>

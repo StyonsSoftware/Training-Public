@@ -1,0 +1,23 @@
+<PageDefinitionSpec
+  xmlns="bb_appfx_pagedefinition"
+  xmlns:c="bb_appfx_commontypes"
+  ID="3650853b-6296-49f0-bee0-79a55a9645db"
+  Name="ParameterizedSD L Page"
+  Description="A page for displaying information about parameterizedsd l records"
+  Author="Styons Software"
+  >
+  <PageHeader Caption="Parameterized Simple Datalist Demo"/>
+  <Tabs>
+    <Tab ID="d2d40c5b-cc2e-4880-a6f8-fc2219642e54" Caption="Addresses">
+      <Sections>
+        <Section ID="8bc65715-03c5-460f-b61e-f821952cb91d" Caption="Addresses">
+          <DataList ID="80758453-2497-4ae0-8bcc-f7f70064ef4b">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+        </Section>
+      </Sections>
+    </Tab>
+  </Tabs>
+</PageDefinitionSpec>

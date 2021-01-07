@@ -1,0 +1,9 @@
+<FunctionalAreaSpec
+  xmlns="bb_appfx_functionalarea"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Name="Training"
+  Description="Contains Training Artifacts"
+  Author="Styons Software"
+  Sequence="9999"
+/>

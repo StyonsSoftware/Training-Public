@@ -1,0 +1,72 @@
+<DataListSpec 
+    xmlns="bb_appfx_datalist"
+    xmlns:c="bb_appfx_commontypes"
+    ID="80758453-2497-4ae0-8bcc-f7f70064ef4b"
+    Name="All Addresses Data List"
+    Description="A data list showing all addresses"
+    Author="Styons Software"
+    c:SecurityUIFolder="All Addresses"
+    >
+  <SPDataList SPName="USR_USP_DATALIST_ALLADDRESSES">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_USP_DATALIST_ALLADDRESSES
+(
+  @COUNTRYID UNIQUEIDENTIFIER = NULL
+ ,@STATEID   UNIQUEIDENTIFIER = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SELECT
+    A.ID
+   ,A.ADDRESSBLOCK
+   ,A.CITY
+   ,S.ABBREVIATION AS STATE
+   ,C.DESCRIPTION AS COUNTRY
+   ,A.POSTCODE
+  FROM
+    ADDRESS A
+    LEFT JOIN STATE S ON S.ID = A.STATEID
+    LEFT JOIN COUNTRY C ON C.ID = A.COUNTRYID
+  WHERE ((@COUNTRYID IS NULL) OR (C.ID = @COUNTRYID))
+    AND ((@STATEID IS NULL) OR (S.ID = @STATEID))
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+  <Parameters>
+    <FormMetaData xmlns="bb_appfx_commontypes">
+      <FormFields>
+        <FormField FieldID="COUNTRYID" DataType="Guid" Caption="Country">
+          <SimpleDataList SimpleDataListID="c9649672-353d-42e8-8c25-4d34bbabfbba" />
+        </FormField>
+        <FormField FieldID="STATEID" DataType="Guid" Caption="State">
+          <SimpleDataList SimpleDataListID="b46d36d1-d3ed-4f6e-91da-89b6c88ca0c6">
+            <Params>
+              <Param ID="COUNTRYID">
+                <Value>Fields!COUNTRYID</Value>
+              </Param>
+            </Params>
+          </SimpleDataList>
+        </FormField>
+      </FormFields>
+      <WebUIComponent>
+        <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.AllAddressesDataListUIModel" />
+        <WebUI>
+          <ExternalResource Url="browser/htmlforms/custom/training/AllAddressesDataList.html" />
+        </WebUI>
+      </WebUIComponent>
+    </FormMetaData>
+  </Parameters>
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="ID" Caption="ID" DataType="Guid" IsHidden="true" />
+      <OutputField FieldID="ADDRESSBLOCK" Caption="Address" DataType="String" />
+      <OutputField FieldID="CITY" Caption="City" DataType="String" />
+      <OutputField FieldID="STATE" Caption="State" DataType="String" />
+      <OutputField FieldID="COUNTRY" Caption="Country" DataType="String" />
+      <OutputField FieldID="POSTCODE" Caption="Postcode" DataType="String" />
+    </OutputFields>
+  </Output>
+</DataListSpec>
