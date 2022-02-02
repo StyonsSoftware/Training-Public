@@ -1,0 +1,36 @@
+<RecordOperationSpec 
+    xmlns:c="bb_appfx_commontypes"
+    ID="258d433d-fd15-44b7-bd8d-5459811fa5c0"
+    Name="Constituent HTML Delete"
+    Description="Used to delete the given Constituent HTML"
+    Author="Styons Software"
+    RecordType="Constituent HTML"
+    OperationType="Delete"
+    c:SecurityUIFolder="Constituent HTML"
+    xmlns="bb_appfx_recordoperation"
+    >
+    <SPRecord>
+        <SPOperationImplementation SPName="USP_CONSTITUENT_HTML_DELETE">
+            <c:CreateProcedureSQL>
+<![CDATA[
+create procedure dbo.USP_CONSTITUENT_HTML_DELETE
+(
+	@ID uniqueidentifier,
+	@CHANGEAGENTID uniqueidentifier
+)
+as begin
+	--check deletion rules, if any
+
+	-- use the system generated delete routine to allow proper recording of the deleting agent
+	exec USP_USR_SSC_HTMLDATA_DELETEBYID_WITHCHANGEAGENTID @ID, @CHANGEAGENTID
+	return 0;
+	
+end
+]]>
+</c:CreateProcedureSQL>
+        </SPOperationImplementation>
+    </SPRecord>
+    <Prompt>
+        <StandardPrompt Text="Are you sure you want to delete this Constituent HTML" />
+    </Prompt>
+</RecordOperationSpec>

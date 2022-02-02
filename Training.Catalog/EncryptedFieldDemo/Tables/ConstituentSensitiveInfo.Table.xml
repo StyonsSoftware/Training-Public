@@ -1,0 +1,23 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="71fb923b-0512-4674-a8c3-b6892fb1ba50"
+  Name="Sensitive Constituent Information"
+  Description="Stores sensitive (i.e., encrypted) records associated with a constituent"
+  Author="Styons Software"
+  Tablename="USR_SENSITIVEINFO"
+  IsBuiltIn="false"
+  >
+  <Fields>
+    <ForeignKeyField ForeignTable="CONSTITUENT" Name="CONSTITUENTID"/>
+    <TextField Name="INSECUREDESCRIPTION" Length="100" Description="Decrypted description of what's in the encyrpted field" Required="true"/>
+    <EncryptedField Name="SENSITIVEINFO" PlainTextLength="1000" Description="Encrypted data"/>
+  </Fields>
+  <Indexes>
+    <Index>
+      <IndexFields>
+        <IndexField Name="CONSTITUENTID"/>
+      </IndexFields>
+    </Index>
+  </Indexes>
+</TableSpec>

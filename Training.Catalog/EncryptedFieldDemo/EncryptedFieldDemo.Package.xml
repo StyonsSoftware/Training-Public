@@ -1,0 +1,82 @@
+<PackageSpec
+  xmlns="bb_appfx_package"
+  xmlns:c="bb_appfx_commontypes"
+  ID="e142c9cd-a56f-4b39-880d-22aa8feb1232"
+  Name="Encrypted Field Demo Package"
+  Description="Demo of how to encrypt and decrypt fields in Blackbaud CRM"
+  Author="Styons Software"
+  >
+  <DependencyList xmlns="bb_appfx_commontypes">
+    <!--Tables-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentSensitiveInfo.Table.xml"/>
+    
+    <!--Datalists-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentSensitiveInfo.Datalist.xml"/>
+    
+    <!--Add forms-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentSensitiveInfo.Add.xml"/>
+
+    <!--Edit forms-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentSensitiveInfo.Edit.xml"/>
+
+    <!--Record operations-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentSensitiveInfoDelete.RecordOperation.xml"/>
+  
+    <!--Query views-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentSensitiveInfo.Query.xml"/>
+  </DependencyList>
+
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterTabs>
+          <AddTab Sequence="9000">
+            <Tab ID="6e5d21e8-2d10-4aab-b655-de22d78701a1" Caption="Sensitive information">
+              <Sections>
+                <Section ID="1967633a-4c9d-430f-adc6-d48e3095fb73" Caption="Sensitive information">
+                  <DataList ID="8785c7ef-fcb6-4d97-8f7d-bbd6930eac7a">
+                    <RenderStyle>
+                      <StandardView/>
+                    </RenderStyle>
+                  </DataList>
+                  <Actions>
+                    <Action ID="51ac4a08-5b3e-41ed-91be-7134e96ca34e" Caption="Add">
+                      <c:ShowAddDataForm DataFormID="b2fd80ef-0241-4c2d-9c51-ed6a36c5a5c6">
+                        <c:ActionContext>
+                          <c:PageContextID/>
+                        </c:ActionContext>
+                        <c:PostActionEvent>
+                          <c:RefreshSection/>
+                        </c:PostActionEvent>
+                      </c:ShowAddDataForm>
+                    </Action>
+                    <Action ID="117a2f2d-9cad-465e-b385-188f9bda0c49" Caption="Edit">
+                      <c:ShowDataForm DataFormID="7e6642ec-152b-42bc-94ee-1c4d9b75a94d">
+                        <c:ActionContext>
+                          <c:SectionField>ID</c:SectionField>
+                        </c:ActionContext>
+                        <c:PostActionEvent>
+                          <c:RefreshSection/>
+                        </c:PostActionEvent>
+                      </c:ShowDataForm>
+                    </Action>
+                    <Action ID="af333345-3682-4e93-b8cc-daebe7f10799" Caption="Delete">
+                      <c:ExecuteRecordOperation RecordOperationID="beb4bf09-4141-4437-b96e-b98547ac7e2e">
+                        <c:ActionContext>
+                          <c:SectionField>ID</c:SectionField>
+                        </c:ActionContext>
+                        <c:PostActionEvent>
+                          <c:RefreshSection/>
+                        </c:PostActionEvent>
+                      </c:ExecuteRecordOperation>
+                    </Action>
+                  </Actions>
+                </Section>
+              </Sections>
+            </Tab>
+          </AddTab>
+        </AlterTabs>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</PackageSpec>

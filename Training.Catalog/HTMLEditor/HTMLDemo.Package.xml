@@ -1,0 +1,22 @@
+<PackageSpec
+  xmlns="bb_appfx_package"
+  xmlns:c="bb_appfx_commontypes"
+  ID="638437cd-ab68-46bc-9d82-7ca9b8aa05f5"
+  Name="HTML Demo Package"
+  Description="Loads an HTML Editing demo on the constituent page"
+  Author="Styons Software"
+  >
+  <DependencyList xmlns="bb_appfx_commontypes">
+    <!--Tables-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.HTMLEditor.ConstituentHTML.Table.xml"/>
+    
+    <!--Add forms-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.HTMLEditor.ConstituentHTML.Add.xml"/>
+
+    <!--View forms-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.HTMLEditor.ConstituentHTML.View.xml"/>
+    
+    <!--Datalists-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.HTMLEditor.ConstituentHTML.Datalist.xml"/>
+  </DependencyList>
+</PackageSpec>

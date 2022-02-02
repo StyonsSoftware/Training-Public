@@ -20,4 +20,12 @@
       </Sections>
     </Tab>
   </Tabs>
+  <PageExpressionForms>
+    <!--Add as many as you like.-->
+    <PageExpressionForm DataFormInstanceID="18bdbd40-0bd9-4307-a2eb-836192139b4d"/>
+    <PageExpressionForm DataFormInstanceID="7951a423-6dcb-400f-ac12-e6edb422b712"/>
+    <PageExpressionForm DataFormInstanceID="364e839e-d2da-489d-ab77-80a8ae2f5a52"/>
+    <PageExpressionForm DataFormInstanceID="83a7e599-0baa-49b6-b6a2-5bc7211e6242"/>
+  </PageExpressionForms>
+  
 </PageDefinitionSpec>

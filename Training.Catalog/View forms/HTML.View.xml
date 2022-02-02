@@ -1,0 +1,47 @@
+<ViewDataFormTemplateSpec
+  xmlns="bb_appfx_viewdataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="63344316-05d4-4009-ab61-7107369c6f12"
+  Name="HTML View Data Form"
+  Description="A data form for viewing html records"
+  Author="Styons Software"
+  DataFormInstanceID="f22dd105-3dac-4045-8320-e9f77069528a"
+  RecordType="HTML"
+  c:SecurityUIFolder="HTML"
+  >
+  <SPDataForm SPName="USR_SSC_USP_DATAFORMTEMPLATE_VIEW_HTML">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_SSC_USP_DATAFORMTEMPLATE_VIEW_HTML
+(
+  @ID         UNIQUEIDENTIFIER
+ ,@DATALOADED BIT              = 0    OUTPUT
+ ,@HTMLFIELD  NVARCHAR(MAX)    = NULL OUTPUT
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @DATALOADED = 1
+  SELECT @HTMLFIELD = HTMLNOTE
+  FROM CONSTITUENTNOTE
+  WHERE ID = @ID
+  RETURN 0
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="HTMLFIELD" Caption="Note">
+        <Html/>
+      </FormField>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.HTMLViewDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/HTMLViewDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</ViewDataFormTemplateSpec>

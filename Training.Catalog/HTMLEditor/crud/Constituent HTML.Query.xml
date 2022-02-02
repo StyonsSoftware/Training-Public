@@ -1,0 +1,66 @@
+<QueryViewSpec 
+    xmlns:c="bb_appfx_commontypes"
+    ID="316770d1-47ff-40db-b68d-d50820bcf58d"
+    Name="Constituent HTML"
+    Description="Provides support for querying on Constituent HTML information."
+    Author="Styons Software"
+    PrimaryKeyField="ID"
+    RecordType="Constituent HTML"
+    IsRoot="true"
+    c:SecurityUIFolder="Constituent HTML"
+    xmlns="bb_appfx_queryview"
+    >
+    <ViewImplementation ViewName="V_QUERY_USR_SSC_HTMLDATA">
+        <ViewSQL>
+<![CDATA[
+select
+    USR_SSC_HTMLDATA.ID,
+    USR_SSC_HTMLDATA.[CONSTITUENTID],
+    USR_SSC_HTMLDATA.[HTMLVALUE],
+    USR_SSC_HTMLDATA.[PLAINTEXTVALUE],
+	ADDEDBY.APPLICATIONNAME as [ADDEDBY_APPLICATION],
+	ADDEDBY.USERNAME as [ADDEDBY_USERNAME],
+	CHANGEDBY.APPLICATIONNAME as [CHANGEDBY_APPLICATION],
+	CHANGEDBY.USERNAME as [CHANGEDBY_USERNAME],
+	USR_SSC_HTMLDATA.DATEADDED,
+	USR_SSC_HTMLDATA.DATECHANGED,
+	USR_SSC_HTMLDATA.TSLONG
+from 
+    dbo.USR_SSC_HTMLDATA
+    left join dbo.CHANGEAGENT as [ADDEDBY] on [ADDEDBY].ID = USR_SSC_HTMLDATA.ADDEDBYID
+    left join dbo.CHANGEAGENT as [CHANGEDBY] on [CHANGEDBY].ID = USR_SSC_HTMLDATA.CHANGEDBYID
+]]>
+</ViewSQL>
+    </ViewImplementation>
+    <Output>
+        <OutputFields>
+            <OutputField Name="ID" Caption="System record ID" Category="System Fields" DataType="Guid" />
+            <OutputField Name="CONSTITUENTID" Caption="Constituent" DataType="Guid" />
+            <OutputField Name="HTMLVALUE" Caption="Htmlvalue" />
+            <OutputField Name="PLAINTEXTVALUE" Caption="Plaintextvalue" />
+            <OutputField Name="ADDEDBY_APPLICATION" Caption="Added by application" Category="System Fields">
+                <LookupInfo>
+                    <SimpleDataList SimpleDataListID="37e3e458-af0d-4dbc-8a18-a93885521a42" />
+                </LookupInfo>
+            </OutputField>
+            <OutputField Name="ADDEDBY_USERNAME" Caption="Added by user name" Category="System Fields">
+                <LookupInfo>
+                    <SimpleDataList SimpleDataListID="cea15e1c-e455-41be-9ecf-6b5453fa96a4" />
+                </LookupInfo>
+            </OutputField>
+            <OutputField Name="CHANGEDBY_APPLICATION" Caption="Changed by application" Category="System Fields">
+                <LookupInfo>
+                    <SimpleDataList SimpleDataListID="37e3e458-af0d-4dbc-8a18-a93885521a42" />
+                </LookupInfo>
+            </OutputField>
+            <OutputField Name="CHANGEDBY_USERNAME" Caption="Changed by user name" Category="System Fields">
+                <LookupInfo>
+                    <SimpleDataList SimpleDataListID="cea15e1c-e455-41be-9ecf-6b5453fa96a4" />
+                </LookupInfo>
+            </OutputField>
+            <OutputField Name="DATEADDED" Caption="Date added" Category="System Fields" DataType="Date" />
+            <OutputField Name="DATECHANGED" Caption="Date changed" Category="System Fields" DataType="Date" />
+            <OutputField Name="TSLONG" Caption="Timestamp value" IsHidden="true" Category="System Fields" DataType="Long" />
+        </OutputFields>
+    </Output>
+</QueryViewSpec>

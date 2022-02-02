@@ -1,0 +1,86 @@
+<DataListSpec
+  xmlns:c="bb_appfx_commontypes"
+  ID="5610ccf8-eaef-4ad9-9a4a-4c0ef7197b06"
+  Name="Constituent HTML List"
+  Description="Returns all Constituent HTML records."
+  Author="Styons Software"
+  c:SecurityUIFolder="Training\Constituent HTML"
+  xmlns="bb_appfx_datalist"
+  >
+  <SPDataList SPName="USR_SSC_USP_DATALIST_CONSTITUENT_HTML">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+create procedure USR_SSC_USP_DATALIST_CONSTITUENT_HTML
+(
+  @CONSTITUENTID UNIQUEIDENTIFIER
+)
+as
+begin
+  set nocount on
+  select 
+    H.ID
+   ,H.CONSTITUENTID
+   ,H.HTMLVALUE
+   ,H.PLAINTEXTVALUE
+	from
+    USR_SSC_HTMLDATA H
+  WHERE H.CONSTITUENTID = @CONSTITUENTID
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+  
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+  
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="ID" Caption="ID" IsHidden="true" DataType="Guid"/>
+      <OutputField FieldID="CONSTITUENTID" Caption="Constituent" DataType="Guid"/>
+      <OutputField FieldID="HTMLVALUE" Caption="Htmlvalue" DataType="String"/>
+      <OutputField FieldID="PLAINTEXTVALUE" Caption="Plaintextvalue" DataType="String"/>
+    </OutputFields>
+  </Output>
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AddPageExpressionForms>
+          <PageExpressionForm DataFormInstanceID="5c4a3d7c-8c7b-4267-b5b7-07ae266e31b0"/>
+        </AddPageExpressionForms>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+  
+  
+        <AlterTabs>
+          <AddTab Sequence="5000">
+            <Tab Caption="HTML Data" ID="1ef2b2ad-6e62-4612-955f-9a6e158f2efd">
+              <Sections>
+                <Section Caption="HTML Data" ID="3f17540f-b426-4178-8023-eb37429565f7">
+                  <DataList ID="5610ccf8-eaef-4ad9-9a4a-4c0ef7197b06">
+                    <RenderStyle>
+                      <StandardView>
+                        <DetailViewForm ViewDataFormID="fd0d9cbe-f3fb-4554-82dc-cf2226f2d9f5" RecordIDField="ID"/>
+                      </StandardView>
+                    </RenderStyle>
+                  </DataList>
+                  <SectionContext>
+                    <c:PageContextID/>
+                  </SectionContext>
+                  <Actions>
+                    <Action Caption="Add" ID="3bbe0185-74c6-4de5-9ef9-fdfb30a2acab">
+                      <c:ShowAddDataForm DataFormID="a6b96780-0731-4ad6-9937-a33cb992e608">
+                        <c:ActionContext>
+                          <c:PageContextID/>
+                        </c:ActionContext>
+                      </c:ShowAddDataForm>
+                    </Action>
+                  </Actions>
+                </Section>
+              </Sections>
+            </Tab>
+          </AddTab>
+        </AlterTabs>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</DataListSpec>

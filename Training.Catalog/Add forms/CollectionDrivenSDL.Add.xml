@@ -1,15 +1,15 @@
 <AddDataFormTemplateSpec 
-    xmlns="bb_appfx_adddataformtemplate"
-    xmlns:c="bb_appfx_commontypes"
-    ID="4c259b92-0f57-40f3-bf9a-6d0e853c2932"
-    Name="Collection Driven SDL Add Data Form"
-    Description="Demo of a collection field, where SDLs drive each other within the grid"
-    Author="Styons Software"
-    DataFormInstanceID="3f94c107-99a8-4574-9b0d-3d95e75f8f21"
-    RecordType="Collection Driven SDL"
-    c:SecurityUIFolder="Collection Driven SDL"
-    FormHeader="Driven SDL within a collection"
-    >
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="4c259b92-0f57-40f3-bf9a-6d0e853c2932"
+  Name="Collection Driven SDL Add Data Form"
+  Description="Demo of a collection field, where SDLs drive each other within the grid"
+  Author="Styons Software"
+  DataFormInstanceID="3f94c107-99a8-4574-9b0d-3d95e75f8f21"
+  RecordType="Collection Driven SDL"
+  c:SecurityUIFolder="Training\Collections"
+  FormHeader="Driven SDL within a collection"
+  >
   <SPDataForm>
     <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_COLLECTIONDRIVENSDL">
       <c:CreateProcedureSQL>

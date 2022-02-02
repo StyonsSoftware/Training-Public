@@ -1,0 +1,89 @@
+<EditDataFormTemplateSpec 
+  xmlns="bb_appfx_editdataformtemplate"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="7a33d4f1-fe21-4485-8d28-0a722e6ec01e" 
+  Name="Constituent Sensitive Info Edit Data Form"
+  Description="A data form for editing constituent sensitive info records" 
+  Author="Styons Software"
+  DataFormInstanceID="7e6642ec-152b-42bc-94ee-1c4d9b75a94d" 
+  RecordType="Sensitive Constituent Information"
+  FormHeader="Edit a constituent sensitive info record"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_CONSTITUENTSENSITIVEINFO">
+      <c:CreateProcedureSQL>
+    <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_CONSTITUENTSENSITIVEINFO
+(
+  @ID                  uniqueidentifier
+ ,@DATALOADED          bit              = 0    output
+ ,@TSLONG              bigint           = 0    output
+ ,@INSECUREDESCRIPTION nvarchar(100)    = null output
+ ,@SENSITIVEINFO       nvarchar(1000)   = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  exec USP_GET_KEY_ACCESS
+  select
+    @TSLONG              = TSLONG
+   ,@INSECUREDESCRIPTION = INSECUREDESCRIPTION
+   ,@SENSITIVEINFO       = isnull(convert(nvarchar(100),DecryptByKey(SENSITIVEINFO)),'')
+  from
+    USR_SENSITIVEINFO
+  where ID = @ID
+  CLOSE SYMMETRIC KEY SYM_BBINFINITY
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_CONSTITUENTSENSITIVEINFO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_CONSTITUENTSENSITIVEINFO 
+(
+  @ID                  uniqueidentifier
+ ,@CHANGEAGENTID       uniqueidentifier = null
+ ,@INSECUREDESCRIPTION nvarchar(100)
+ ,@SENSITIVEINFO       nvarchar(1000)
+)
+as
+begin
+  set nocount on
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    exec USP_GET_KEY_ACCESS
+    update USR_SENSITIVEINFO
+    set
+      INSECUREDESCRIPTION = @INSECUREDESCRIPTION
+     ,SENSITIVEINFO       = EncryptByKey(Key_GUID('sym_BBInfinity'),convert(nvarchar(100),@SENSITIVEINFO))
+     ,CHANGEDBYID         = @CHANGEAGENTID
+     ,DATECHANGED         = @NOW
+    where ID = @ID
+    CLOSE SYMMETRIC KEY SYM_BBINFINITY
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="INSECUREDESCRIPTION" Caption="Description" Required="true" DataType="String" MaxLength="100"/>
+      <FormField FieldID="SENSITIVEINFO" Caption="Sensitive information" DataType="String" MaxLength="1000" Multiline="true"/>
+    </FormFields>
+  </FormMetaData>
+</EditDataFormTemplateSpec>

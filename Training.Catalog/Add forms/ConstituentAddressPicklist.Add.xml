@@ -1,0 +1,155 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="6ce646c5-50d1-475a-bdf1-0c17e3c6f43c"
+  Name="Constituent Address Picklist"
+  Description="Demo of a form that lets you pick from a list of available items and slide over to a list of selected items."
+  Author="Styons Software"
+  DataFormInstanceID="0aeced44-c0c4-430a-9d4f-b876cf6b4d7b"
+  RecordType="Address"
+  c:SecurityUIFolder="Training\Picklist"
+  FormHeader="Select addresses"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_PICKLIST_PRELOAD">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_PICKLIST_PRELOAD
+(
+  @CONSTITUENTID      UNIQUEIDENTIFIER
+ ,@AVAILABLEADDRESSES XML              = NULL OUTPUT
+ ,@SELECTEDADDRESSES  XML              = NULL OUTPUT
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  --Available addresses == all addresses on the constituent record except those which have been selected
+  SET @AVAILABLEADDRESSES = (
+    SELECT
+      A.ID           AS ADDRESSID
+     ,A.ADDRESSBLOCK AS ADDRESSBLOCK
+    FROM
+      [ADDRESS] A
+      LEFT JOIN USR_SELECTEDADDRESSES SA ON SA.ADDRESSID = A.ID
+    WHERE A.CONSTITUENTID = @CONSTITUENTID
+      AND SA.ID IS NULL
+    FOR XML RAW('ITEM'),TYPE,ELEMENTS,ROOT('AVAILABLEADDRESSES'),BINARY BASE64
+  )
+
+  --Selected addresses == all addresses that have been recorded in the USR_SELECTEDADDRESSES table
+  SET @SELECTEDADDRESSES = (
+    SELECT
+      A.ID           AS ADDRESSID
+     ,A.ADDRESSBLOCK AS ADDRESSBLOCK
+    FROM
+      [ADDRESS] A
+      JOIN USR_SELECTEDADDRESSES SA ON SA.ADDRESSID = A.ID
+    WHERE A.CONSTITUENTID = @CONSTITUENTID
+    FOR XML RAW('ITEM'),TYPE,ELEMENTS,ROOT('AVAILABLEADDRESSES'),BINARY BASE64
+  )  
+  RETURN 0        
+END
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_PICKLIST">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_PICKLIST
+(
+  @ID                 UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@CONSTITUENTID      UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID      UNIQUEIDENTIFIER = NULL
+ ,@AVAILABLEADDRESSES XML              = NULL
+ ,@SELECTEDADDRESSES  XML              = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @ID = ISNULL(@ID,NEWID())
+  DECLARE @NOW DATETIME = GETDATE()
+  IF @CHANGEAGENTID IS NULL
+    EXEC USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID OUTPUT
+  BEGIN TRY
+    DELETE USR_SELECTEDADDRESSES WHERE CONSTITUENTID = @CONSTITUENTID
+    INSERT INTO USR_SELECTEDADDRESSES
+      (ID, CONSTITUENTID, ADDRESSID, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    SELECT
+      NEWID()
+     ,@CONSTITUENTID
+     ,T.c.value('(ADDRESSID)[1]','uniqueidentifier')
+     ,@CHANGEAGENTID
+     ,@CHANGEAGENTID
+     ,@NOW
+     ,@NOW
+    FROM
+      @SELECTEDADDRESSES.nodes('/SELECTEDADDRESSES/ITEM') T(c)
+  END TRY
+  BEGIN CATCH
+    EXEC USP_RAISE_ERROR
+    RETURN 1
+  END CATCH
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="AVAILABLEADDRESSES" Caption="Available addresses" DataType="XML">
+        <Collection>
+          <Fields>
+            <FormField FieldID="ADDRESSID" DataType="Guid" Hidden="true"/>
+            <FormField FieldID="ADDRESSBLOCK" DataType="String" Caption="Address"/>
+          </Fields>
+        </Collection>
+      </FormField>
+      <FormField FieldID="SELECTEDADDRESSES" Caption="Selected addresses" DataType="XML">
+        <Collection>
+          <Fields>
+            <FormField FieldID="ADDRESSID" DataType="Guid" Hidden="true"/>
+            <FormField FieldID="ADDRESSBLOCK" DataType="String" Caption="Address"/>
+          </Fields>
+        </Collection>
+      </FormField>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentAddressPicklistUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ConstituentAddressPicklist.html"/>
+      </WebUI>
+    </WebUIComponent>
+
+    <UIActions>
+      <UIAction ActionID="SELECT" Caption="" ImageKey="CATALOG:Training.Catalog,Training.Catalog.right-arrow_16.png"/>
+      <UIAction ActionID="DESELECT" Caption="" ImageKey="CATALOG:Training.Catalog,Training.Catalog.left-arrow_16.png"/>
+    </UIActions>
+  </FormMetaData>
+
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterPageActionGroups>
+          <AlterPageActionGroup PageActionGroupID="6459a910-09ae-44bd-9240-31d2ebbafa7c">
+            <AlterActions>
+              <AddAction Sequence="999">
+                <Action Caption="Example picklist" ID="a65a5c26-a1bb-4d56-89ba-ce33f63fdc41">
+                  <c:ShowAddDataForm DataFormID="0aeced44-c0c4-430a-9d4f-b876cf6b4d7b">
+                    <c:ActionContext>
+                      <c:PageContextID/>
+                    </c:ActionContext>
+                  </c:ShowAddDataForm>
+                </Action>
+              </AddAction>
+            </AlterActions>
+          </AlterPageActionGroup>
+        </AlterPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</AddDataFormTemplateSpec>

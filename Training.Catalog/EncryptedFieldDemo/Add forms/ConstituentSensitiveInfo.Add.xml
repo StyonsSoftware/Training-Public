@@ -1,0 +1,60 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="b87c652c-4e16-49ba-ab57-1060f33f9d63"
+  Name="Constituent Sensitive Info Add Data Form"
+  Description="A data form for adding constituent sensitive info records"
+  Author="Styons Software"
+  DataFormInstanceID="b2fd80ef-0241-4c2d-9c51-ed6a36c5a5c6"
+  RecordType="Sensitive Constituent Information"
+  c:SecurityUIFolder="Constituent Sensitive Info"
+  FormHeader="Add a constituent sensitive info"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_CONSTITUENTSENSITIVEINFO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_ADD_CONSTITUENTSENSITIVEINFO
+(
+  @ID                  uniqueidentifier = null output
+ ,@CONSTITUENTID       uniqueidentifier
+ ,@CHANGEAGENTID       uniqueidentifier = null
+ ,@INSECUREDESCRIPTION nvarchar(100)    = ''
+ ,@SENSITIVEINFO         nvarchar(1000)   = ''
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @now datetime = getdate()
+
+  begin try
+    exec USP_GET_KEY_ACCESS
+    insert into USR_SENSITIVEINFO
+      (ID, CONSTITUENTID, INSECUREDESCRIPTION, SENSITIVEINFO, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    values
+      (@ID, @CONSTITUENTID, @INSECUREDESCRIPTION, EncryptByKey(Key_GUID('sym_BBInfinity'),convert(nvarchar(100),@SENSITIVEINFO)), @CHANGEAGENTID, @CHANGEAGENTID, @now, @now)
+    CLOSE SYMMETRIC KEY SYM_BBINFINITY
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="INSECUREDESCRIPTION" Caption="Description" Required="true" DataType="String" MaxLength="100"/>
+      <FormField FieldID="SENSITIVEINFO" Caption="Medical information" DataType="String" MaxLength="1000" Multiline="true"/>
+    </FormFields>
+  </FormMetaData>
+</AddDataFormTemplateSpec>

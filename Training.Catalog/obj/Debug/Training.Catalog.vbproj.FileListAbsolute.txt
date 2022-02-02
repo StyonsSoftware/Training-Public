@@ -4,3 +4,8 @@ C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.C
 C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.vbproj.CoreCompileInputs.cache
 C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.dll
 C:\Users\J.R. Styons\source\repos\Training\Training.Catalog\obj\Debug\Training.Catalog.pdb
+C:\dev\src\github\Training-Public\Training.Catalog\bin\debug\Training.Catalog.dll
+C:\dev\src\github\Training-Public\Training.Catalog\bin\debug\Training.Catalog.pdb
+C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.vbproj.CoreCompileInputs.cache
+C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.dll
+C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.pdb

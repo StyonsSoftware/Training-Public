@@ -1,0 +1,103 @@
+<EditDataFormTemplateSpec 
+    xmlns:c="bb_appfx_commontypes"
+    ID="db6feb78-9121-4c5d-97c4-0eb0f519b4e6"
+    Name="Constituent HTML Edit Form"
+    Description="Used for editing the given Constituent HTML"
+    Author="Styons Software"
+    RecordType="Constituent HTML"
+    DataFormInstanceID="f7896f18-fcbc-4a9d-97c5-0851d5dbceb7"
+    c:SecurityUIFolder="Constituent HTML"
+    OwnerIDMapperID="00000000-0000-0000-0000-000000000000"
+    xmlns="bb_appfx_editdataformtemplate"
+    >
+    <SPDataForm>
+        <LoadImplementation SPName="USP_DATAFORMTEMPLATE_EDITLOAD_CONSTITUENT_HTML">
+            <c:CreateProcedureSQL>
+<![CDATA[
+create procedure dbo.USP_DATAFORMTEMPLATE_EDITLOAD_CONSTITUENT_HTML
+(
+    @ID uniqueidentifier,
+    @DATALOADED bit = 0 output,
+    @TSLONG bigint = 0 output,
+    @CONSTITUENTID uniqueidentifier = null output,
+    @HTMLVALUE nvarchar(max) = null output,
+    @PLAINTEXTVALUE nvarchar(max) = null output
+)
+as
+
+	set nocount on;
+
+	-- be sure to set these, in case the select returns no rows
+	set @DATALOADED = 0
+	set @TSLONG = 0
+
+	-- populate the output parameters, which correspond to fields on the form.  Note that
+	-- we set @DATALOADED = 1 to indicate that the load was successful.  Otherwise, the system
+	-- will display a "no data loaded" message.  Also note that we fetch the TSLONG so that concurrency
+	-- can be considered.
+	select
+		@DATALOADED = 1,
+		@TSLONG = TSLONG,
+        @CONSTITUENTID = CONSTITUENTID, 
+        @HTMLVALUE = HTMLVALUE, 
+        @PLAINTEXTVALUE = PLAINTEXTVALUE
+	from dbo.USR_SSC_HTMLDATA
+	where ID = @ID
+
+	return 0;
+]]>
+</c:CreateProcedureSQL>
+        </LoadImplementation>
+        <SaveImplementation SPName="USP_DATAFORMTEMPLATE_EDIT_CONSTITUENT_HTML">
+            <c:CreateProcedureSQL>
+<![CDATA[
+create procedure dbo.USP_DATAFORMTEMPLATE_EDIT_CONSTITUENT_HTML
+(
+	@ID uniqueidentifier,
+	@CHANGEAGENTID uniqueidentifier = null,
+    @CONSTITUENTID uniqueidentifier,
+    @HTMLVALUE nvarchar(max),
+    @PLAINTEXTVALUE nvarchar(max)
+)
+as
+
+	set nocount on;
+
+	if @CHANGEAGENTID is null  
+		exec dbo.USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+						
+	begin try
+		-- handle updating the data
+		update dbo.USR_SSC_HTMLDATA set
+            CONSTITUENTID = @CONSTITUENTID,
+            HTMLVALUE = @HTMLVALUE,
+            PLAINTEXTVALUE = @PLAINTEXTVALUE,
+
+			CHANGEDBYID = @CHANGEAGENTID,
+			DATECHANGED = getdate()
+		where ID = @ID
+	end try
+	begin catch
+		exec dbo.USP_RAISE_ERROR
+		return 1
+	end catch
+
+return 0;
+]]>
+</c:CreateProcedureSQL>
+            <c:ExpectedDBExceptions>
+                <c:Constraints>
+                    <c:Constraint Name="FK_USR_SSC_HTMLDATA_CONSTITUENTID" Field="CONSTITUENTID" Type="ForeignKey" />
+                </c:Constraints>
+            </c:ExpectedDBExceptions>
+        </SaveImplementation>
+    </SPDataForm>
+    <c:FormMetaData FixedDialog="true">
+        <c:FormFields>
+            <c:FormField FieldID="CONSTITUENTID" DataType="Guid" Caption="Constituent" />
+            <c:FormField FieldID="HTMLVALUE" Caption="Htmlvalue" />
+            <c:FormField FieldID="PLAINTEXTVALUE" Caption="Plaintextvalue" />
+        </c:FormFields>
+        <c:FormUIComponent />
+    </c:FormMetaData>
+</EditDataFormTemplateSpec>

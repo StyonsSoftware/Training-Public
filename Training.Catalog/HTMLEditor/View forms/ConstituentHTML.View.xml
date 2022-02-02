@@ -1,0 +1,54 @@
+<ViewDataFormTemplateSpec 
+  xmlns:c="bb_appfx_commontypes"
+  ID="154adf1f-de1b-4890-a70d-ac1d32df459f"
+  Name="Constituent HTML View Form"
+  Description="Used for viewing a given Constituent HTML"
+  Author="Styons Software"
+  DataFormInstanceID="fd0d9cbe-f3fb-4554-82dc-cf2226f2d9f5"
+  RecordType="Constituent HTML"
+  c:SecurityUIFolder="Training\Constituent HTML"
+  xmlns="bb_appfx_viewdataformtemplate"
+  >
+  <SPDataForm SPName="USR_SSC_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENT_HTML">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+create procedure USR_SSC_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENT_HTML 
+(
+  @ID             uniqueidentifier
+ ,@DATALOADED     bit              = 0 output
+ ,@CONSTITUENTID  uniqueidentifier = null output
+ ,@HTMLVALUE      nvarchar(max)    = null output
+ ,@PLAINTEXTVALUE nvarchar(max)    = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  select
+    @CONSTITUENTID = CONSTITUENTID
+   ,@HTMLVALUE = HTMLVALUE
+   ,@PLAINTEXTVALUE = PLAINTEXTVALUE
+  from USR_SSC_HTMLDATA
+  where ID = @ID
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData FixedDialog="true" xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="CONSTITUENTID" DataType="Guid" Caption="Constituent"/>
+      <FormField FieldID="HTMLVALUE" Caption="Htmlvalue">
+        <Html PlainTextFieldID="PLAINTEXTVALUE"/>
+      </FormField>
+      <FormField FieldID="PLAINTEXTVALUE" Caption="Plaintextvalue"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentHTMLViewFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/html/ConstituentHTMLViewForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</ViewDataFormTemplateSpec>

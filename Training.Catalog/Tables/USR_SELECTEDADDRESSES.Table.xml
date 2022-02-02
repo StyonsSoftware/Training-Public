@@ -1,0 +1,16 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="0f32d8b7-39b3-4a1e-a5f4-09eb2d99b76b"
+  Name="Selected addresses"
+  Description="Stores selected addresses for a constituent"
+  Author="Styons Software"
+  Tablename="USR_SELECTEDADDRESSES"
+  IsBuiltIn="false"
+  WarnOnMissingIndexes="false"
+  >
+  <Fields>
+    <ForeignKeyField Name="CONSTITUENTID" ForeignTable="CONSTITUENT" OnDelete="CascadeDelete"/>
+    <ForeignKeyField Name="ADDRESSID" ForeignTable="ADDRESS"/>
+  </Fields>
+</TableSpec>

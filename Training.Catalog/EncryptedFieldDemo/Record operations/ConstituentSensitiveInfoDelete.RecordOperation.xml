@@ -1,0 +1,33 @@
+<RecordOperationSpec 
+  xmlns="bb_appfx_recordoperation"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="beb4bf09-4141-4437-b96e-b98547ac7e2e" 
+  Name="Constituent Sensitive Info Delete Record Operation" 
+  Description="Deletes a given constituent sensitive record"
+  Author="Styons Software"
+  OperationType="Delete"
+  RecordType="Sensitive Constituent Information"
+  >
+  <SPRecord>
+    <SPOperationImplementation SPName="USR_USP_RECORDOPERATION_CONSTITUENTSENSITIVEINFODELETE">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_RECORDOPERATION_CONSTITUENTSENSITIVEINFODELETE
+(
+  @ID UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID UNIQUEIDENTIFIER
+)
+AS
+BEGIN
+  DELETE USR_SENSITIVEINFO WHERE ID = @ID
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SPOperationImplementation>
+  </SPRecord>
+
+  <Prompt>
+    <StandardPrompt Text="Are you sure you want to delete this record?"/>
+  </Prompt>
+</RecordOperationSpec>

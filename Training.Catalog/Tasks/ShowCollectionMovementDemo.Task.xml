@@ -1,0 +1,12 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes"
+  ID="a75f9368-2397-4ac3-8dba-1f52200e2a7f"
+  Name="Show Collection Move Up Down"
+  Description="Show the test add form that includes a move up-down button for rows in a collection"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="300"
+  >
+  <c:ShowAddDataForm DataFormID="3f94c107-99a8-4574-9b0d-3d95e75f8f21"/>
+</TaskSpec>

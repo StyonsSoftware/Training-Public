@@ -94,6 +94,13 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddFormWithMoveUpDownButtonsOnACollectionLOCATIONSUIModel.CodeGen.vb">
+      <DependentUpon>AddFormWithMoveUpDownButtonsOnACollectionUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddFormWithMoveUpDownButtonsOnACollectionUIModel.CodeGen.vb">
+      <DependentUpon>AddFormWithMoveUpDownButtonsOnACollectionUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddFormWithMoveUpDownButtonsOnACollectionUIModel.vb" />
     <Compile Include="AllAddressesDataListUIModel.CodeGen.vb">
       <DependentUpon>AllAddressesDataListUIModel.vb</DependentUpon>
     </Compile>
@@ -106,6 +113,28 @@
       <DependentUpon>CollectionDrivenSDLAddDataFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="CollectionDrivenSDLAddDataFormUIModel.vb" />
+    <Compile Include="ConstituentAddressPicklistAVAILABLEADDRESSESUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentAddressPicklistSELECTEDADDRESSESUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentAddressPicklistUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentAddressPicklistUIModel.vb" />
+    <Compile Include="ConstituentHTMLAddFormUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentHTMLAddFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentHTMLAddFormUIModel.vb" />
+    <Compile Include="ConstituentHTMLViewFormUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentHTMLViewFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentHTMLViewFormUIModel.vb" />
+    <Compile Include="HTMLViewDataFormUIModel.CodeGen.vb">
+      <DependentUpon>HTMLViewDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HTMLViewDataFormUIModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup />
@@ -113,6 +142,41 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Add forms\ConstituentAddressPicklist.Add.xml">
+      <Link>LinkedSpecs\ConstituentAddressPicklist.Add.xml</Link>
+    </None>
+    <Content Include="ConstituentAddressPicklistUIModel.xml">
+      <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\ConstituentAddressPicklist.html" />
+    <None Include="..\Training.Catalog\Add forms\CollectionMoveUpDown.Add.xml">
+      <Link>LinkedSpecs\CollectionMoveUpDown.Add.xml</Link>
+    </None>
+    <Content Include="AddFormWithMoveUpDownButtonsOnACollectionUIModel.xml">
+      <DependentUpon>AddFormWithMoveUpDownButtonsOnACollectionUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\AddFormWithMoveUpDownButtonsOnACollection.html" />
+    <None Include="..\Training.Catalog\HTMLEditor\View forms\ConstituentHTML.View.xml">
+      <Link>LinkedSpecs\ConstituentHTML.View.xml</Link>
+    </None>
+    <Content Include="ConstituentHTMLViewFormUIModel.xml">
+      <DependentUpon>ConstituentHTMLViewFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\html\ConstituentHTMLViewForm.html" />
+    <None Include="..\Training.Catalog\HTMLEditor\Add forms\ConstituentHTML.Add.xml">
+      <Link>LinkedSpecs\ConstituentHTML.Add.xml</Link>
+    </None>
+    <Content Include="ConstituentHTMLAddFormUIModel.xml">
+      <DependentUpon>ConstituentHTMLAddFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\html\ConstituentHTMLAddForm.html" />
+    <None Include="..\Training.Catalog\View forms\HTML.View.xml">
+      <Link>LinkedSpecs\HTML.View.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\HTMLViewDataForm.html" />
+    <Content Include="HTMLViewDataFormUIModel.xml">
+      <DependentUpon>HTMLViewDataFormUIModel.vb</DependentUpon>
+    </Content>
     <None Include="..\Training.Catalog\Add forms\CollectionDrivenSDL.Add.xml">
       <Link>LinkedSpecs\CollectionDrivenSDL.Add.xml</Link>
     </None>

@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>CollectionMoveUpDown.Add.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>AddFormWithMoveUpDownButtonsOnACollectionUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>AddFormWithMoveUpDownButtonsOnACollection.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

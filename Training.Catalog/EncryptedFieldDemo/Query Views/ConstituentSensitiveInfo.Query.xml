@@ -1,0 +1,37 @@
+<QueryViewSpec
+  xmlns="bb_appfx_queryview"
+  xmlns:c="bb_appfx_commontypes"
+  ID="ea67a725-251b-46bd-8cc3-adb64ee40236"
+  Name="Constituent Sensitive Info Query"
+  Description="A view defined for querying on constituent sensitive info records"
+  Author="Styons Software"
+  IsRoot="true"
+  PrimaryKeyField="ID"
+  RecordType="Constituent Sensitive Info"
+  c:SecurityUIFolder="Constituent Sensitive Info"
+  >
+  <ViewImplementation ViewName="USR_V_QUERY_CONSTITUENTSENSITIVEINFO">
+    <ViewSQL>
+      <![CDATA[
+SELECT
+  ID
+ ,CONSTITUENTID
+ ,INSECUREDESCRIPTION
+ ,SENSITIVEINFO
+FROM
+  USR_SENSITIVEINFO
+  ]]>
+    </ViewSQL>
+  </ViewImplementation>
+
+  <Output>
+    <OutputFields>
+      <OutputField Caption="System record ID" Category="System Fields" Name="ID"/>
+      <OutputField Name="INSECUREDESCRIPTION" Caption="Description of secured data" DataType="String"/>
+      <OutputField Name="SENSITIVEINFO" Caption="Decrypted sensitive information" DataType="String" IsEncryptedField="true"/>
+    </OutputFields>
+  </Output>
+  <RelationshipOperations>
+    <AddToParentView  ParentView ="V_QUERY_CONSTITUENT" PathAlias="Sensitive Information" Field="CONSTITUENTID" ParentViewRelatedField ="ID"/>
+  </RelationshipOperations>
+</QueryViewSpec>

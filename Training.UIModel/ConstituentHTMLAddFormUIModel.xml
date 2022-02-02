@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ConstituentHTML.Add.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ConstituentHTMLAddFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ConstituentHTMLAddForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\html\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

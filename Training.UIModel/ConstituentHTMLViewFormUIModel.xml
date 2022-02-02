@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ConstituentHTML.View.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ConstituentHTMLViewFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ConstituentHTMLViewForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\html\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

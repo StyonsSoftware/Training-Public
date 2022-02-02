@@ -1,0 +1,39 @@
+<DataListSpec 
+  xmlns="bb_appfx_datalist"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="8785c7ef-fcb6-4d97-8f7d-bbd6930eac7a" 
+  Name="Constituent Sensitive Info Data List"
+  Description="A data list showing constituent sensitive info records." 
+  Author="Styons Software"
+  c:SecurityUIFolder="Constituent Sensitive Info"
+  >
+  <SPDataList SPName="USR_USP_DATALIST_CONSTITUENTSENSITIVEINFO">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_USP_DATALIST_CONSTITUENTSENSITIVEINFO
+(
+  @CONSTITUENTID UNIQUEIDENTIFIER
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SELECT
+    ID
+   ,INSECUREDESCRIPTION
+  FROM
+    USR_SENSITIVEINFO
+  WHERE CONSTITUENTID = @CONSTITUENTID
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="ID" Caption="ID" DataType="Guid" IsHidden="true"/>
+      <OutputField FieldID="INSECUREDESCRIPTION" Caption="Description" DataType="String"/>
+    </OutputFields>
+  </Output>
+</DataListSpec>

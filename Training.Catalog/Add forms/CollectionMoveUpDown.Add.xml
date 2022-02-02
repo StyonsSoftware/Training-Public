@@ -1,0 +1,77 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="98d94e1a-8a05-41a9-8caf-bcd4ad5514d3"
+  Name="Add form with move up down buttons on a collection"
+  Description="Demo of a collection field with move up down buttons"
+  Author="Styons Software"
+  DataFormInstanceID="3f94c107-99a8-4574-9b0d-3d95e75f8f21"
+  RecordType="Collection Demo"
+  c:SecurityUIFolder="Training\Collections"
+  FormHeader="Collection with move up down buttons"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_COLLECTIONMOVEUPDOWN">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_ADD_COLLECTIONMOVEUPDOWN
+(
+  @ID            uniqueidentifier = null output
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@LOCATIONS     xml              = null
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  begin try
+    select 1--don't need to save anything, this is a UI demo
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="LOCATIONS" Caption="Locations" DataType="XML">
+        <Collection>
+          <Fields>
+            <FormField FieldID="NAME" DataType="String" Caption="Name"/>
+            <FormField FieldID="COUNTRYID" DataType="Guid" Caption="Country">
+              <SimpleDataList SimpleDataListID="c9649672-353d-42e8-8c25-4d34bbabfbba"/>
+            </FormField>
+            <FormField FieldID="STATEID" DataType="Guid" Caption="State">
+              <SimpleDataList SimpleDataListID="b46d36d1-d3ed-4f6e-91da-89b6c88ca0c6">
+                <Params>
+                  <Param ID="COUNTRYID">
+                    <Value>Fields!COUNTRYID</Value>
+                  </Param>
+                </Params>
+              </SimpleDataList>
+            </FormField>
+          </Fields>
+        </Collection>
+      </FormField>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.AddFormWithMoveUpDownButtonsOnACollectionUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/AddFormWithMoveUpDownButtonsOnACollection.html"/>
+      </WebUI>
+    </WebUIComponent>
+    <UIActions>
+      <UIAction ActionID="MOVEUP" Caption="Move up"/>
+      <UIAction ActionID="MOVDOWN" Caption="Move down"/>
+    </UIActions>
+  </FormMetaData>
+</AddDataFormTemplateSpec>

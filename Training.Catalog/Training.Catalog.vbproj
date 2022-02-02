@@ -78,9 +78,7 @@
   <ItemGroup>
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Functional Areas\Training.FunctionalArea.xml" />
   </ItemGroup>
@@ -99,7 +97,65 @@
   <ItemGroup>
     <EmbeddedResource Include="Tasks\ShowCollectionSDLDemo.Task.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View forms\HTML.View.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HTMLEditor\Tables\ConstituentHTML.Table.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HTMLEditor\HTMLDemo.Package.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HTMLEditor\crud\Constituent HTML.Package.xml" />
+    <EmbeddedResource Include="HTMLEditor\crud\Constituent HTML.Query.xml" />
+    <EmbeddedResource Include="HTMLEditor\Datalists\ConstituentHTML.DataList.xml" />
+    <EmbeddedResource Include="HTMLEditor\crud\Constituent HTMLDelete.RecordOperation.xml" />
+    <EmbeddedResource Include="HTMLEditor\crud\Constituent HTML.Edit.xml" />
+    <EmbeddedResource Include="HTMLEditor\Add forms\ConstituentHTML.Add.xml" />
+    <EmbeddedResource Include="HTMLEditor\View forms\ConstituentHTML.View.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Add forms\CollectionMoveUpDown.Add.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tasks\ShowCollectionMovementDemo.Task.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EncryptedFieldDemo\Tables\ConstituentSensitiveInfo.Table.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EncryptedFieldDemo\EncryptedFieldDemo.Package.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EncryptedFieldDemo\Add forms\ConstituentSensitiveInfo.Add.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EncryptedFieldDemo\Datalists\ConstituentSensitiveInfo.Datalist.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EncryptedFieldDemo\Edit forms\ConstituentSensitiveInfo.Edit.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EncryptedFieldDemo\Record operations\ConstituentSensitiveInfoDelete.RecordOperation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="postbuild.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\left-arrow_16.png" />
+    <EmbeddedResource Include="Images\left-arrow_32.png" />
+    <EmbeddedResource Include="Images\right-arrow_16.png" />
+    <EmbeddedResource Include="Images\right-arrow_32.png" />
+    <EmbeddedResource Include="Tables\USR_SELECTEDADDRESSES.Table.xml" />
+    <EmbeddedResource Include="EncryptedFieldDemo\Query Views\ConstituentSensitiveInfo.Query.xml" />
+    <EmbeddedResource Include="Add forms\ConstituentAddressPicklist.Add.xml" />
+    <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)postbuild.bat" "$(ProjectDir)" "$(TargetFileName)" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

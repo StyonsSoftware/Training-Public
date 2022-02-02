@@ -1,0 +1,23 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes"
+  ID="d5ee58e6-4415-452c-804c-b9e3afdf5219"
+  Name="Constituent HTML"
+  Description="Stores HTML associated with a constituent"
+  Author="Styons Software"
+  Tablename="USR_SSC_HTMLDATA"
+  IsBuiltIn="false"
+  >
+  <Fields>
+    <ForeignKeyField ForeignTable="CONSTITUENT" Name="CONSTITUENTID" />
+    <MemoField Name="HTMLVALUE"/>
+    <MemoField Name="PLAINTEXTVALUE"/>
+  </Fields>
+  <Indexes>
+    <Index>
+      <IndexFields>
+        <IndexField Name="CONSTITUENTID"/>
+      </IndexFields>
+    </Index>
+  </Indexes>
+</TableSpec>

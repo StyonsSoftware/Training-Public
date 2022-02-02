@@ -1,0 +1,66 @@
+<AddDataFormTemplateSpec 
+  xmlns:c="bb_appfx_commontypes"
+  ID="3afd01ca-f043-4638-bbf5-13accc5357ed"
+  Name="Constituent HTML Add Form"
+  Description="Used for adding a new Constituent HTML"
+  Author="Styons Software"
+  RecordType="Constituent HTML"
+  DataFormInstanceID="a6b96780-0731-4ad6-9937-a33cb992e608"
+  c:SecurityUIFolder="Training\Constituent HTML"
+  xmlns="bb_appfx_adddataformtemplate"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_SSC_USP_DATAFORMTEMPLATE_ADD_CONSTITUENT_HTML">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_SSC_USP_DATAFORMTEMPLATE_ADD_CONSTITUENT_HTML
+(
+  @ID             uniqueidentifier = null output
+ ,@CHANGEAGENTID  uniqueidentifier = null
+ ,@CONSTITUENTID  uniqueidentifier
+ ,@HTMLVALUE      nvarchar(max)    = ''
+ ,@PLAINTEXTVALUE nvarchar(max)    = ''
+)
+as
+begin
+  set nocount on
+  set @id = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @now datetime = getdate()
+
+  begin try
+	  insert into USR_SSC_HTMLDATA
+      (ID, CONSTITUENTID, HTMLVALUE, PLAINTEXTVALUE, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    values
+      (@ID, @CONSTITUENTID, @HTMLVALUE, @PLAINTEXTVALUE, @CHANGEAGENTID, @CHANGEAGENTID, @now, @now)
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+  
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+  
+  <FormMetaData FixedDialog="true" xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="HTMLVALUE" Caption="Html" DataType="String">
+        <Html PlainTextFieldID="PLAINTEXTVALUE"/>
+      </FormField>
+      <FormField FieldID="PLAINTEXTVALUE" Caption="Plain text" Hidden="true" DataType="String"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentHTMLAddFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/html/ConstituentHTMLAddForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</AddDataFormTemplateSpec>

@@ -1,0 +1,53 @@
+﻿<!--
+  How this file was made:
+  1) Normal "create ui model" wizard
+  2) Create three <div> tags like this:
+     <div class="bbui-forms-fieldset-column">
+     </div>
+  3) Every div is a column on the page.
+     Cut and paste the fields into the columns as desired.
+     Give each field it's own table (you will have to create some <table> tags as you break things up)
+  4) I moved the labels directly above the collections,
+     and got rid of the first column in the collection tables.
+  5) On the "button" div, I added this style tag, so the buttons get pushed down to the middle:
+     style="padding-top:40px;"
+  -->
+<div id="#MAP#ConstituentAddressPicklist">
+  <h2 id="#MAP#FORMHEADER_value"></h2>
+  <div class="bbui-forms-fieldset-column">
+    <table>
+      <tr id="#MAP#AVAILABLEADDRESSES_container">
+        <td>
+          <label id="#MAP#AVAILABLEADDRESSES_caption" for="#MAP#AVAILABLEADDRESSES_value"></label>
+          <div id="#MAP#AVAILABLEADDRESSES_value" style="height: 100px; width: 400px;" />
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="bbui-forms-fieldset-column" style="padding-top:40px;">
+    <table>
+      <tr>
+        <td></td>
+        <td>
+          <button id="#MAP#SELECT_action"></button>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button id="#MAP#DESELECT_action"></button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="bbui-forms-fieldset-column">
+    <table>
+      <tr id="#MAP#SELECTEDADDRESSES_container">
+        <td>
+          <label id="#MAP#SELECTEDADDRESSES_caption" for="#MAP#SELECTEDADDRESSES_value"></label>
+          <div id="#MAP#SELECTEDADDRESSES_value" style="height: 100px; width: 400px;" />
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
