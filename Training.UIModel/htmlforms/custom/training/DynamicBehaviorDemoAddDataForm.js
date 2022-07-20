@@ -43,8 +43,24 @@ I am sure there are many equivalents for other, lesser browsers :)
       },
       formupdated: function (args) {
         //Fires when the form is updated on the server, typically triggered by an action or a field's value changing.
+        //note that you can also add "normal" javascript event handlers from here.
+        //for example, you could attach an "onblur" event to an input box to make the form sing and dance *as* they type.
+        //now that you are here, the plumbing is done, and you can do any JS you like.
         var needMoreRoom = container.getFieldByName("MAKENOTEBIGGER", modelInstanceId).value;
+
+        //we want to change the size of the note field.  to do that, we need the exact field name.
+        //Blackbaud CRM generates unique field names ever time a form is rendered.
+        //these names are in the form <random guid>YOURFIELDNAME.
+        //For example, if you right-click and inspect this field at runtime, the name would look something like this:
+        //   ctrl_0cb26231_2722_468b_bca3_30e6d8cbc820_NOTE_value
+        //since you cannot be sure of the control ID when the form renders, you have to search for a control whose name *ends with* your field name.
+        //note: if you have a detail view form that can potentially be rendered many times on a page (say, as a user expands each row of a datalist)
+        //then this selector will not be sufficient, and you will need to do a little extra work to find "your" control.
+        //if anyone at Blackbaud is reading this, there should really be a function called container.getControlByName(), which would
+        //return the actual DOM element.
         var noteField = $("[id$=NOTE_value]")[0];
+
+        //now that we have the note field, make it bigger or "normal" based on whether the box was checked.
         noteField.rows = (needMoreRoom ? 7 : 3);
       },
       parentresize: function (args) {
