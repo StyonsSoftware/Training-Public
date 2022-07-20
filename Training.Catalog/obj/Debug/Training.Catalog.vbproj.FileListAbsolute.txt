@@ -9,3 +9,4 @@ C:\dev\src\github\Training-Public\Training.Catalog\bin\debug\Training.Catalog.pd
 C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.vbproj.CoreCompileInputs.cache
 C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.dll
 C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.pdb
+C:\dev\src\github\Training-Public\Training.Catalog\obj\Debug\Training.Catalog.vbproj.AssemblyReference.cache

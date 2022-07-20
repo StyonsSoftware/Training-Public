@@ -5,6 +5,13 @@ You can read all about it in these two locations:
   https://webfiles.blackbaud.com/files/support/guides/infinitydevguide/infsdk-developer-help.htm#../Subsystems/webshell-javascript/Content/WebShell/coWebshellWritingJSforUIModelDataForm2.htm%3FTocPath%3DJavaScript%7CWrite%2520JavaScript%2520for%2520the%2520Infinity%2520Platform%7C_____3
 
   https://webfiles.blackbaud.com/files/support/guides/infinitytechref/Content/apidocs-BB_4-0/index.html
+
+BBCRM is very aggressive about caching JS files.
+If you change your file, deploy it, and do *not* see it take effect, then you may need
+to manually clear your browser's cache.  I have found this Firefox extension to be very helpful:
+https://addons.mozilla.org/en-US/firefox/addon/empty-cache-button/
+
+I am sure there are many equivalents for other, lesser browsers :)
 */
 (function (container, modelInstanceId) {
   var util = BBUI.forms.Utility;
