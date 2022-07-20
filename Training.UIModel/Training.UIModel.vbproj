@@ -10,7 +10,7 @@
     <RootNamespace>Training.UIModel</RootNamespace>
     <AssemblyName>Training.UIModel</AssemblyName>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <OptionInfer>On</OptionInfer>
     <OptionStrict>Off</OptionStrict>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -116,6 +116,9 @@
     <Compile Include="ConstituentAddressPicklistAVAILABLEADDRESSESUIModel.CodeGen.vb">
       <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
     </Compile>
+    <Compile Include="ConstituentAddressPicklistAVAILABLEADDRESSESUIModel.Custom.vb">
+      <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
+    </Compile>
     <Compile Include="ConstituentAddressPicklistSELECTEDADDRESSESUIModel.CodeGen.vb">
       <DependentUpon>ConstituentAddressPicklistUIModel.vb</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <DependentUpon>ConstituentHTMLViewFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ConstituentHTMLViewFormUIModel.vb" />
+    <Compile Include="DynamicBehaviorDemoAddDataFormUIModel.CodeGen.vb">
+      <DependentUpon>DynamicBehaviorDemoAddDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicBehaviorDemoAddDataFormUIModel.vb" />
     <Compile Include="HTMLViewDataFormUIModel.CodeGen.vb">
       <DependentUpon>HTMLViewDataFormUIModel.vb</DependentUpon>
     </Compile>
@@ -142,6 +149,15 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Add forms\DynamicBehaviorDemo.Add.xml">
+      <Link>LinkedSpecs\DynamicBehaviorDemo.Add.xml</Link>
+    </None>
+    <Content Include="DynamicBehaviorDemoAddDataFormUIModel.xml">
+      <DependentUpon>DynamicBehaviorDemoAddDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\DynamicBehaviorDemoAddDataForm.html" />
+    <Content Include="htmlforms\custom\training\DynamicBehaviorDemoAddDataForm.js" />
+    <Content Include="UIModel1.UIModel.xml" />
     <None Include="..\Training.Catalog\Add forms\ConstituentAddressPicklist.Add.xml">
       <Link>LinkedSpecs\ConstituentAddressPicklist.Add.xml</Link>
     </None>
@@ -173,6 +189,7 @@
     <None Include="..\Training.Catalog\View forms\HTML.View.xml">
       <Link>LinkedSpecs\HTML.View.xml</Link>
     </None>
+    <Content Include="htmlforms\custom\training\HighlightDemoListbuilder.html" />
     <Content Include="htmlforms\custom\training\HTMLViewDataForm.html" />
     <Content Include="HTMLViewDataFormUIModel.xml">
       <DependentUpon>HTMLViewDataFormUIModel.vb</DependentUpon>

@@ -1,0 +1,19 @@
+<PageDefinitionSpec 
+  xmlns="bb_appfx_pagedefinition" 
+  xmlns:c="bb_appfx_commontypes"
+  ID="264233f9-d79d-468e-9e5d-0cd26cb8cc12"
+  Name="Listbuilder Demo Page"
+  Description="Listbuilder playground"
+  Author="Styons Software"
+  >
+  <PageHeader Caption="Listbuilder Demo"/>
+  <Tabs>
+    <Tab ID="2711e641-6937-4cf6-a79f-924744c51321" Caption="Listbuilder with highlighting">
+      <Sections>
+        <Section ID="ca4689ff-790b-4925-999c-eb12f573fee9" Caption="Listbuilder with highlight rules">
+          <ListBuilder QueryViewID="59f1e3c5-5e41-4d95-a096-25bf86433f85"/>
+        </Section>
+      </Sections>
+    </Tab>
+  </Tabs>
+</PageDefinitionSpec>

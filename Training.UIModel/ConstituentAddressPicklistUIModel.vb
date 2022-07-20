@@ -1,10 +1,10 @@
 Public Class ConstituentAddressPicklistUIModel
 
     Private Sub ConstituentAddressPicklistUIModel_Loaded(sender As Object, e As LoadedEventArgs) Handles Me.Loaded
-        'marking these read-only means that if a user clicks on a row, it doesn't start editing the text inside
-        SELECTEDADDRESSES.DisplayReadOnly = True
-        AVAILABLEADDRESSES.DisplayReadOnly = True
-    End Sub
+    'marking these read-only means that if a user clicks on a row, it doesn't start editing the text inside
+    'SELECTEDADDRESSES.DisplayReadOnly = True
+    'AVAILABLEADDRESSES.DisplayReadOnly = True
+  End Sub
 
     Private Sub _select_InvokeAction(sender As Object, e As InvokeActionEventArgs) Handles _select.InvokeAction
         'this happens when they click "Select" (the >>> button)

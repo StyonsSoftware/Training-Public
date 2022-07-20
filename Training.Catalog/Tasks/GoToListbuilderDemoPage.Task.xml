@@ -1,0 +1,12 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="3037eaec-b77d-4c63-a4ae-046beb24ed82"
+  Name="Go To Listbuilder Demo Page"
+  Description="Show the listbuilder demo page"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="400"
+  >
+  <c:ShowPage PageID="264233f9-d79d-468e-9e5d-0cd26cb8cc12"/>
+</TaskSpec>

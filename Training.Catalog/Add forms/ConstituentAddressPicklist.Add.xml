@@ -28,6 +28,7 @@ BEGIN
     SELECT
       A.ID           AS ADDRESSID
      ,A.ADDRESSBLOCK AS ADDRESSBLOCK
+     ,A.CITY         AS CITY
     FROM
       [ADDRESS] A
       LEFT JOIN USR_SELECTEDADDRESSES SA ON SA.ADDRESSID = A.ID
@@ -41,6 +42,7 @@ BEGIN
     SELECT
       A.ID           AS ADDRESSID
      ,A.ADDRESSBLOCK AS ADDRESSBLOCK
+     ,A.CITY         AS CITY
     FROM
       [ADDRESS] A
       JOIN USR_SELECTEDADDRESSES SA ON SA.ADDRESSID = A.ID
@@ -105,6 +107,7 @@ END
           <Fields>
             <FormField FieldID="ADDRESSID" DataType="Guid" Hidden="true"/>
             <FormField FieldID="ADDRESSBLOCK" DataType="String" Caption="Address"/>
+            <FormField FieldID="CITY" DataType="String" Caption="City"/>
           </Fields>
         </Collection>
       </FormField>
@@ -113,6 +116,7 @@ END
           <Fields>
             <FormField FieldID="ADDRESSID" DataType="Guid" Hidden="true"/>
             <FormField FieldID="ADDRESSBLOCK" DataType="String" Caption="Address"/>
+            <FormField FieldID="CITY" DataType="String" Caption="City"/>
           </Fields>
         </Collection>
       </FormField>

@@ -11,7 +11,7 @@
     <AssemblyName>Training.Catalog</AssemblyName>
     <MyType>Windows</MyType>
     <OptionStrict>Off</OptionStrict>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <OldToolsVersion>2.0</OldToolsVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -143,6 +143,9 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Tasks\GoToListbuilderDemoPage.Task.xml" />
+    <EmbeddedResource Include="Pages\ListbuilderDemo.Page.xml" />
+    <EmbeddedResource Include="ListBuilders\HighlightDemo.Listbuilder.xml" />
     <EmbeddedResource Include="Images\left-arrow_16.png" />
     <EmbeddedResource Include="Images\left-arrow_32.png" />
     <EmbeddedResource Include="Images\right-arrow_16.png" />
@@ -150,6 +153,7 @@
     <EmbeddedResource Include="Tables\USR_SELECTEDADDRESSES.Table.xml" />
     <EmbeddedResource Include="EncryptedFieldDemo\Query Views\ConstituentSensitiveInfo.Query.xml" />
     <EmbeddedResource Include="Add forms\ConstituentAddressPicklist.Add.xml" />
+    <EmbeddedResource Include="Add forms\DynamicBehaviorDemo.Add.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

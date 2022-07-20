@@ -1,0 +1,80 @@
+<QueryViewSpec
+  xmlns="bb_appfx_queryview"
+  xmlns:c="bb_appfx_commontypes"
+  ID="59f1e3c5-5e41-4d95-a096-25bf86433f85"
+  Name="Highlight Demo Listbuilder"
+  Description="Listbuilder that shows how to highlight rows based on cell values"
+  Author="Styons Software"
+  IsRoot="true"
+  PrimaryKeyField="CONSTITUENTID"
+  c:SecurityUIFolder="Training\Listbuilders"
+  >
+  <ViewImplementation ViewName="USR_V_QUERY_LISTBUILDERHIGHLIGHTDEMO">
+    <ViewSQL>
+      <![CDATA[
+SELECT
+  CON.ID                          AS CONSTITUENTID
+ ,CON.[NAME]                      AS CONSTITUENTNAME
+ ,A.ADDRESSBLOCK                  AS PRIMARYADDRESSBLOCK
+ ,A.CITY                          AS PRIMARYADDRESSCITY
+ ,S.ABBREVIATION                  AS PRIMARYADDRESSSTATEABBREVIATION
+ ,CTY.[DESCRIPTION]               AS PRIMARYADDRESSCOUNTRYDESCRIPTION
+ ,A.POSTCODE                      AS PRIMARYADDRESSPOSTCODE
+ ,CON.AGE                         AS AGE
+ ,CASE WHEN AGE % 2 = 0
+       THEN 'Special'
+       ELSE ''
+  END                             AS SPECIALFLAG
+ ,CASE WHEN AGE % 2 = 0
+       THEN ''
+       ELSE 'Not special'
+  END                             AS NOTSPECIALFLAG  
+ ,'RES:road0'                     AS RED_DIAMOND_IMAGEKEY
+FROM
+  CONSTITUENT CON
+  LEFT JOIN [ADDRESS] A ON A.CONSTITUENTID = CON.ID AND A.ISPRIMARY = 1
+  LEFT JOIN [STATE] S ON S.ID = A.STATEID
+  LEFT JOIN COUNTRY CTY ON CTY.ID = A.COUNTRYID
+  ]]>
+    </ViewSQL>
+  </ViewImplementation>
+
+  <Output>
+    <OutputFields>
+      <OutputField Caption="System record ID" Category="System Fields" Name="CONSTITUENTID" IsHidden="true"/>
+      <OutputField Name="CONSTITUENTNAME" Caption="Name" DataType="String"/>
+      <OutputField Name="PRIMARYADDRESSBLOCK" Caption="Address" DataType="String"/>
+      <OutputField Name="PRIMARYADDRESSCITY" Caption="City" DataType="String"/>
+      <OutputField Name="PRIMARYADDRESSSTATEABBREVIATION" Caption="State" DataType="String"/>
+      <OutputField Name="PRIMARYADDRESSCOUNTRYDESCRIPTION" Caption="Country" DataType="String"/>
+      <OutputField Name="PRIMARYADDRESSPOSTCODE" Caption="Zip" DataType="String"/>
+      <OutputField Name="AGE" Caption="Age" DataType="Integer"/>
+      <OutputField Name="SPECIALFLAG" Caption="Special color" DataType="String"/>
+      <OutputField Name="NOTSPECIALFLAG" Caption="Not special color" DataType="String"/>
+      <OutputField Name="RED_DIAMOND_IMAGEKEY" Caption="Red diamond image key" IsImageKey="true"/>
+    </OutputFields>
+  </Output>
+
+  <ListBuilder>
+    <Columns>
+      <Column IsDefaultColumn="true" Name="CONSTITUENTID"/>
+      <Column IsDefaultColumn="true" Name="CONSTITUENTNAME"/>
+      <Column IsDefaultColumn="true" Name="PRIMARYADDRESSBLOCK"/>
+      <Column IsDefaultColumn="true" Name="PRIMARYADDRESSCITY"/>
+      <Column IsDefaultColumn="true" Name="PRIMARYADDRESSSTATEABBREVIATION"/>
+      <Column IsDefaultColumn="true" Name="PRIMARYADDRESSCOUNTRYDESCRIPTION"/>
+      <Column IsDefaultColumn="true" Name="PRIMARYADDRESSPOSTCODE"/>
+      <Column IsDefaultColumn="true" Name="AGEINFO">
+        <CompositeColumn Caption="Age info">
+          <OutputFields>
+            <OutputField Name="AGE"/>
+            <OutputField Name="SPECIALFLAG"/>
+            <OutputField Name="NOTSPECIALFLAG"/>
+            <OutputField Name="RED_DIAMOND_IMAGEKEY"/>
+          </OutputFields>
+        </CompositeColumn>
+      </Column>
+    </Columns>
+    <ColumnTemplates Url="browser/htmlforms/custom/training/HighlightDemoListbuilder.html"/>
+  </ListBuilder>
+</QueryViewSpec>

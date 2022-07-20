@@ -1,0 +1,66 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="c34b926b-4432-4e8f-bbf2-6cd8d11cc79c"
+  Name="Dynamic Behavior Demo Add Data Form"
+  Description="A do-nothing add form that shows how to use JavaSript to effect responsive behavior for users"
+  Author="Styons Software"
+  DataFormInstanceID="8d72abb4-11da-4533-bdc6-89bec13bf291"
+  RecordType="Constituent"
+  c:SecurityUIFolder="Training\JavaScript"
+  FormHeader="Dynamic behavior through JavaScript"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_DYNAMICBEHAVIORDEMO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_ADD_DYNAMICBEHAVIORDEMO
+(
+  @ID             uniqueidentifier = null output
+ ,@CHANGEAGENTID  uniqueidentifier = null
+ ,@MAKENOTEBIGGER bit              = null
+ ,@NOTE           NVARCHAR(MAX)    = ''
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  --don't actually do anything, this is just a UI demo
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="MAKENOTEBIGGER" Caption="I need more room for my note" DataType="Boolean"/>
+      <FormField FieldID="NOTE" Caption="Note" DataType="String" MaxLength="0" Multiline="true"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.DynamicBehaviorDemoAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/DynamicBehaviorDemoAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+
+  <!--Add a link to the Constituent page called "Dynamic demo", which will bring up this form.-->
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterOrAddPageActionGroups>
+          <AlterOrAddPageActionGroup ID="d2afb5b2-3e80-422e-8b59-00b11c15d31e" Caption="Demo">
+            <AddAction Sequence="10">
+              <Action ID="8db9b443-a862-4753-a760-7ae6763d1e38" Caption="Dynamic demo">
+                <c:ShowAddDataForm DataFormID="8d72abb4-11da-4533-bdc6-89bec13bf291"/>
+              </Action>
+            </AddAction>
+          </AlterOrAddPageActionGroup>
+        </AlterOrAddPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</AddDataFormTemplateSpec>

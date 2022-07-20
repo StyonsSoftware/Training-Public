@@ -1,0 +1,20 @@
+﻿<div id="#MAP#AGEINFO">
+  <style type="text/css">
+    .special-color {
+      background-color: pink;
+      color: blue;
+    }
+  </style>
+  <tpl if="SPECIALFLAG">
+    <div title="{AGE_raw:htmlEncode}" class="bbui-pages-datalistgrid-withimagekey-wrapper special-color" style="margin-top:1px">
+      <img class="bbui-pages-datalistgrid-withimagekey-image" style="margin-top:0px" src="{RED_DIAMOND_IMAGEKEY}" />
+      <span class="bbui-pages-datalistgrid-withimagekey-value" title="{AGE_raw}">{AGE}</span>
+    </div>
+  </tpl>
+  <tpl if="NOTSPECIALFLAG">
+    <div title="{AGE_raw:htmlEncode}" class="bbui-pages-datalistgrid-withimagekey-wrapper" style="margin-top:1px">
+      <img class="bbui-pages-datalistgrid-withimagekey-image" style="margin-top:0px" src="{RED_DIAMOND_IMAGEKEY}" />
+      <span class="bbui-pages-datalistgrid-withimagekey-value" title="{AGE_raw}">{AGE}</span>
+    </div>
+  </tpl>
+</div>
