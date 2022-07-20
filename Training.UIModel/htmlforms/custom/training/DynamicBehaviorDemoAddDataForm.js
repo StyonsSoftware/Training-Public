@@ -6,6 +6,12 @@ You can read all about it in these two locations:
 
   https://webfiles.blackbaud.com/files/support/guides/infinitytechref/Content/apidocs-BB_4-0/index.html
 
+In this example JS file, I have put in a handler for every public event.
+The only event handler that actually *does* anything is "formupdated".
+The others are there just for your reference, so you can get an idea of what is possible.
+If you really wanted to, you could get rid of these comments and the other handlers and reduce
+this file down to about 5 lines of code.
+
 BBCRM is very aggressive about caching JS files.
 If you change your file, deploy it, and do *not* see it take effect, then you may need
 to manually clear your browser's cache.  I have found this Firefox extension to be very helpful:
