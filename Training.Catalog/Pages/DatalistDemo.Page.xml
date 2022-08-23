@@ -1,0 +1,23 @@
+<PageDefinitionSpec 
+  xmlns="bb_appfx_pagedefinition" 
+  xmlns:c="bb_appfx_commontypes"
+  ID="396db14d-a7ad-40b7-ba0a-c5f26026467d"
+  Name="Datalist Demo Page"
+  Description="A page for displaying information about datalist demo records"
+  Author="Styons Software"
+  >
+  <PageHeader Caption="Datalist Demo" ImageKey="REPLACE_WITH_IMAGEKEY"/>
+  <Tabs>
+    <Tab ID="c392c501-54c9-412e-82dc-135ef11d4d36" Caption="Tab caption">
+      <Sections>
+        <Section ID="2ee24fc9-de0b-4298-90e5-19464750ac49" Caption="Section caption">
+          <DataList ID="cbf417e9-3071-40fc-9a73-2f270e122147">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+        </Section>
+      </Sections>
+    </Tab>
+  </Tabs>
+</PageDefinitionSpec>

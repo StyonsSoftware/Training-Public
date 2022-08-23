@@ -143,6 +143,9 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Tasks\ShowDatalistDemo.Task.xml" />
+    <EmbeddedResource Include="Pages\DatalistDemo.Page.xml" />
+    <EmbeddedResource Include="SimpleList\MarketingEffort.SimpleList.xml" />
     <EmbeddedResource Include="Tasks\GoToListbuilderDemoPage.Task.xml" />
     <EmbeddedResource Include="Pages\ListbuilderDemo.Page.xml" />
     <EmbeddedResource Include="ListBuilders\HighlightDemo.Listbuilder.xml" />
@@ -154,6 +157,7 @@
     <EmbeddedResource Include="EncryptedFieldDemo\Query Views\ConstituentSensitiveInfo.Query.xml" />
     <EmbeddedResource Include="Add forms\ConstituentAddressPicklist.Add.xml" />
     <EmbeddedResource Include="Add forms\DynamicBehaviorDemo.Add.xml" />
+    <EmbeddedResource Include="Datalist\MarketingEfforts.Datalist.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

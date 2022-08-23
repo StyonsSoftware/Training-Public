@@ -1,0 +1,56 @@
+<DataListSpec 
+  xmlns="bb_appfx_datalist"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="cbf417e9-3071-40fc-9a73-2f270e122147" 
+  Name="Marketing Efforts Data List"
+  Description="A data list showing marketing efforts records." 
+  Author="Styons Software"
+  >
+  <SPDataList SPName="USR_SSC_USP_DATALIST_MARKETINGEFFORTS">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_SSC_USP_DATALIST_MARKETINGEFFORTS
+(
+  @MKTSEGMENTATIONID UNIQUEIDENTIFIER = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SELECT
+    MS.ID     AS MKTSEGMENTATIONID
+   ,MS.[NAME] AS MKTSEGMENTATIONNAME
+   ,MS.ACTIVE AS ISACTIVE
+  FROM
+    MKTSEGMENTATION MS
+  WHERE ((@MKTSEGMENTATIONID IS NULL) OR (MS.ID = @MKTSEGMENTATIONID))
+  ORDER BY
+    MS.[NAME] ASC
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+  <Parameters>
+    <FormMetaData xmlns="bb_appfx_commontypes">
+      <FormFields>
+        <FormField FieldID="MKTSEGMENTATIONID" DataType="Guid" Caption="Marketing effort">
+          <SimpleDataList SimpleDataListID="25ffc3fe-17e3-40aa-9192-7743839586bc"/>
+        </FormField>
+      </FormFields>
+    </FormMetaData>
+  </Parameters>
+
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="MKTSEGMENTATIONID" Caption="MKTSEGMENTATIONID" DataType="Guid" IsHidden="true"/>
+      <OutputField FieldID="MKTSEGMENTATIONNAME" Caption="Name" DataType="String"/>
+      <OutputField FieldID="ISACTIVE" Caption="Active" DataType="Boolean" DisplayBooleanAsCheck="true"/>
+    </OutputFields>
+  </Output>
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</DataListSpec>

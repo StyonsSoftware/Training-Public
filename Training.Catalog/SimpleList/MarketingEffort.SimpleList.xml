@@ -1,0 +1,27 @@
+<SimpleDataListSpec
+  xmlns="bb_appfx_simpledatalist"
+  xmlns:c="bb_appfx_commontypes"
+  ID="25ffc3fe-17e3-40aa-9192-7743839586bc"
+  Name="Marketing Effort Simple Data List (Custom)"
+  Description="A simple data list that returns marketing effort records"
+  Author="Styons Software"
+  >
+  <SPSimpleList SPName="USR_SSC_USP_SIMPLEDATALIST_MARKETINGEFFORT">
+    <c:CreateProcedureSQL >
+      <![CDATA[
+CREATE PROCEDURE USR_SSC_USP_SIMPLEDATALIST_MARKETINGEFFORT
+AS
+BEGIN
+  SET NOCOUNT ON
+  SELECT
+    MS.ID     AS [VALUE]
+   ,MS.[NAME] AS [LABEL]
+  FROM
+    MKTSEGMENTATION MS
+  ORDER BY
+    MS.[NAME] ASC
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPSimpleList>
+</SimpleDataListSpec>
