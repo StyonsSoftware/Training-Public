@@ -158,6 +158,7 @@
     <EmbeddedResource Include="Add forms\ConstituentAddressPicklist.Add.xml" />
     <EmbeddedResource Include="Add forms\DynamicBehaviorDemo.Add.xml" />
     <EmbeddedResource Include="Datalist\MarketingEfforts.Datalist.xml" />
+    <EmbeddedResource Include="Add forms\AddressValidationDemo.Add.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

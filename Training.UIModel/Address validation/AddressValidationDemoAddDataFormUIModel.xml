@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>AddressValidationDemo.Add.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>AddressValidationDemoAddDataFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>AddressValidationDemoAddDataForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

@@ -1,0 +1,12 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="5691239d-3154-4411-9375-97ec3441c04e"
+  Name="Show Datalist Demo"
+  Description="Show datalist demo page"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="300"
+  >
+  <c:ShowPage PageID="396db14d-a7ad-40b7-ba0a-c5f26026467d"/>
+</TaskSpec>

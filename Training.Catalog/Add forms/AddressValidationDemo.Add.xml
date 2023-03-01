@@ -1,0 +1,142 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="837ba8fc-734b-4b7c-82ef-abfe3d5f8c09"
+  Name="Address Validation Demo Add Data Form"
+  Description="A data form for adding address validation demo records"
+  Author="Styons Software"
+  DataFormInstanceID="549644c5-3041-4813-973e-bd727d307f12"
+  RecordType="Address Validation Demo"
+  c:SecurityUIFolder="Training\Address Validation"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_ADDRESSVALIDATIONDEMO_PRELOAD">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_ADDRESSVALIDATIONDEMO_PRELOAD
+(
+  @CONSTITUENTID     UNIQUEIDENTIFIER
+ ,@ADDRESSTYPECODEID UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@ADDRESSBLOCK      NVARCHAR(150)    = NULL OUTPUT
+ ,@CITY              NVARCHAR(50)     = NULL OUTPUT
+ ,@STATEID           UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@POSTCODE          NVARCHAR(12)     = NULL OUTPUT
+ ,@COUNTRYID         UNIQUEIDENTIFIER = NULL OUTPUT
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SELECT TOP 1
+    @ADDRESSTYPECODEID = A.ADDRESSTYPECODEID
+   ,@ADDRESSBLOCK      = A.ADDRESSBLOCK     
+   ,@CITY              = A.CITY             
+   ,@STATEID           = A.STATEID          
+   ,@POSTCODE          = A.POSTCODE         
+   ,@COUNTRYID         = A.COUNTRYID        
+  FROM
+    ADDRESS A
+  WHERE CONSTITUENTID = @CONSTITUENTID
+  ORDER BY
+    CASE WHEN A.ISPRIMARY = 1 THEN 0 ELSE 1 END ASC
+  RETURN 0        
+END
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_ADDRESSVALIDATIONDEMO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_ADDRESSVALIDATIONDEMO
+(
+  @ID                UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@CONSTITUENTID     UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID     UNIQUEIDENTIFIER = NULL
+ ,@ADDRESSTYPECODEID UNIQUEIDENTIFIER = NULL
+ ,@ADDRESSBLOCK      NVARCHAR(150)    = ''
+ ,@CITY              NVARCHAR(50)     = ''
+ ,@STATEID           UNIQUEIDENTIFIER = NULL
+ ,@POSTCODE          NVARCHAR(12)     = ''
+ ,@COUNTRYID         UNIQUEIDENTIFIER = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @ID = ISNULL(@ID,NEWID())
+  IF @CHANGEAGENTID IS NULL
+    EXEC USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID OUTPUT
+  DECLARE @NOW DATETIME = GETDATE()
+
+  BEGIN TRY
+    SELECT 1 --Do nothing with the data.  this is just a demo.
+  END TRY
+  BEGIN CATCH
+    EXEC USP_RAISE_ERROR
+    RETURN 1
+  END CATCH
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="ADDRESSTYPECODEID" DataType="Guid" Caption="Type">
+        <CodeTable CodeTableName="ADDRESSTYPECODE"/>
+      </FormField>
+      <FormField FieldID="ADDRESSBLOCK" MaxLength="150" Caption="Address" DefaultValueText=""/>
+      <FormField FieldID="CITY" MaxLength="50" Caption="City" DefaultValueText=""/>
+      <FormField FieldID="STATEID" DataType="Guid" Caption="State">
+        <SimpleDataList SimpleDataListID="7fa91401-596c-4f7c-936d-6e41683121d7">
+          <Params>
+            <Param ID="COUNTRYID">
+              <Value>Fields!COUNTRYID</Value>
+            </Param>
+          </Params>
+        </SimpleDataList>
+      </FormField>
+      <FormField FieldID="POSTCODE" MaxLength="12" Caption="ZIP" DefaultValueText="">
+        <SearchList SearchListID="e5de8c33-de58-4dc6-9a13-48be9f03db81" DisplayTextIsValue="true"/>
+      </FormField>
+      <FormField FieldID="COUNTRYID" DataType="Guid" Required="true" Caption="Country">
+        <SimpleDataList SimpleDataListID="c9649672-353d-42e8-8c25-4d34bbabfbba"/>
+      </FormField>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.AddressValidationDemoAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/AddressValidationDemoAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+
+    <UIActions>
+      <UIAction ActionID="ACTION_VALIDATE" Caption="Validate this address"/>
+    </UIActions>
+  </FormMetaData>
+
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterPageActionGroups>
+          <AlterPageActionGroup PageActionGroupID="6459a910-09ae-44bd-9240-31d2ebbafa7c">
+            <AlterActions>
+              <AddAction Sequence="999">
+                <Action Caption="Address validation demo" ID="ba8d8c99-46cc-49e7-ae93-fc236c613a7d">
+                  <c:ShowAddDataForm DataFormID="549644c5-3041-4813-973e-bd727d307f12">
+                    <c:ActionContext>
+                      <c:PageContextID/>
+                    </c:ActionContext>
+                  </c:ShowAddDataForm>
+                </Action>
+              </AddAction>
+            </AlterActions>
+          </AlterPageActionGroup>
+        </AlterPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</AddDataFormTemplateSpec>

@@ -58,6 +58,10 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Blackbaud.AppFx.AddressValidation.Server, Version=4.0.3101.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Blackbaud\SDK\DLLReferences\Blackbaud.AppFx.AddressValidation.Server.dll</HintPath>
+    </Reference>
     <Reference Include="Blackbaud.AppFx.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
@@ -101,6 +105,11 @@
       <DependentUpon>AddFormWithMoveUpDownButtonsOnACollectionUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="AddFormWithMoveUpDownButtonsOnACollectionUIModel.vb" />
+    <Compile Include="Address validation\AddressValidation.vb" />
+    <Compile Include="Address validation\AddressValidationDemoAddDataFormUIModel.CodeGen.vb">
+      <DependentUpon>AddressValidationDemoAddDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Address validation\AddressValidationDemoAddDataFormUIModel.vb" />
     <Compile Include="AllAddressesDataListUIModel.CodeGen.vb">
       <DependentUpon>AllAddressesDataListUIModel.vb</DependentUpon>
     </Compile>
@@ -152,12 +161,18 @@
     <None Include="..\Training.Catalog\Add forms\DynamicBehaviorDemo.Add.xml">
       <Link>LinkedSpecs\DynamicBehaviorDemo.Add.xml</Link>
     </None>
+    <None Include="..\Training.Catalog\Add forms\AddressValidationDemo.Add.xml">
+      <Link>LinkedSpecs\AddressValidationDemo.Add.xml</Link>
+    </None>
+    <Content Include="Address validation\AddressValidationDemoAddDataFormUIModel.xml">
+      <DependentUpon>AddressValidationDemoAddDataFormUIModel.vb</DependentUpon>
+    </Content>
     <Content Include="DynamicBehaviorDemoAddDataFormUIModel.xml">
       <DependentUpon>DynamicBehaviorDemoAddDataFormUIModel.vb</DependentUpon>
     </Content>
+    <Content Include="htmlforms\custom\training\AddressValidationDemoAddDataForm.html" />
     <Content Include="htmlforms\custom\training\DynamicBehaviorDemoAddDataForm.html" />
     <Content Include="htmlforms\custom\training\DynamicBehaviorDemoAddDataForm.js" />
-    <Content Include="UIModel1.UIModel.xml" />
     <None Include="..\Training.Catalog\Add forms\ConstituentAddressPicklist.Add.xml">
       <Link>LinkedSpecs\ConstituentAddressPicklist.Add.xml</Link>
     </None>
