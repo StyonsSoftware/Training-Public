@@ -1,0 +1,80 @@
+<PageDefinitionSpec 
+  xmlns="bb_appfx_pagedefinition" 
+  xmlns:c="bb_appfx_commontypes"
+  ID="2af28132-152e-401b-8cc0-340a1c6b3b20"
+  Name="Page Refresh Demo Page"
+  Description="Shows two ways of refreshing a page with a newly selected constituent"
+  Author="Styons Software"
+  ContextRecordType="Constituent"
+  ExpressionDataFormID="0c836902-a398-47a0-91eb-8b66e434148e"
+  >
+  <!--The ExpressionDataFormID is one of the OOB forms used by the Constituent page.-->
+  <PageHeader Caption="=&quot;Now showing: &quot;&amp;Fields!NAME"/>
+
+  <!--
+  This widget renders a short list of constituents.
+  When the user clicks on a person in the list, the page refreshes for that selection.
+  -->
+  <SummarySection Caption="Change" HideRefresh="true" HideCaption="true" ID="a0c1af84-1b6e-483a-b108-f870f0c2fa37">
+    <UIWidget ID="709d8a0f-383b-4401-b1a1-9e282c59fd6a"/>
+  </SummarySection>
+
+  <!--OOB address and phone lists, just to prove that we are reflecting the chosen constituent-->
+  <Tabs>
+    <Tab ID="f8d9cca3-8045-44b7-bad4-8a5c82649dfb" Caption="Addresses">
+      <Sections>
+        <Section ID="1eaac52a-13e5-4660-a997-8281cc294733" Caption="Addresses">
+          <DataList ID="e04c7070-e928-4646-859b-2e2c22c84b9d">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+          <SectionContext>
+            <c:PageContextID/>
+          </SectionContext>
+        </Section>
+      </Sections>
+    </Tab>
+    <Tab ID="9737a8cc-aeb0-4dc0-8249-812e71aaa342" Caption="Phones">
+      <Sections>
+        <Section ID="eb33492d-e368-4ece-99ab-093e44c6c125" Caption="Phone #s">
+          <DataList ID="07ce8ab9-1a76-4971-bcc9-0e3ccfe77ecf">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+          <SectionContext>
+            <c:PageContextID/>
+          </SectionContext>
+        </Section>
+      </Sections>
+    </Tab>
+  </Tabs>
+
+  <!--
+  When they click "Change constituent", do the following:
+  1) pop up the constituent search list
+  2) pass that value to a dummy do-nothing record op
+  3) re-render the current page, with the context coming back out of that record op
+  
+  This has the effect of refreshing the page for whomever you just selected.
+  -->
+  <PageActionGroups>
+    <PageActionGroup Caption="Tasks" ID="6089a3d1-67fb-4640-b765-0420fcfc28db">
+      <Actions>
+        <Action Caption="Change constituent" ID="975cfa72-8802-48e5-84f7-b99942c103c8">
+          <ExecuteRecordOperation RecordOperationID="32f8fe00-0a3d-4d15-a5cf-10bdbf2b42ec" ShowPrompt="false" xmlns="bb_appfx_commontypes">
+            <ActionContext>
+              <SearchListReturnValue SearchListID="fdf9d631-5277-4300-80b3-fdf5fb8850ec"/>
+            </ActionContext>
+            <PostActionEvent>
+              <GoToPage>
+                <SpecificPage PageID="2af28132-152e-401b-8cc0-340a1c6b3b20"/>
+              </GoToPage>
+            </PostActionEvent>
+          </ExecuteRecordOperation>
+        </Action>
+      </Actions>
+    </PageActionGroup>
+  </PageActionGroups>
+</PageDefinitionSpec>

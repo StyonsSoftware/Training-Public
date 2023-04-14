@@ -143,6 +143,11 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Widgets\PageRefreshDemo.UIWidget.xml" />
+    <EmbeddedResource Include="Packages\PageRefreshDemo.Package.xml" />
+    <EmbeddedResource Include="Tasks\GoToPageRefreshDemo.Task.xml" />
+    <EmbeddedResource Include="Record operations\DoNothing.RecordOperation.xml" />
+    <EmbeddedResource Include="Pages\PageRefreshDemo.Page.xml" />
     <EmbeddedResource Include="Tasks\ShowDatalistDemo.Task.xml" />
     <EmbeddedResource Include="Pages\DatalistDemo.Page.xml" />
     <EmbeddedResource Include="SimpleList\MarketingEffort.SimpleList.xml" />
@@ -159,6 +164,7 @@
     <EmbeddedResource Include="Add forms\DynamicBehaviorDemo.Add.xml" />
     <EmbeddedResource Include="Datalist\MarketingEfforts.Datalist.xml" />
     <EmbeddedResource Include="Add forms\AddressValidationDemo.Add.xml" />
+    <EmbeddedResource Include="Datalist\PageRefreshDemoConstituents.Datalist.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

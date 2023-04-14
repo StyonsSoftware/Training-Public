@@ -1,0 +1,44 @@
+<DataListSpec
+  xmlns="bb_appfx_datalist"
+  xmlns:c="bb_appfx_commontypes"
+  ID="42684c4f-daf6-460c-a491-6742eaeea200"
+  Name="Page Refresh Demo Constituents Data List"
+  Description="Short list of random constituents to demo the Page refresh feature"
+  Author="Styons Software"
+  >
+  <SPDataList SPName="USR_USP_DATALIST_PAGEREFRESHDEMOCONSTITUENTS">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_USP_DATALIST_PAGEREFRESHDEMOCONSTITUENTS
+(
+  @NAMELIKE NVARCHAR(100) = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SELECT TOP 10
+    ID
+   ,[NAME]
+  FROM
+    CONSTITUENT
+  WHERE ((@NAMELIKE IS NULL) OR ([NAME] LIKE '%' + @NAMELIKE + '%'))
+  ORDER BY
+    DATECHANGED DESC
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+  <Parameters>
+    <FormMetaData xmlns="bb_appfx_commontypes">
+      <FormFields>
+        <FormField FieldID="NAMELIKE" DataType="String" Caption="Name contains" Hidden="true"/>
+      </FormFields>
+    </FormMetaData>
+  </Parameters>
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="ID" Caption="ID" DataType="Guid" IsHidden="true"/>
+      <OutputField FieldID="NAME" Caption="Name" DataType="String"/>
+    </OutputFields>
+  </Output>
+</DataListSpec>

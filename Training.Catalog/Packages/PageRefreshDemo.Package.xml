@@ -1,0 +1,17 @@
+<PackageSpec
+  xmlns="bb_appfx_package"
+  xmlns:c="bb_appfx_commontypes"
+  ID="59c7ddb8-a59f-44da-8173-19e5ea96625c"
+  Name="Page Refresh Demo Package"
+  Description="Loads just the page refresh demo features"
+  Author="Styons Software"
+  >
+  <DependencyList xmlns="bb_appfx_commontypes">
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.Training.FunctionalArea.xml"/>
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.DoNothing.RecordOperation.xml"/>
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.PageRefreshDemoConstituents.Datalist.xml"/>
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.PageRefreshDemo.UIWidget.xml"/>
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.PageRefreshDemo.Page.xml"/>
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.GoToPageRefreshDemo.Task.xml"/>
+  </DependencyList>
+</PackageSpec>

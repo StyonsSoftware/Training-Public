@@ -158,6 +158,9 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Datalist\PageRefreshDemoConstituents.Datalist.xml">
+      <Link>LinkedSpecs\PageRefreshDemoConstituents.Datalist.xml</Link>
+    </None>
     <None Include="..\Training.Catalog\Add forms\DynamicBehaviorDemo.Add.xml">
       <Link>LinkedSpecs\DynamicBehaviorDemo.Add.xml</Link>
     </None>

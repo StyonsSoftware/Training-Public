@@ -1,0 +1,16 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="d4c89e18-abae-44c8-a13b-5080f6e9752c"
+  Name="Go To Page Refresh Demo"
+  Description="Go to the page refresh demo"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="500"
+  >
+  <ShowPage PageID="2af28132-152e-401b-8cc0-340a1c6b3b20" xmlns="bb_appfx_commontypes">
+    <ActionContext>
+      <SearchListReturnValue SearchListID="fdf9d631-5277-4300-80b3-fdf5fb8850ec"/>
+    </ActionContext>
+  </ShowPage>
+</TaskSpec>

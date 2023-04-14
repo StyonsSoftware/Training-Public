@@ -1,0 +1,28 @@
+<RecordOperationSpec 
+  xmlns="bb_appfx_recordoperation"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="32f8fe00-0a3d-4d15-a5cf-10bdbf2b42ec" 
+  Name="Do Nothing Record Operation" 
+  Description="Do nothing and quit.  Used as a placeholder on the Page Refresh Demo"
+  Author="Styons Software"
+  OperationType="Update"
+  RecordType="Constituent"
+  >
+  <SPRecord>
+    <SPOperationImplementation SPName="USR_USP_RECORDOPERATION_DONOTHING">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_RECORDOPERATION_DONOTHING
+(
+  @ID            UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID UNIQUEIDENTIFIER
+)
+AS
+BEGIN
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SPOperationImplementation>
+  </SPRecord>
+</RecordOperationSpec>

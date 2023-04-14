@@ -1,0 +1,27 @@
+<UIWidgetSpec
+  xmlns="bb_appfx_uiwidget"
+  xmlns:c="bb_appfx_commontypes"
+  ID="709d8a0f-383b-4401-b1a1-9e282c59fd6a"
+  Name="Page Refresh Demo UI Widget"
+  Description="Show a short list of constituents.  When one is selected, render a page for them."
+  Author="Styons Software"
+  Title="UI Widget Spec"
+  >
+  <DataSource>
+    <DataList ID="42684c4f-daf6-460c-a491-6742eaeea200">
+      <RenderStyle>
+        <List>
+          <LinkActions>
+            <LinkAction LinkFieldID="NAME">
+              <ShowPage PageID="2af28132-152e-401b-8cc0-340a1c6b3b20">
+                <ActionContext>
+                  <DataListField>ID</DataListField>
+                </ActionContext>
+              </ShowPage>
+            </LinkAction>
+          </LinkActions>
+        </List>
+      </RenderStyle>
+    </DataList>
+  </DataSource>
+</UIWidgetSpec>
