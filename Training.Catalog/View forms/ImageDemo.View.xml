@@ -1,0 +1,49 @@
+<ViewDataFormTemplateSpec
+    xmlns="bb_appfx_viewdataformtemplate"
+    xmlns:c="bb_appfx_commontypes"
+    ID="ec1f24a9-3e1a-49b9-adec-de173549a7c5"
+    Name="Image Demo View Data Form"
+    Description="A data form for viewing image demo records"
+    Author="Styons Software"
+    DataFormInstanceID="a29ee034-5c8b-4762-8745-0af7a617bf28"
+    RecordType="Image Demo"
+    c:SecurityUIFolder="Image Demo"
+    >
+  <SPDataForm SPName="USR_USP_DATAFORMTEMPLATE_VIEW_IMAGEDEMO">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_VIEW_IMAGEDEMO
+(
+  @ID uniqueidentifier
+ ,@DATALOADED bit = 0 output
+ ,@DECISIONFIELD tinyint = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  select
+    @DECISIONFIELD = 1
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="DECISIONFIELD" Caption="Decision field" DataType="TinyInt" />
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ImageDemoViewDataFormUIModel" />
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ImageDemoViewDataForm.html" />
+      </WebUI>
+    </WebUIComponent>
+
+
+    <UIFields>
+      <FormField FieldID="TESTIMAGE" />
+    </UIFields>
+  </FormMetaData>
+</ViewDataFormTemplateSpec>

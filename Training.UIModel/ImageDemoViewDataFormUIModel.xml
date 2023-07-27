@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ImageDemo.View.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ImageDemoViewDataFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ImageDemoViewDataForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

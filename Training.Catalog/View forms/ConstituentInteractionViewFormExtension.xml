@@ -1,0 +1,85 @@
+<ViewDataFormTemplateSpec
+  xmlns="bb_appfx_viewdataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="759e6600-5cef-436c-af5e-87eea6fdc2f6"
+  Name="Constituent Interaction View Form Extension"
+  Description="Extends the OOB 'Constituent Interaction View Form' with custom fields"
+  Author="Styons Software"
+  DataFormInstanceID="5ee1541a-fbc1-42ea-b76d-897d8d7a2de0"
+  RecordType="Constituent Interaction"
+  c:SecurityUIFolder="SSC\Training"
+  >
+  <SPDataForm SPName="USR_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENTINTERACTIONVIEWFORMEXTENSION">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENTINTERACTIONVIEWFORMEXTENSION
+(
+  @ID           uniqueidentifier
+ ,@DATALOADED   bit              = 0    output
+ ,@RELATIVEINFO xml              = null output
+ ,@RECORDCOUNT  INT              = NULL OUTPUT
+ ,@CURRENTINDEX INT              = NULL OUTPUT
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  DECLARE @RELATIVES TABLE
+  (
+    FIRSTNAME NVARCHAR(100)
+   ,KEYNAME   NVARCHAR(200)
+   ,AGE INT
+  )
+  INSERT INTO @RELATIVES
+  select
+    relcon.FIRSTNAME
+   ,relcon.KEYNAME
+   ,relcon.age
+  from
+    constituent c
+    join interaction i on i.constituentid = c.id
+    join relationship rel on rel.relationshipconstituentid = c.id
+    join constituent relcon on relcon.id = rel.RECIPROCALCONSTITUENTID
+  where i.id = @ID
+    and relcon.ISORGANIZATION = 0
+  SET @RECORDCOUNT = @@ROWCOUNT
+  SET @CURRENTINDEX = 0
+  SET @RELATIVEINFO = (
+    SELECT FIRSTNAME, KEYNAME, AGE
+    FROM @RELATIVES
+    FOR XML RAW('ITEM'),TYPE,ELEMENTS,ROOT('RELATIVEINFO'),BINARY BASE64
+    )
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="RELATIVEINFO" Caption="Relatives" DataType="XML">
+        <Collection ViewMode="Repeater">
+          <Fields>
+            <FormField FieldID="FIRSTNAME" Caption="First name" DataType="String"/>
+            <FormField FieldID="KEYNAME" Caption="Last name"/>
+            <FormField FieldID="AGE" Caption="Age"/>
+          </Fields>
+        </Collection>
+      </FormField>
+      <FormField FieldID="RECORDCOUNT" DataType="Integer" Caption="Total" ReadOnly="true"/>
+      <FormField FieldID="CURRENTINDEX" DataType="Integer" Caption="Current" ReadOnly="true"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentInteractionViewFormExtensionUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ConstituentInteractionViewFormExtension.html"/>
+      </WebUI>
+    </WebUIComponent>
+    <UIActions>
+      <UIAction ActionID="NEXTRECORD" Caption="Next"/>
+      <UIAction ActionID="PRIORRECORD" Caption="Back"/>
+    </UIActions>
+  </FormMetaData>
+
+  <c:DataFormExtension DataFormInstanceID="e3574968-1684-4b51-9752-3599be1b4ec4" RenderStyle="AfterParent" TabCaption="Extended fields"/>
+</ViewDataFormTemplateSpec>

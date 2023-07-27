@@ -1,0 +1,62 @@
+<DataListSpec
+  xmlns="bb_appfx_datalist"
+  xmlns:c="bb_appfx_commontypes"
+  ID="ab5d089f-eaf5-4ce7-bc0c-64c8144c271d"
+  Name="Params From URL Data List"
+  Description="Datalist that uses a custom UIModel to push URL parameters into filters"
+  Author="Styons Software"
+  >
+  <SPDataList SPName="USR_USP_DATALIST_PARAMSFROMURL">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_USP_DATALIST_PARAMSFROMURL
+(
+  @FIRSTNAME NVARCHAR(100) = ''
+ ,@KEYNAME   NVARCHAR(200) = ''
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @KEYNAME = ISNULL(@KEYNAME,'')
+  SET @FIRSTNAME = ISNULL(@FIRSTNAME,'')
+  
+  SELECT
+    ID
+   ,LOOKUPID
+   ,FIRSTNAME
+   ,KEYNAME
+  FROM
+    CONSTITUENT
+  WHERE 1=1
+    AND ((@KEYNAME = '') OR (KEYNAME LIKE '%' + @KEYNAME + '%'))
+    AND ((@FIRSTNAME = '') OR (FIRSTNAME LIKE '%' + @FIRSTNAME + '%'))
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+
+  <Parameters>
+    <FormMetaData xmlns="bb_appfx_commontypes">
+      <FormFields>
+        <FormField FieldID="FIRSTNAME" Caption="First name contains" DataType="String"/>
+        <FormField FieldID="KEYNAME" Caption="Last name contains" DataType="String"/>
+      </FormFields>
+
+      <WebUIComponent>
+        <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ParamsFromURLDataListUIModel"/>
+        <WebUI>
+          <ExternalResource Url="browser/htmlforms/custom/training/ParamsFromURLDataList.html"/>
+        </WebUI>
+      </WebUIComponent>
+    </FormMetaData>
+  </Parameters>
+
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="ID" Caption="ID" DataType="Guid" IsHidden="true"/>
+      <OutputField FieldID="LOOKUPID" Caption="Lookup ID" DataType="String"/>
+      <OutputField FieldID="FIRSTNAME" Caption="First name" DataType="String"/>
+      <OutputField FieldID="KEYNAME" Caption="Last name" DataType="String"/>
+    </OutputFields>
+  </Output>
+</DataListSpec>

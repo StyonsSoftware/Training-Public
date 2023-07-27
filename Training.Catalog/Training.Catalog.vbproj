@@ -143,6 +143,9 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="View forms\ConstituentInteractionViewFormExtension.xml" />
+    <EmbeddedResource Include="Images\problem-solving.png" />
+    <EmbeddedResource Include="View forms\ImageDemo.View.xml" />
     <EmbeddedResource Include="Widgets\PageRefreshDemo.UIWidget.xml" />
     <EmbeddedResource Include="Packages\PageRefreshDemo.Package.xml" />
     <EmbeddedResource Include="Tasks\GoToPageRefreshDemo.Task.xml" />
@@ -165,6 +168,7 @@
     <EmbeddedResource Include="Datalist\MarketingEfforts.Datalist.xml" />
     <EmbeddedResource Include="Add forms\AddressValidationDemo.Add.xml" />
     <EmbeddedResource Include="Datalist\PageRefreshDemoConstituents.Datalist.xml" />
+    <EmbeddedResource Include="Datalist\ParamsFromURL.Datalist.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ParamsFromURL.Datalist.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ParamsFromURLDataListUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ParamsFromURLDataList.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

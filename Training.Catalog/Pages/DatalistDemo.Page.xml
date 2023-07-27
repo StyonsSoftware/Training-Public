@@ -17,6 +17,13 @@
             </RenderStyle>
           </DataList>
         </Section>
+        <Section ID="441f0246-8e27-416d-b2be-aa9bd43e552e" Caption="Params from URL">
+          <DataList ID="ab5d089f-eaf5-4ce7-bc0c-64c8144c271d">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+        </Section>
       </Sections>
     </Tab>
   </Tabs>

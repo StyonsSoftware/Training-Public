@@ -83,6 +83,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,13 @@
       <DependentUpon>ConstituentHTMLViewFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ConstituentHTMLViewFormUIModel.vb" />
+    <Compile Include="ConstituentInteractionViewFormExtensionRELATIVEINFOUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentInteractionViewFormExtensionUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentInteractionViewFormExtensionUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentInteractionViewFormExtensionUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentInteractionViewFormExtensionUIModel.vb" />
     <Compile Include="DynamicBehaviorDemoAddDataFormUIModel.CodeGen.vb">
       <DependentUpon>DynamicBehaviorDemoAddDataFormUIModel.vb</DependentUpon>
     </Compile>
@@ -151,13 +159,43 @@
       <DependentUpon>HTMLViewDataFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="HTMLViewDataFormUIModel.vb" />
+    <Compile Include="ImageDemoViewDataFormUIModel.CodeGen.vb">
+      <DependentUpon>ImageDemoViewDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImageDemoViewDataFormUIModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="ParamsFromURLDataListUIModel.CodeGen.vb">
+      <DependentUpon>ParamsFromURLDataListUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ParamsFromURLDataListUIModel.vb" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\View forms\ConstituentInteractionViewFormExtension.xml">
+      <Link>LinkedSpecs\ConstituentInteractionViewFormExtension.xml</Link>
+    </None>
+    <Content Include="ConstituentInteractionViewFormExtensionUIModel.xml">
+      <DependentUpon>ConstituentInteractionViewFormExtensionUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\ConstituentInteractionViewFormExtension.html" />
+    <None Include="..\Training.Catalog\View forms\ImageDemo.View.xml">
+      <Link>LinkedSpecs\ImageDemo.View.xml</Link>
+    </None>
+    <None Include="..\Training.Catalog\Datalist\ParamsFromURL.Datalist.xml">
+      <Link>LinkedSpecs\ParamsFromURL.Datalist.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\ConstituentInteractionViewFormExtension.js" />
+    <Content Include="htmlforms\custom\training\ImageDemoViewDataForm.html" />
+    <Content Include="htmlforms\custom\training\ParamsFromURLDataList.html" />
+    <Content Include="ImageDemoViewDataFormUIModel.xml">
+      <DependentUpon>ImageDemoViewDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="ParamsFromURLDataListUIModel.xml">
+      <DependentUpon>ParamsFromURLDataListUIModel.vb</DependentUpon>
+    </Content>
     <None Include="..\Training.Catalog\Datalist\PageRefreshDemoConstituents.Datalist.xml">
       <Link>LinkedSpecs\PageRefreshDemoConstituents.Datalist.xml</Link>
     </None>

@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ConstituentInteractionViewFormExtension.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ConstituentInteractionViewFormExtensionUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ConstituentInteractionViewFormExtension.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>
