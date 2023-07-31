@@ -25,6 +25,9 @@ Partial Public Class [ConstituentInteractionViewFormExtensionUIModel]
 
 #End Region
 
+    Private WithEvents _firstname As Global.Blackbaud.AppFx.UIModeling.Core.StringField
+    Private WithEvents _keyname As Global.Blackbaud.AppFx.UIModeling.Core.StringField
+    Private WithEvents _age As Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
     Private WithEvents _relativeinfo As Global.Blackbaud.AppFx.UIModeling.Core.CollectionField(Of ConstituentInteractionViewFormExtensionRELATIVEINFOUIModel)
     Private WithEvents _recordcount As Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
     Private WithEvents _currentindex As Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
@@ -35,6 +38,9 @@ Partial Public Class [ConstituentInteractionViewFormExtensionUIModel]
     Public Sub New()
         MyBase.New()
 
+        _firstname = New Global.Blackbaud.AppFx.UIModeling.Core.StringField
+        _keyname = New Global.Blackbaud.AppFx.UIModeling.Core.StringField
+        _age = New Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
         _relativeinfo = New Global.Blackbaud.AppFx.UIModeling.Core.CollectionField(Of ConstituentInteractionViewFormExtensionRELATIVEINFOUIModel)
         _recordcount = New Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
         _currentindex = New Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
@@ -49,12 +55,34 @@ Partial Public Class [ConstituentInteractionViewFormExtensionUIModel]
         MyBase.UserInterfaceUrl = "browser/htmlforms/custom/training/ConstituentInteractionViewFormExtension.html"
 
         '
+        '_firstname
+        '
+        _firstname.Name = "FIRSTNAME"
+        _firstname.Caption = "First name"
+        _firstname.DBReadOnly = True
+        _firstname.MaxLength = 200
+        Me.Fields.Add(_firstname)
+        '
+        '_keyname
+        '
+        _keyname.Name = "KEYNAME"
+        _keyname.Caption = "Last name"
+        _keyname.DBReadOnly = True
+        _keyname.MaxLength = 200
+        Me.Fields.Add(_keyname)
+        '
+        '_age
+        '
+        _age.Name = "AGE"
+        _age.Caption = "Age"
+        _age.DBReadOnly = True
+        Me.Fields.Add(_age)
+        '
         '_relativeinfo
         '
         _relativeinfo.Name = "RELATIVEINFO"
         _relativeinfo.Caption = "Relatives"
         _relativeinfo.DBReadOnly = True
-        _relativeinfo.ViewMode = Global.Blackbaud.AppFx.UIModeling.Core.CollectionFieldViewMode.[Repeater]
         Me.Fields.Add(_relativeinfo)
         '
         '_recordcount
@@ -86,6 +114,39 @@ Partial Public Class [ConstituentInteractionViewFormExtensionUIModel]
 		OnCreated()
 
     End Sub
+    
+    ''' <summary>
+    ''' First name
+    ''' </summary>
+    <System.ComponentModel.Description("First name")> _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("BBUIModelLibrary", "4.0.3405.0")> _
+    Public ReadOnly Property [FIRSTNAME]() As Global.Blackbaud.AppFx.UIModeling.Core.StringField
+        Get
+            Return _firstname
+        End Get
+    End Property
+    
+    ''' <summary>
+    ''' Last name
+    ''' </summary>
+    <System.ComponentModel.Description("Last name")> _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("BBUIModelLibrary", "4.0.3405.0")> _
+    Public ReadOnly Property [KEYNAME]() As Global.Blackbaud.AppFx.UIModeling.Core.StringField
+        Get
+            Return _keyname
+        End Get
+    End Property
+    
+    ''' <summary>
+    ''' Age
+    ''' </summary>
+    <System.ComponentModel.Description("Age")> _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("BBUIModelLibrary", "4.0.3405.0")> _
+    Public ReadOnly Property [AGE]() As Global.Blackbaud.AppFx.UIModeling.Core.IntegerField
+        Get
+            Return _age
+        End Get
+    End Property
     
     ''' <summary>
     ''' Relatives

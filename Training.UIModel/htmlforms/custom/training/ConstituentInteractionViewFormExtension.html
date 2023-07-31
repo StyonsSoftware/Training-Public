@@ -1,43 +1,42 @@
-﻿<div id="#MAP#ConstituentInteractionViewFormExtension">
+﻿<!--
+looking for the JS implementation of the previous/next button?
+go back in the version history of this file
+  -->
+<div id="#MAP#ConstituentInteractionViewFormExtension">
   <table>
+    <tr id="#MAP#FIRSTNAME_container">
+      <td>
+        <span id="#MAP#FIRSTNAME_caption" class="bbui-forms-captionlight"></span>
+      </td>
+      <td>
+        <span id="#MAP#FIRSTNAME_value"></span>
+      </td>
+    </tr>
+    <tr id="#MAP#KEYNAME_container">
+      <td>
+        <span id="#MAP#KEYNAME_caption" class="bbui-forms-captionlight"></span>
+      </td>
+      <td>
+        <span id="#MAP#KEYNAME_value"></span>
+      </td>
+    </tr>
+    <tr id="#MAP#AGE_container">
+      <td>
+        <span id="#MAP#AGE_caption" class="bbui-forms-captionlight"></span>
+      </td>
+      <td>
+        <span id="#MAP#AGE_value"></span>
+      </td>
+    </tr>
     <tr id="#MAP#RELATIVEINFO_container">
       <td>
         <span id="#MAP#RELATIVEINFO_caption" class="bbui-forms-captionlight"></span>
       </td>
       <td>
-        <div id="#MAP#RELATIVEINFO_value">
-          <div id="#MAP#RELATIVEINFO_template">
-            <table>
-              <tr>
-                <td>
-                  <span id="#MAP#RELATIVEINFO_FIRSTNAME_caption" class="bbui-forms-captionlight"></span>
-                </td>
-                <td>
-                  <span id="#MAP#RELATIVEINFO_FIRSTNAME_value"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span id="#MAP#RELATIVEINFO_KEYNAME_caption" class="bbui-forms-captionlight"></span>
-                </td>
-                <td>
-                  <span id="#MAP#RELATIVEINFO_KEYNAME_value"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span id="#MAP#RELATIVEINFO_AGE_caption" class="bbui-forms-captionlight"></span>
-                </td>
-                <td>
-                  <span id="#MAP#RELATIVEINFO_AGE_value"></span>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
+        <div id="#MAP#RELATIVEINFO_value" style="height: 100px; width: 400px;" />
       </td>
     </tr>
-    <tr id="#MAP#RECORDCOUNT_container" style="display:none;">
+    <tr id="#MAP#RECORDCOUNT_container">
       <td>
         <span id="#MAP#RECORDCOUNT_caption" class="bbui-forms-captionlight"></span>
       </td>
@@ -45,7 +44,7 @@
         <span id="#MAP#RECORDCOUNT_value"></span>
       </td>
     </tr>
-    <tr id="#MAP#CURRENTINDEX_container" style="display:none;">
+    <tr id="#MAP#CURRENTINDEX_container">
       <td>
         <span id="#MAP#CURRENTINDEX_caption" class="bbui-forms-captionlight"></span>
       </td>
@@ -54,13 +53,16 @@
       </td>
     </tr>
     <tr>
-      <td>
-        <button id="#MAP#PRIORRECORD_action"></button>
-      </td>
+      <td></td>
       <td>
         <button id="#MAP#NEXTRECORD_action"></button>
       </td>
     </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button id="#MAP#PRIORRECORD_action"></button>
+      </td>
+    </tr>
   </table>
 </div>
-<!--SCRIPT:/browser/htmlforms/custom/training/ConstituentInteractionViewFormExtension.js-->

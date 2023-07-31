@@ -19,6 +19,9 @@ create procedure USR_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENTINTERACTIONVIEWFORMEXT
  ,@RELATIVEINFO xml              = null output
  ,@RECORDCOUNT  INT              = NULL OUTPUT
  ,@CURRENTINDEX INT              = NULL OUTPUT
+ ,@FIRSTNAME    NVARCHAR(200)    = NULL OUTPUT
+ ,@KEYNAME      NVARCHAR(200)    = NULL OUTPUT
+ ,@AGE          INT              = NULL OUTPUT
 )
 as
 begin
@@ -56,8 +59,11 @@ end
   </SPDataForm>
   <FormMetaData xmlns="bb_appfx_commontypes">
     <FormFields>
+      <FormField FieldID="FIRSTNAME" DataType="String" Caption="First name"/>
+      <FormField FieldID="KEYNAME" DataType="String" Caption="Last name"/>
+      <FormField FieldID="AGE" DataType="Integer" Caption="Age"/>
       <FormField FieldID="RELATIVEINFO" Caption="Relatives" DataType="XML">
-        <Collection ViewMode="Repeater">
+        <Collection>
           <Fields>
             <FormField FieldID="FIRSTNAME" Caption="First name" DataType="String"/>
             <FormField FieldID="KEYNAME" Caption="Last name"/>
