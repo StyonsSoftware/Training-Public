@@ -62,6 +62,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Blackbaud\SDK\DLLReferences\Blackbaud.AppFx.AddressValidation.Server.dll</HintPath>
     </Reference>
+    <Reference Include="Blackbaud.AppFx.ProspectResearch.UIModel, Version=4.0.186.3403, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Blackbaud\sdkversions\34\SDK\DLLReferences\Blackbaud.AppFx.ProspectResearch.UIModel.dll</HintPath>
+    </Reference>
     <Reference Include="Blackbaud.AppFx.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
@@ -168,12 +172,23 @@
       <DependentUpon>ParamsFromURLDataListUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ParamsFromURLDataListUIModel.vb" />
+    <Compile Include="ProspectResearchRequestAddFormAddDataFormUIModel.CodeGen.vb">
+      <DependentUpon>ProspectResearchRequestAddFormAddDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProspectResearchRequestAddFormAddDataFormUIModel.vb" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Add forms\ProspectResearchRequestAddForm.Extension.xml">
+      <Link>LinkedSpecs\ProspectResearchRequestAddForm.Extension.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\ProspectResearchRequestAddFormAddDataForm.html" />
+    <Content Include="ProspectResearchRequestAddFormAddDataFormUIModel.xml">
+      <DependentUpon>ProspectResearchRequestAddFormAddDataFormUIModel.vb</DependentUpon>
+    </Content>
     <None Include="..\Training.Catalog\View forms\ConstituentInteractionViewFormExtension.xml">
       <Link>LinkedSpecs\ConstituentInteractionViewFormExtension.xml</Link>
     </None>

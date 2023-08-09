@@ -7,7 +7,7 @@
     Author="Styons Software"
     DataFormInstanceID="a29ee034-5c8b-4762-8745-0af7a617bf28"
     RecordType="Image Demo"
-    c:SecurityUIFolder="Image Demo"
+    c:SecurityUIFolder="SSC\Training"
     >
   <SPDataForm SPName="USR_USP_DATAFORMTEMPLATE_VIEW_IMAGEDEMO">
     <c:CreateProcedureSQL>

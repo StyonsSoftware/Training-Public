@@ -7,7 +7,7 @@
   Author="Styons Software"
   DataFormInstanceID="f22dd105-3dac-4045-8320-e9f77069528a"
   RecordType="HTML"
-  c:SecurityUIFolder="HTML"
+  c:SecurityUIFolder="SSC\Training"
   >
   <SPDataForm SPName="USR_SSC_USP_DATAFORMTEMPLATE_VIEW_HTML">
     <c:CreateProcedureSQL>

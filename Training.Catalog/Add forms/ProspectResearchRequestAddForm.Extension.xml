@@ -1,0 +1,61 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="5dd9eed7-4e69-4ffb-a61b-9021e4c26ff9"
+  Name="Prospect Research Request Add Form Add Data Form"
+  Description="A data form for adding prospect research request add form records"
+  Author="Styons Software"
+  DataFormInstanceID="baddc141-d435-40f5-9348-f58fca05eb3f"
+  RecordType="Prospect Research Request Add Form"
+  c:SecurityUIFolder="Prospect Research Request Add Form"
+  FormHeader="Add a prospect research request add form"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_PROSPECTRESEARCHREQUESTADDFORM">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_ADD_PROSPECTRESEARCHREQUESTADDFORM
+(
+  @ID                        uniqueidentifier = null output
+ ,@PROSPECTRESEARCHREQUESTID uniqueidentifier
+ ,@CHANGEAGENTID             uniqueidentifier = null
+ ,@DEFAULTPROSPECTID         UNIQUEIDENTIFIER = NULL
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @now datetime = getdate()
+
+  begin try
+    select 1
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Prospect Research Request" RecordIDParameter="PROSPECTRESEARCHREQUESTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="DEFAULTPROSPECTID" Caption="Default prospect" DataType="Guid"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ProspectResearchRequestAddFormAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ProspectResearchRequestAddFormAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+  <c:DataFormExtension DataFormInstanceID="7a968ff9-8e1b-483c-af13-2f55dcb14e50" RenderStyle="AfterParent" TabCaption="Extended fields"/>
+</AddDataFormTemplateSpec>

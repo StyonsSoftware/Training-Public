@@ -1,0 +1,38 @@
+<ViewDataFormTemplateSpec 
+  xmlns="bb_appfx_viewdataformtemplate" 
+  xmlns:c="bb_appfx_commontypes" 
+  ID="290198f6-6515-4261-9d90-e3e5c66e514d" 
+  Name="Prospect Research Request Add Form Extension Data Provider"
+  Description="Used as an endpoint by the Prospect Research Request Add Form Extension"
+  Author="Styons Software"
+  DataFormInstanceID="9e26aad0-379e-4536-9c23-12f7429e2f6f" 
+  RecordType="Prospect Research Request"
+  c:SecurityUIFolder="SSC\Training"
+  >
+  <SPDataForm SPName="USR_USP_DATAFORMTEMPLATE_VIEW_PROSPECTRESEARCHREQUESTADDFORMEXTENSIONDATAPROVIDER">
+    <c:CreateProcedureSQL>
+  <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_VIEW_PROSPECTRESEARCHREQUESTADDFORMEXTENSIONDATAPROVIDER
+(
+  @ID                   uniqueidentifier
+ ,@DATALOADED           bit = 0 output
+ ,@DEFAULTCONSTITUENTID uniqueidentifier = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  select top 1 @DEFAULTCONSTITUENTID = id
+  from constituent
+  where lookupid = '96'
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="DEFAULTCONSTITUENTID" DataType="Guid"/>
+    </FormFields>
+  </FormMetaData>
+</ViewDataFormTemplateSpec>
