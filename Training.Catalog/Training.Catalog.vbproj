@@ -77,6 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Record operations\RecordOperationSpec.RecordOperation1.vb" />
+    <Compile Include="Searchlists\GlobalChange.Search.vb">
+      <DependentUpon>GlobalChange.Search.xml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -143,6 +147,13 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Tasks\ShowGlobalChangeSearch.Task.xml" />
+    <EmbeddedResource Include="Searchlists\GlobalChange.TranslationFunction.xml" />
+    <EmbeddedResource Include="Searchlists\GlobalChange.Search.xml" />
+    <EmbeddedResource Include="View forms\RevenueTransactionProfileViewForm.Extension.xml" />
+    <EmbeddedResource Include="Record operations\RecordOperationSpec.RecordOperation1.xml" />
+    <EmbeddedResource Include="Query views\BFAS.RelationshipChange.Query.xml" />
+    <EmbeddedResource Include="View forms\CalendarViewForm.Extension.xml" />
     <EmbeddedResource Include="View forms\ProspectResearchRequestAddFormExtensionDataProvider.View.xml" />
     <EmbeddedResource Include="View forms\ConstituentInteractionViewFormExtension.xml" />
     <EmbeddedResource Include="Images\problem-solving.png" />
@@ -171,6 +182,9 @@
     <EmbeddedResource Include="Datalist\PageRefreshDemoConstituents.Datalist.xml" />
     <EmbeddedResource Include="Datalist\ParamsFromURL.Datalist.xml" />
     <EmbeddedResource Include="Add forms\ProspectResearchRequestAddForm.Extension.xml" />
+    <EmbeddedResource Include="Edit forms\OrderOfOperations.Edit.xml" />
+    <EmbeddedResource Include="Edit forms\OrderOfOperationsExtension.Edit.xml" />
+    <EmbeddedResource Include="Add forms\RedirectMessage.Add.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

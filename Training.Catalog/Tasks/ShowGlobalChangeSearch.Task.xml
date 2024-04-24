@@ -1,0 +1,16 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="1fb5515e-ca7b-448b-8b4a-e8d989ae754a"
+  Name="Global Change CLR Search Demo"
+  Description="Show the Global Change clr searchlist"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="600"
+  >
+  <ShowPage PageID="2af28132-152e-401b-8cc0-340a1c6b3b20" xmlns="bb_appfx_commontypes">
+    <ActionContext>
+      <SearchListReturnValue SearchListID="947fb797-d6fd-4e0e-8bfe-84a0bbf64eca"/>
+    </ActionContext>
+  </ShowPage>
+</TaskSpec>

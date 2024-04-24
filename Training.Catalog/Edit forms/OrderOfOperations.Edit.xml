@@ -1,0 +1,92 @@
+<EditDataFormTemplateSpec
+    xmlns="bb_appfx_editdataformtemplate"
+    xmlns:c="bb_appfx_commontypes"
+    ID="02ca5448-5d45-4847-9b6b-19cb53c6e64f"
+    Name="Order Of Operations Edit Data Form"
+    Description="A data form for editing order of operations records"
+    Author="Styons Software"
+    DataFormInstanceID="6eb2ff47-5a48-4be2-8daf-9798482c82a5"
+    RecordType="Constituent"
+    FormHeader="Edit an order of operations"
+    >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_ORDEROFOPERATIONS">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_ORDEROFOPERATIONS
+(
+  @ID         uniqueidentifier
+ ,@DATALOADED bit              = 0    output
+ ,@TSLONG     bigint           = 0    output
+ ,@FIRSTNAME  nvarchar(100)    = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  
+  exec USR_USP_RECORDLOGMESSAGE 'Edit load'
+  
+  select
+    @TSLONG    = TSLONG
+   ,@FIRSTNAME = CON.FIRSTNAME
+  from
+    constituent con
+  where ID = @ID
+
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_ORDEROFOPERATIONS">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_ORDEROFOPERATIONS 
+(
+  @ID            uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@FIRSTNAME     nvarchar(100)
+)
+as
+begin
+  set nocount on
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    exec USR_USP_RECORDLOGMESSAGE 'Edit save'
+    update constituent
+    set
+      firstname = @Firstname
+     ,CHANGEDBYID = @CHANGEAGENTID
+     ,DATECHANGED = @NOW
+    where ID = @ID
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="FIRSTNAME" Caption="1st name" DataType="String" MaxLength="100" />
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.OrderOfOperationsEditDataFormUIModel" />
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/OrderOfOperationsEditDataForm.html" />
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</EditDataFormTemplateSpec>

@@ -1,0 +1,27 @@
+<TranslationFunctionSpec
+  xmlns="bb_appfx_translationfunction"
+  xmlns:c="bb_appfx_commontypes"
+  ID="fb7f7cb2-7047-4473-8570-3fba43da3841"
+  Name="UFN_TRANSLATIONFUNCTION_xxx"
+  Description="Translation function for the Global Change Search"
+  Author="Styons Software"
+  RecordType="Global Change"
+  >
+  <SQLTranslationFunction FNName="USR_UFN_TRANSLATIONFUNCTION_GLOBALCHANGESEARCH">
+    <c:CreateFunctionSQL>
+      <![CDATA[
+create function USR_UFN_TRANSLATIONFUNCTION_GLOBALCHANGESEARCH
+(
+  @ID uniqueidentifier
+) 
+returns nvarchar(50) 
+as
+begin
+  declare @s nvarchar(50)
+  select @s = [NAME] from GLOBALCHANGE where ID = @ID
+  return @s
+end  
+]]>
+    </c:CreateFunctionSQL>
+  </SQLTranslationFunction>
+</TranslationFunctionSpec>

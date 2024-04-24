@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>GlobalChange.Search.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>GlobalChangeSearchUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>GlobalChangeSearch.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

@@ -159,6 +159,10 @@
       <DependentUpon>DynamicBehaviorDemoAddDataFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="DynamicBehaviorDemoAddDataFormUIModel.vb" />
+    <Compile Include="GlobalChangeSearchUIModel.CodeGen.vb">
+      <DependentUpon>GlobalChangeSearchUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalChangeSearchUIModel.vb" />
     <Compile Include="HTMLViewDataFormUIModel.CodeGen.vb">
       <DependentUpon>HTMLViewDataFormUIModel.vb</DependentUpon>
     </Compile>
@@ -168,6 +172,14 @@
     </Compile>
     <Compile Include="ImageDemoViewDataFormUIModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="OrderOfOperationsEditDataFormUIModel.CodeGen.vb">
+      <DependentUpon>OrderOfOperationsEditDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OrderOfOperationsEditDataFormUIModel.vb" />
+    <Compile Include="OrderOfOperationsExtensionEditDataFormUIModel.CodeGen.vb">
+      <DependentUpon>OrderOfOperationsExtensionEditDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OrderOfOperationsExtensionEditDataFormUIModel.vb" />
     <Compile Include="ParamsFromURLDataListUIModel.CodeGen.vb">
       <DependentUpon>ParamsFromURLDataListUIModel.vb</DependentUpon>
     </Compile>
@@ -176,12 +188,44 @@
       <DependentUpon>ProspectResearchRequestAddFormAddDataFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ProspectResearchRequestAddFormAddDataFormUIModel.vb" />
+    <Compile Include="RedirectMessageAddDataFormUIModel.CodeGen.vb">
+      <DependentUpon>RedirectMessageAddDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RedirectMessageAddDataFormUIModel.vb" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Searchlists\GlobalChange.Search.xml">
+      <Link>LinkedSpecs\GlobalChange.Search.xml</Link>
+    </None>
+    <Content Include="GlobalChangeSearchUIModel.xml">
+      <DependentUpon>GlobalChangeSearchUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\GlobalChangeSearch.html" />
+    <None Include="..\Training.Catalog\Add forms\RedirectMessage.Add.xml">
+      <Link>LinkedSpecs\RedirectMessage.Add.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\RedirectMessageAddDataForm.html" />
+    <Content Include="RedirectMessageAddDataFormUIModel.xml">
+      <DependentUpon>RedirectMessageAddDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <None Include="..\Training.Catalog\Edit forms\OrderOfOperationsExtension.Edit.xml">
+      <Link>LinkedSpecs\OrderOfOperationsExtension.Edit.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\OrderOfOperationsExtensionEditDataForm.html" />
+    <Content Include="OrderOfOperationsExtensionEditDataFormUIModel.xml">
+      <DependentUpon>OrderOfOperationsExtensionEditDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <None Include="..\Training.Catalog\Add forms\OrderOfOperations.Edit.xml">
+      <Link>LinkedSpecs\OrderOfOperations.Edit.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\OrderOfOperationsEditDataForm.html" />
+    <Content Include="OrderOfOperationsEditDataFormUIModel.xml">
+      <DependentUpon>OrderOfOperationsEditDataFormUIModel.vb</DependentUpon>
+    </Content>
     <None Include="..\Training.Catalog\Add forms\ProspectResearchRequestAddForm.Extension.xml">
       <Link>LinkedSpecs\ProspectResearchRequestAddForm.Extension.xml</Link>
     </None>

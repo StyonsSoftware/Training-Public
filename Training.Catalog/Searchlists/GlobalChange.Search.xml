@@ -1,0 +1,35 @@
+<SearchListSpec
+  xmlns="bb_appfx_searchlist"
+  xmlns:c="bb_appfx_commontypes"
+  ID="947fb797-d6fd-4e0e-8bfe-84a0bbf64eca"
+  Name="Global Change Search"
+  Description="A search list for locating global change records"
+  Author="Styons Software"
+  RecordType="Global Change"
+  TranslationFunctionID="fb7f7cb2-7047-4473-8570-3fba43da3841"
+  >
+  <CLRSearchList AssemblyName="Training.Catalog" ClassName="Training.Catalog.GlobalChangeSearch">
+    <GrantSelectList xmlns="bb_appfx_commontypes">
+      <GrantSelect>GLOBALCHANGE</GrantSelect>
+      <GrantSelect>GLOBALCHANGECATALOG</GrantSelect>
+    </GrantSelectList>
+  </CLRSearchList>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="GLOBALCHANGENAME" Caption="Name" DataType="String" MaxLength="100"/>
+    </FormFields>
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.GlobalChangeSearchUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/GlobalChangeSearch.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+  <Output TranslationField="GLOBALCHANGENAME" PrimaryKeyField="GLOBALCHANGEID">
+    <OutputFields>
+      <OutputField FieldID="GLOBALCHANGEID" Caption="ID" DataType="Guid" IsHidden="true"/>
+      <OutputField FieldID="GLOBALCHANGENAME" Caption="Global change" DataType="String"/>
+      <OutputField FieldID="GLOBALCHANGECATALOGDISPLAYNAME" Caption="Global change type" DataType="String"/>
+    </OutputFields>
+  </Output>
+</SearchListSpec>

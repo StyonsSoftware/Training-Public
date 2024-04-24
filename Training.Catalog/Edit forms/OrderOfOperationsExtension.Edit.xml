@@ -1,0 +1,90 @@
+<EditDataFormTemplateSpec 
+    xmlns="bb_appfx_editdataformtemplate"
+    xmlns:c="bb_appfx_commontypes"
+    ID="6d3f750c-d96e-4787-be8f-1e2e162ffdba"
+    Name="Order Of Operations Extension Edit Data Form"
+    Description="A data form for editing order of operations extension records"
+    Author="Styons Software"
+    DataFormInstanceID="f8533eb0-c07f-4fb0-aa04-2e4b06a37e3f"
+    RecordType="Constituent"
+    FormHeader="Edit an order of operations extension"
+    >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_ORDEROFOPERATIONSEXTENSION">
+      <c:CreateProcedureSQL>
+    <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_ORDEROFOPERATIONSEXTENSION
+(
+  @ID         uniqueidentifier
+ ,@DATALOADED bit              = 0    output
+ ,@TSLONG     bigint           = 0    output
+ ,@MIDDLENAME nvarchar(100)     = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  exec USR_USP_RECORDLOGMESSAGE 'Extension Edit load'
+  select
+    @TSLONG = TSLONG
+   ,@MIDDLENAME = RESEARCHSUMMARY
+  from
+    prospect
+  where ID = @ID
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_ORDEROFOPERATIONSEXTENSION">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_ORDEROFOPERATIONSEXTENSION 
+(
+  @ID            uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@MIDDLENAME    nvarchar(100)
+)
+as
+begin
+  set nocount on
+  exec USR_USP_RECORDLOGMESSAGE 'Extension Edit Save'
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    update prospect
+    set
+      researchsummary = @middlename
+     ,CHANGEDBYID = @CHANGEAGENTID
+     ,DATECHANGED = @NOW
+    where ID = @ID
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="MIDDLENAME" Caption="M. name" DataType="String" MaxLength="100" />
+    </FormFields>
+
+        <WebUIComponent>
+            <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.OrderOfOperationsExtensionEditDataFormUIModel" />
+            <WebUI>
+                <ExternalResource Url="browser/htmlforms/custom/training/OrderOfOperationsExtensionEditDataForm.html" />
+            </WebUI>
+        </WebUIComponent>
+  </FormMetaData>
+  <c:DataFormExtension DataFormInstanceID="6eb2ff47-5a48-4be2-8daf-9798482c82a5" RenderStyle="AfterParent" TabCaption="Extended fields" />
+</EditDataFormTemplateSpec>

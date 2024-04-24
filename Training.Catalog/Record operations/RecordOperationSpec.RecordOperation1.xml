@@ -1,0 +1,25 @@
+<RecordOperationSpec 
+  xmlns="bb_appfx_recordoperation"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="588f4ae4-3865-4b02-a5ca-aef062211603" 
+  Name="Record Operation Spec Record Operation"
+  Description="REPLACE_WITH_DESCRIPTION"
+  Author="Styons Software"
+  OperationType="Update" 
+  RecordType="REPLACE_WITH_RECORDTYPE"
+  c:SecurityUIFolder="REPLACE_WITH_SECURITYUIFOLDER"
+  >
+
+  <!-- indicate the server-side catalog implementation that will be used to execute the record operation.  This should refer to a class
+  that inherits AppCatalog.AppRecordOperationPerform.
+   -->
+  <CLRRecord>
+    <CLRRecordOperation AssemblyName="Training.Catalog" ClassName="Training.Catalog.RecordOperationSpecRecordOperation"/>
+  </CLRRecord>
+
+  <!-- optionally, offer a prompt before executing the record operation -->
+  <Prompt>
+    <StandardPrompt Text="Are you sure you want to continue?"/>
+  </Prompt>
+
+</RecordOperationSpec>

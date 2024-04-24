@@ -1,0 +1,60 @@
+<ViewDataFormTemplateSpec 
+  xmlns="bb_appfx_viewdataformtemplate" 
+  xmlns:c="bb_appfx_commontypes" 
+  ID="437ebdb9-3c19-4476-97f7-62a5372d92a1" 
+  Name="Revenue Transaction Profile View Form Extension (Training)"
+  Description="Extends the OOB 'Revenue Transaction Profile View Form' with custom fields"
+  Author="Styons Software"
+  DataFormInstanceID="b6218a25-ba6f-4ede-bd14-a110365d74d3" 
+  RecordType="Revenue"
+  c:SecurityUIFolder="SSC\Training"
+  >
+  <SPDataForm SPName="USR_SSC_USP_DATAFORMTEMPLATE_VIEW_REVENUETRANSACTIONPROFILEVIEWFORM_TRAINING">
+    <c:CreateProcedureSQL>
+  <![CDATA[
+create procedure USR_SSC_USP_DATAFORMTEMPLATE_VIEW_REVENUETRANSACTIONPROFILEVIEWFORM_TRAINING
+(
+  @ID         uniqueidentifier
+ ,@DATALOADED bit              = 0    output
+ ,@ADDRESSES  xml              = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+
+  SET @ADDRESSES = (
+    SELECT
+      A.ADDRESSBLOCK
+     ,A.CITY
+     ,S.ABBREVIATION
+     ,A.POSTCODE
+    FROM
+      ADDRESS A
+      LEFT JOIN [STATE] S ON S.ID = A.STATEID
+      JOIN CONSTITUENT C ON C.ID = A.CONSTITUENTID
+      JOIN FINANCIALTRANSACTION FT ON FT.CONSTITUENTID = C.ID
+    WHERE FT.ID = @ID
+    FOR XML RAW('ITEM'),TYPE,ELEMENTS,ROOT('ADDRESSES'),BINARY BASE64
+  )
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="ADDRESSES" Caption="Addresses" DataType="XML">
+        <Collection>
+          <Fields>
+            <FormField FieldID="ADDRESSBLOCK" Caption="Address" DataType="String"/>
+            <FormField FieldID="CITY" Caption="City" DataType="String"/>
+            <FormField FieldID="STATE" Caption="State" DataType="String"/>
+            <FormField FieldID="POSTCODE" Caption="Zip" DataType="String"/>
+          </Fields>
+        </Collection>
+      </FormField>
+    </FormFields>
+  </FormMetaData>
+  <c:DataFormExtension DataFormInstanceID="74f1a311-2ed9-4c0b-b666-9bf318748d9b" RenderStyle="AfterParent" TabCaption="Extended fields"/>
+</ViewDataFormTemplateSpec>

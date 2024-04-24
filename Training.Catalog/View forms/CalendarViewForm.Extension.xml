@@ -1,0 +1,44 @@
+<ViewDataFormTemplateSpec
+  xmlns="bb_appfx_viewdataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="2e1b2a10-dfae-4d62-a8b8-ce69d407109d"
+  Name="Calendar View Form Extension"
+  Description="Extends the OOB 'Calendar View Form' with custom logic (see UIModel)"
+  Author="Styons Software"
+  DataFormInstanceID="5f5f5638-29e0-498c-bdb1-daf1019835f2"
+  RecordType="Calendar Catalog ID + Context ID"
+  c:SecurityUIFolder="SSC\Training"
+  >
+  <SPDataForm SPName="USR_USP_DATAFORMTEMPLATE_VIEW_CALENDARVIEWFORM">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_VIEW_CALENDARVIEWFORM
+(
+  @ID          uniqueidentifier
+ ,@DATALOADED  bit = 0          output
+ ,@PLACEHOLDER bit = null       output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  SET @PLACEHOLDER = 1
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="PLACEHOLDER" DataType="Boolean" Hidden="true"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.CalendarViewFormExtensionUIModel"/>
+      <WebUI>
+        <DefaultWebUI/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+  <c:DataFormExtension DataFormInstanceID="86ab718c-8daa-4661-b6be-705241342192" RenderStyle="AfterParent" TabCaption="Extended fields"/>
+</ViewDataFormTemplateSpec>

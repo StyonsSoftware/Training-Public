@@ -1,0 +1,84 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="b47fe400-d0b9-43e1-b39f-49234ac908d0"
+  Name="Redirect Message Add Data Form"
+  Description="A data form for adding redirect message records"
+  Author="Styons Software"
+  DataFormInstanceID="c23592d5-5cdb-47a5-948c-56d4c4774c64"
+  RecordType="Redirect Message"
+  c:SecurityUIFolder="Redirect Message"
+  FormHeader="Add a redirect message"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_SSC_USP_DATAFORMTEMPLATE_ADD_REDIRECTMESSAGE_PRELOAD">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_SSC_USP_DATAFORMTEMPLATE_ADD_REDIRECTMESSAGE_PRELOAD
+(
+  @CONSTITUENTID uniqueidentifier
+ ,@ISPROSPECT    bit              = null output
+)
+as
+begin
+  set nocount on
+  SET @ISPROSPECT =
+    CASE WHEN EXISTS(SELECT * FROM PROSPECT WHERE ID = @CONSTITUENTID)
+         THEN 1
+         ELSE 0
+    END
+  return 0        
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+    <SaveImplementation SPName="USR_SSC_USP_DATAFORMTEMPLATE_ADD_REDIRECTMESSAGE">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_SSC_USP_DATAFORMTEMPLATE_ADD_REDIRECTMESSAGE
+(
+  @ID            uniqueidentifier = null output
+ ,@CONSTITUENTID uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@FIRSTNAME     nvarchar(100)    = ''
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @now datetime = getdate()
+  
+  --do nothing, this is just a demo
+
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="ISPROSPECT" DataType="Boolean" ReadOnly="true"/>
+      <FormField FieldID="FIRSTNAME" Caption="First name" DataType="String" MaxLength="100"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.RedirectMessageAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/RedirectMessageAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+    <UIActions>
+      <UIAction ActionID="GOTOWEALTHANDRATINGSPAGE" Caption="View wealth and ratings">
+        <ShowPage PageID="a6c2fffb-2df0-44c9-8238-2ae74443f1de">
+          <ActionContext>Form!CURRENTRECORDID</ActionContext>
+        </ShowPage>
+      </UIAction>
+    </UIActions>
+  </FormMetaData>
+</AddDataFormTemplateSpec>

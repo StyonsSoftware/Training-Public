@@ -1,0 +1,59 @@
+﻿<QueryViewSpec
+	xmlns="bb_appfx_queryview"
+	xmlns:c="bb_appfx_commontypes"
+	ID="4f8ac1a1-7537-4509-a43f-9a500e2eb4f6"
+	Name="BFAS Relationship Change Query"
+	Description="A custom view to extrach change data from the relationship audit table"
+	Author="rayporter"
+	IsRoot="false"
+	PrimaryKeyField="ID"
+	RecordType="Relationship"
+	c:SecurityUIFolder="Custom"
+	>
+  <TVFImplementation FunctionName="USR_BFAS_UFN_RELATIONSHIPCHANGE_QUERY">
+    <CreateFunctionSQL>
+      <![CDATA[
+CREATE FUNCTION dbo.USR_BFAS_UFN_RELATIONSHIPCHANGE_QUERY
+(
+  @ID UNIQUEIDENTIFIER = NULL
+)
+RETURNS TABLE
+AS
+  RETURN(
+  SELECT TOP 1
+  A.AUDITID AS ID,
+  (case A.AUDITTYPECODE when 2 then 'Delete' else 'Update' end) as CHANGETYPE,
+  A.AUDITDATE as AUDITCHANGEDATE,
+  A.AUDITKEY,
+  A.AUDITRECORDID,
+  A.AUDITCHANGEAGENTID,
+  CA.APPLICATIONNAME,
+  CA.USERNAME as AUDIT_CHANGEDBY_USERNAME,
+  A.DATEADDED,
+  A.DATECHANGED
+  FROM dbo.RELATIONSHIPAUDIT AS A
+  LEFT OUTER JOIN dbo.CHANGEAGENT AS CA ON A.AUDITCHANGEAGENTID=CA.ID
+  WHERE A.AUDITTYPECODE = 1
+  AND A.AUDITRECORDID = @ID
+)
+      ]]>
+    </CreateFunctionSQL>
+    <Context ContextRecordType="Relationship" RecordIDParameter="ID"/>
+  </TVFImplementation>
+  <Output>
+    <OutputFields>
+      <OutputField Caption="System record ID" Category="System Fields" Name="ID" />
+      <OutputField Name="CHANGETYPE" Caption="Change Type" DataType="String" IsHidden="true" />
+      <OutputField Name="AUDITCHANGEDATE" Caption="Date changed" DataType="Date" />
+      <OutputField Name="AUDITRECORDID" Caption="Audit Record ID" DataType="Guid" IsHidden="true" />
+      <OutputField Name="AUDITCHANGEAGENTID" Caption="Audit Change Agent ID" DataType="Guid" IsHidden="true" />
+      <OutputField Name="APPLICATIONNAME" Caption="Application Name" DataType="String" IsHidden="true" />
+      <OutputField Name="AUDIT_CHANGEDBY_USERNAME" Caption="Changed by user name" DataType="String" />
+      <OutputField Name="DATEADDED" Caption="Audit Date Added" DataType="Date" IsHidden="true" />
+      <OutputField Name="DATECHANGED" Caption="Audit Date Changed" DataType="Date" IsHidden="true" />
+    </OutputFields>
+  </Output>
+  <RelationshipOperations>
+    <AddToParentView ParentView="V_QUERY_RELATIONSHIPS" ParentViewRelatedField="ID" Field="AUDITRECORDID" PathAlias="BFAS Relationship Change"/>
+  </RelationshipOperations>
+</QueryViewSpec>
