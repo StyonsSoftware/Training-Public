@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Training.Catalog/bin/debug
+/Training.Catalog/obj/Debug
+/Training.UIModel/bin/debug
+/Training.UIModel/obj/Debug
