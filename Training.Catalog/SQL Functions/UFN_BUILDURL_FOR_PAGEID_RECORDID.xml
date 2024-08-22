@@ -1,0 +1,56 @@
+﻿<SQLFunctionSpec
+	xmlns="bb_appfx_sqlfunction"
+	xmlns:c="bb_appfx_commontypes" 
+	ID="912f8017-c096-4d3c-a517-d5ae661647e3"
+	Name="USR_UFN_BUILDURL_FOR_PAGEID_RECORDID"
+	Description="Build URL For Pageid and RecordID "
+	Author="Styons Software"
+	DBFunctionName="USR_UFN_BUILDURL_FOR_PAGEID_RECORDID"
+	>
+
+	<CreateFunctionSQL>
+		<![CDATA[
+create function dbo.USR_UFN_BUILDURL_FOR_PAGEID_RECORDID
+(
+  @PAGEID nvarchar(50), 
+  @RECORDID nvarchar(50)
+)
+returns nvarchar(1000)
+with execute as caller
+as
+begin
+  declare @url nvarchar(1000) = ''
+  --select * from pagedefinitioncatalog where id = '8142773c-ca9b-4f4d-83a7-bdd306394838'
+  --declare @pageid uniqueidentifier = '8142773c-ca9b-4f4d-83a7-bdd306394838'
+
+  declare @siteinfoid NVARCHAR(50)
+  SELECT @siteinfoid = CONVERT(NVARCHAR(50), value) from fn_listextendedproperty('Hosting_SiteInfoID', default, default, default, default, default, default)
+
+  declare @databasename NVARCHAR(100)
+  SELECT @databasename = CONVERT(NVARCHAR(50), value) from fn_listextendedproperty('Hosting_DatabaseDisplayName', default, default, default, default, default, default)
+
+  if @databasename is null or 0 = len(@databasename)
+  begin
+    select @databasename = value from setting where name = 'BBAppFXDatabaseToUse'
+  end
+
+  SET @URL = @URL + COALESCE(dbo.UFN_GETAPPLICATIONROOTURL(), '')
+  IF RIGHT(@URL, 1) <> '/'
+	  SET @URL = @URL + '/';
+  SET @URL = @URL + N'webui/webshellpage.aspx';
+
+  IF @siteinfoid IS NOT null and 0 < len(@siteinfoid)
+  BEGIN
+    SET @URL = @URL + '?SITEINFOID=' + @siteinfoid
+    SET @URL = @URL + '&HOSTEDSITEINFOID=' + @siteinfoid
+  END
+  SET @URL = @URL + N'&databasename=' + COALESCE(@databasename, db_name(), '')
+  SET @URL = @URL + N'#pageType=p&pageId=' + COALESCE(@PAGEID , '00000000-0000-0000-0000-000000000000')
+  SET @URL = @URL + N'&recordId=' + COALESCE(@RECORDID , '00000000-0000-0000-0000-000000000000')
+  set @url = replace(@url,'webshellpage.aspx&','webshellpage.aspx?')
+	return @URL
+end
+		]]>
+	</CreateFunctionSQL>
+
+</SQLFunctionSpec>

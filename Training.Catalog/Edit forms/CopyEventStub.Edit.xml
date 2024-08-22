@@ -1,0 +1,107 @@
+<EditDataFormTemplateSpec
+  xmlns="bb_appfx_editdataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="3d8dc684-4338-4144-9274-f4cbe757d2b9"
+  Name="Copy Event Stub Edit Data Form"
+  Description="Creates a new event, takes you to that page.  The redirect is the thing I'm testing here."
+  Author="Styons Software"
+  DataFormInstanceID="0d681f4b-217e-425f-b851-8eac5116a9d0"
+  RecordType="Event"
+  FormHeader="Copy this event"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_COPYEVENTSTUB">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_COPYEVENTSTUB
+(
+  @ID          uniqueidentifier
+ ,@DATALOADED  bit              = 0    output
+ ,@TSLONG      bigint           = 0    output
+ ,@NEWEVENTID  nvarchar(36)     = null output
+ ,@NEWEVENTURL nvarchar(2000)   = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  set @neweventid = convert(nvarchar(36),newid())
+  declare @pageid_events nvarchar(36) = '9988b807-97b2-434c-8be1-bbee6b944b2c'
+  set @neweventurl = dbo.USR_UFN_BUILDURL_FOR_PAGEID_RECORDID(@pageid_events, @NEWEVENTID)
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_COPYEVENTSTUB">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_COPYEVENTSTUB 
+(
+  @ID            uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@NEWEVENTID    nvarchar(36)
+ ,@NEWEVENTURL   nvarchar(2000)
+)
+as
+begin
+  set nocount on
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    declare @caid uniqueidentifier
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @caid output
+    select @neweventid
+    insert into [event]
+      (id,[name],[description],startdate,enddate,dateadded,datechanged,addedbyid,changedbyid)
+    values
+      (@neweventid,'Test event [' + convert(nvarchar(36),@neweventid) + ']','Testing',@now,@now+1,@now,@now,@caid,@caid)
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="NEWEVENTID" DataType="String" MaxLength="36"/>
+      <FormField FieldID="NEWEVENTURL" DataType="String" MaxLength="2000"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.CopyEventStubEditDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/CopyEventStubEditDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+  <!--Add this edit form as an action on the Event Page under a new "Test tasks" page action group-->
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="9988b807-97b2-434c-8be1-bbee6b944b2c">
+        <AlterOrAddPageActionGroups>
+          <AlterOrAddPageActionGroup ID="3374bc77-8fe2-4706-a6fd-edb7226f3930" Caption="Test tasks">
+            <AddAction Sequence="10">
+              <Action ID="73afcdb7-ad0d-49a8-bd8c-30aa01ec10ee" Caption="Copy event">
+                <ShowDataForm DataFormID="0d681f4b-217e-425f-b851-8eac5116a9d0" xmlns="bb_appfx_commontypes">
+                  <ActionContext>
+                    <PageContextID/>
+                  </ActionContext>
+                </ShowDataForm>
+              </Action>
+            </AddAction>
+          </AlterOrAddPageActionGroup>
+        </AlterOrAddPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</EditDataFormTemplateSpec>

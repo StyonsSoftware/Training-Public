@@ -1,0 +1,98 @@
+<!--
+This form and its Extension are inspired by a conversation with Ray Porter on 07/10/2024.
+He asked if
+1) parent forms and extension forms execute in the same SQL transaction
+and
+2) there is any reason a parent would save but then the extension would *not* save
+
+Logging the transaction id and playing around with dataloaded revealed the answers:
+1) Yes, one transaction for *both* loads, and one transaction for *both* saves
+2) Yes, if the extension's LOAD procedure returned a "0" for the @DATALOADED param, then the save never fires.
+   Otherwise, the extension always fires after the parent finishes (assuming no errors in the parent)
+-->
+<EditDataFormTemplateSpec 
+  xmlns="bb_appfx_editdataformtemplate"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="c1035acb-37be-458a-8895-4e87db379d42" 
+  Name="Example Constituent Edit Data Form"
+  Description="A data form for editing example constituent records" 
+  Author="Styons Software"
+  DataFormInstanceID="3295568d-4c8f-482f-9d36-2bb395ed189f" 
+  RecordType="Constituent"
+  FormHeader="Edit an example constituent"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_EXAMPLECONSTITUENT">
+      <c:CreateProcedureSQL>
+    <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_EXAMPLECONSTITUENT
+(
+  @ID         uniqueidentifier
+ ,@DATALOADED bit              = 0    output
+ ,@TSLONG     bigint           = 0    output
+ ,@FIRSTNAME  nvarchar(1000)   = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  select
+    @TSLONG = TSLONG
+   ,@FIRSTNAME = FIRSTNAME
+  from
+    CONSTITUENT
+  where ID = @ID
+  declare @xid nvarchar(100) = convert(nvarchar(100),CURRENT_TRANSACTION_ID())
+  declare @msg nvarchar(max) = 'Main form edit-load: ' + @xid
+  exec USR_USP_RECORDLOGMESSAGE @msg  
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_EXAMPLECONSTITUENT">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_EXAMPLECONSTITUENT 
+(
+  @ID            uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@FIRSTNAME     nvarchar(1000)
+)
+as
+begin
+  set nocount on
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    update CONSTITUENT
+    set
+      FIRSTNAME = @FIRSTNAME
+     ,CHANGEDBYID = @CHANGEAGENTID
+     ,DATECHANGED = @NOW
+    where ID = @ID
+    declare @xid nvarchar(100) = convert(nvarchar(100),CURRENT_TRANSACTION_ID())
+    declare @msg nvarchar(max) = 'Main form edit-save: ' + @xid
+    exec USR_USP_RECORDLOGMESSAGE @msg
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="FIRSTNAME" Caption="1st name" DataType="String" MaxLength="1000"/>
+    </FormFields>
+  </FormMetaData>
+</EditDataFormTemplateSpec>

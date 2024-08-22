@@ -1,0 +1,100 @@
+<EditDataFormTemplateSpec 
+  xmlns="bb_appfx_editdataformtemplate"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="cbf69265-f531-42c7-bc61-e638c3452043" 
+  Name="Example Constituent Extension Edit Data Form"
+  Description="A data form for editing example constituent extension records" 
+  Author="Styons Software"
+  DataFormInstanceID="7dd6abb6-63e8-4ed4-80d2-0a174ee31f2c" 
+  RecordType="Constituent"
+  FormHeader="Edit an example constituent extension"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_EXAMPLECONSTITUENTEXTENSION">
+      <c:CreateProcedureSQL>
+    <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_EXAMPLECONSTITUENTEXTENSION
+(
+  @ID          uniqueidentifier
+ ,@DATALOADED  bit              = 0    output
+ ,@TSLONG      bigint           = 0    output
+ ,@CUSTOMFIELD nvarchar(100)    = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  select
+    @TSLONG      = TSLONG
+   ,@CUSTOMFIELD = CUSTOMFIELD
+  from
+    USR_CONSTITUENT
+  where ID = @ID
+  
+  declare @xid nvarchar(100) = convert(nvarchar(100),CURRENT_TRANSACTION_ID())
+  declare @msg nvarchar(max) = 'Extension form edit-load: ' + @xid
+  exec USR_USP_RECORDLOGMESSAGE @msg    
+  
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_EXAMPLECONSTITUENTEXTENSION">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_EXAMPLECONSTITUENTEXTENSION 
+(
+  @ID            uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@CUSTOMFIELD   nvarchar(100)
+)
+as
+begin
+  set nocount on
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    IF EXISTS(SELECT * FROM USR_CONSTITUENT WHERE ID = @ID)
+    BEGIN
+      update USR_CONSTITUENT
+      set
+        CUSTOMFIELD = @CUSTOMFIELD
+       ,CHANGEDBYID = @CHANGEAGENTID
+       ,DATECHANGED = @NOW
+      where ID = @ID
+    end
+    else
+    begin
+      INSERT INTO USR_CONSTITUENT
+        (ID, CUSTOMFIELD, DATEADDED, DATECHANGED, ADDEDBYID, CHANGEDBYID)
+      VALUES
+        (@ID, @CUSTOMFIELD, @NOW, @NOW, @CHANGEAGENTID, @CHANGEAGENTID)
+    end
+    
+    declare @xid nvarchar(100) = convert(nvarchar(100),CURRENT_TRANSACTION_ID())
+    declare @msg nvarchar(max) = 'Extension form edit-save: ' + @xid
+    exec USR_USP_RECORDLOGMESSAGE @msg
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="CUSTOMFIELD" Caption="Custom field" DataType="String" MaxLength="100"/>
+    </FormFields>
+  </FormMetaData>
+  <c:DataFormExtension DataFormInstanceID="3295568d-4c8f-482f-9d36-2bb395ed189f" RenderStyle="AfterParent" TabCaption="Extended fields"/>
+</EditDataFormTemplateSpec>

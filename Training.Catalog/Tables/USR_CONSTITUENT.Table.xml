@@ -1,0 +1,15 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="8e12b8fa-d665-4b3b-a5f2-a84dfe0f0385"
+  Name="USR CONSTITUENT"
+  Description="Stores information about usr constituent records"
+  Author="Styons Software"
+  Tablename="USR_CONSTITUENT"
+  IsBuiltIn="false"
+  PrimaryKeyAsForeignKeyTablename="CONSTITUENT"
+  >
+  <Fields>
+    <TextField Name="CUSTOMFIELD" Length="100" Description="Just testing"/>
+  </Fields>
+</TableSpec>

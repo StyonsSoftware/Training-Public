@@ -155,10 +155,18 @@
       <DependentUpon>ConstituentInteractionViewFormExtensionUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ConstituentInteractionViewFormExtensionUIModel.vb" />
+    <Compile Include="CopyEventStubEditDataFormUIModel.CodeGen.vb">
+      <DependentUpon>CopyEventStubEditDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CopyEventStubEditDataFormUIModel.vb" />
     <Compile Include="DynamicBehaviorDemoAddDataFormUIModel.CodeGen.vb">
       <DependentUpon>DynamicBehaviorDemoAddDataFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="DynamicBehaviorDemoAddDataFormUIModel.vb" />
+    <Compile Include="EditDataFormTemplateSpecEditDataFormUIModel.CodeGen.vb">
+      <DependentUpon>EditDataFormTemplateSpecEditDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditDataFormTemplateSpecEditDataFormUIModel.vb" />
     <Compile Include="GlobalChangeSearchUIModel.CodeGen.vb">
       <DependentUpon>GlobalChangeSearchUIModel.vb</DependentUpon>
     </Compile>
@@ -198,6 +206,21 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Edit forms\CopyEventStub.Edit.xml">
+      <Link>LinkedSpecs\CopyEventStub.Edit.xml</Link>
+    </None>
+    <Content Include="CopyEventStubEditDataFormUIModel.xml">
+      <DependentUpon>CopyEventStubEditDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\CopyEventStubEditDataForm.html" />
+    <None Include="..\Training.Catalog\Edit forms\EditDataFormTemplateSpec.Edit1.xml">
+      <Link>LinkedSpecs\EditDataFormTemplateSpec.Edit1.xml</Link>
+    </None>
+    <Content Include="EditDataFormTemplateSpecEditDataFormUIModel.xml">
+      <DependentUpon>EditDataFormTemplateSpecEditDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\CopyEventStubEditDataForm.js" />
+    <Content Include="htmlforms\custom\training\EditDataFormTemplateSpecEditDataForm.html" />
     <None Include="..\Training.Catalog\Searchlists\GlobalChange.Search.xml">
       <Link>LinkedSpecs\GlobalChange.Search.xml</Link>
     </None>

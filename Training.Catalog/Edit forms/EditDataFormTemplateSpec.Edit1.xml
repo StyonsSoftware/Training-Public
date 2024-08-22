@@ -1,0 +1,81 @@
+<EditDataFormTemplateSpec 
+    xmlns="bb_appfx_editdataformtemplate"
+    xmlns:c="bb_appfx_commontypes"
+    ID="bb08bdb7-1f7a-4a44-9730-c14b28deaf80"
+    Name="Edit Data Form Template Spec Edit Data Form"
+    Description="A data form for editing edit data form template spec records"
+    Author="Styons Software"
+    DataFormInstanceID="e6f97eb6-d46f-465d-8f75-3ee310edf54f"
+    RecordType="Edit Data Form Template Spec"
+    FormHeader="Edit an edit data form template spec"
+    >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_EDITDATAFORMTEMPLATESPEC">
+      <c:CreateProcedureSQL>
+    <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDITLOAD_EDITDATAFORMTEMPLATESPEC
+(
+  @ID         uniqueidentifier
+ ,@DATALOADED bit              = 0    output
+ ,@TSLONG     bigint           = 0    output
+ ,@FIELD1     nvarchar(10)     = null output
+ ,@DUMMYID    uniqueidentifier = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  set @TSLONG = 0
+  set @DUMMYID = '01c2365d-e3f3-4fc2-a6be-7538d34ff6f5'
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_EDITDATAFORMTEMPLATESPEC">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_EDIT_EDITDATAFORMTEMPLATESPEC 
+(
+  @ID            uniqueidentifier
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@FIELD1        nvarchar(10)
+ ,@DUMMYID       uniqueidentifier
+)
+as
+begin
+  set nocount on
+  set @id = @dummyid
+  if @CHANGEAGENTID is null  
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @NOW datetime = getdate()
+
+  begin try
+    select 1
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="FIELD1" Caption="Field 1" DataType="String" MaxLength="10" />
+      <FormField FieldID="DUMMYID" Caption="Dummy ID" DataType="Guid" Hidden="true"/>
+    </FormFields>
+
+        <WebUIComponent>
+            <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.EditDataFormTemplateSpecEditDataFormUIModel" />
+            <WebUI>
+                <ExternalResource Url="browser/htmlforms/custom/training/EditDataFormTemplateSpecEditDataForm.html" />
+            </WebUI>
+        </WebUIComponent>
+  </FormMetaData>
+</EditDataFormTemplateSpec>

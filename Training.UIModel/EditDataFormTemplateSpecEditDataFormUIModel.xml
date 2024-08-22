@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>EditDataFormTemplateSpec.Edit1.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>EditDataFormTemplateSpecEditDataFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>EditDataFormTemplateSpecEditDataForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

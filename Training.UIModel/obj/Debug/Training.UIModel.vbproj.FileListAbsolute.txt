@@ -4,3 +4,38 @@ C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.U
 C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.dll
 C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.pdb
 C:\Users\J.R. Styons\source\repos\Training\Training.UIModel\obj\Debug\Training.UIModel.vbprojAssemblyReference.cache
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Training.UIModel.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Training.UIModel.pdb
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.AddressValidation.Server.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.ProspectResearch.UIModel.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.BatchUI.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.Platform.UIModel.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.ProspectResearch.Catalog.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.WebShell.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.Security.UIModel.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.SFTP.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.UIModeling.RestServices.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.ProspectResearch.SpWrapProspectResearch.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.Platform.Catalog.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.UIModeling.RestServices.Contracts.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.Security.Catalog.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Rebex.Sftp.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Rebex.Networking.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\AjaxControlToolkit.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.AppFx.Platform.Export.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Aspose.Words.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Xceed.Zip.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Xceed.FileSystem.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.Enterprise.PublicTenantManagement.DataService.Client.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Rebex.Common.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\DocumentFormat.OpenXml.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Xceed.Compression.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.Core.DataService.Client.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.Core.WebService.Client.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\Blackbaud.Core.DataService.Contracts.dll
+C:\dev\src\github\Training-Public\Training.UIModel\bin\debug\System.Net.Http.Formatting.dll
+C:\dev\src\github\Training-Public\Training.UIModel\obj\Debug\Training.UIModel.vbproj.AssemblyReference.cache
+C:\dev\src\github\Training-Public\Training.UIModel\obj\Debug\Training.UIModel.vbproj.CoreCompileInputs.cache
+C:\dev\src\github\Training-Public\Training.UIModel\obj\Debug\Training.UIModel.dll
+C:\dev\src\github\Training-Public\Training.UIModel\obj\Debug\Training.UIModel.pdb
+C:\dev\src\github\Training-Public\Training.UIModel\obj\Debug\Training.1EF5C906.Up2Date

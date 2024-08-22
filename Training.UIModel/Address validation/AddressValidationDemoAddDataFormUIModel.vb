@@ -52,6 +52,7 @@ Public Class AddressValidationDemoAddDataFormUIModel
             .Title = "Success"
             })
     End Sub
+
     Private Sub ShowAddressValidationFailedMessage()
         Prompts.Add(New UIPrompt() With {
             .ButtonStyle = UIPromptButtonStyle.Ok,

@@ -147,6 +147,8 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SQL Functions\UFN_BUILDURL_FOR_PAGEID_RECORDID.xml" />
+    <EmbeddedResource Include="Tables\USR_CONSTITUENT.Table.xml" />
     <EmbeddedResource Include="Tasks\ShowGlobalChangeSearch.Task.xml" />
     <EmbeddedResource Include="Searchlists\GlobalChange.TranslationFunction.xml" />
     <EmbeddedResource Include="Searchlists\GlobalChange.Search.xml" />
@@ -185,6 +187,10 @@
     <EmbeddedResource Include="Edit forms\OrderOfOperations.Edit.xml" />
     <EmbeddedResource Include="Edit forms\OrderOfOperationsExtension.Edit.xml" />
     <EmbeddedResource Include="Add forms\RedirectMessage.Add.xml" />
+    <EmbeddedResource Include="Edit forms\EditDataFormTemplateSpec.Edit1.xml" />
+    <EmbeddedResource Include="Edit forms\ExampleConstituent.Edit.xml" />
+    <EmbeddedResource Include="Edit forms\ExampleConstituentExtension.Edit.xml" />
+    <EmbeddedResource Include="Edit forms\CopyEventStub.Edit.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
