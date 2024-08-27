@@ -148,6 +148,10 @@
       <DependentUpon>ConstituentHTMLViewFormUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ConstituentHTMLViewFormUIModel.vb" />
+    <Compile Include="ConstituentInfoBoxViewDataFormUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentInfoBoxViewDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentInfoBoxViewDataFormUIModel.vb" />
     <Compile Include="ConstituentInteractionViewFormExtensionRELATIVEINFOUIModel.CodeGen.vb">
       <DependentUpon>ConstituentInteractionViewFormExtensionUIModel.vb</DependentUpon>
     </Compile>
@@ -206,6 +210,13 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\View forms\ConstituentInfoBox.View.xml">
+      <Link>LinkedSpecs\ConstituentInfoBox.View.xml</Link>
+    </None>
+    <Content Include="ConstituentInfoBoxViewDataFormUIModel.xml">
+      <DependentUpon>ConstituentInfoBoxViewDataFormUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\ConstituentInfoBoxViewDataForm.html" />
     <None Include="..\Training.Catalog\Edit forms\CopyEventStub.Edit.xml">
       <Link>LinkedSpecs\CopyEventStub.Edit.xml</Link>
     </None>

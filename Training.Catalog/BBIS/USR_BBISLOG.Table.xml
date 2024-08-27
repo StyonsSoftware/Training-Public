@@ -1,0 +1,14 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="5c469b10-a76e-42a3-a225-b3b02731399c"
+  Name="BBIS Log Table"
+  Description="Used by demo part"
+  Author="Styons Software"
+  Tablename="USR_BBISLOG"
+  IsBuiltIn="false"
+  >
+  <Fields>
+    <TextField Name="LOGMESSAGE" Length="1000"/>
+  </Fields>
+</TableSpec>

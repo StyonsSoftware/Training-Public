@@ -1,0 +1,175 @@
+<BatchTypeExtensionSpec 
+  xmlns="bb_appfx_batchtypeextension" 
+  xmlns:c="bb_appfx_commontypes"
+  ID="baa48261-a002-4e2c-97ee-97fbb6b25863"
+  Name="Interaction Batch Extension Batch Extension"
+  Description="Extends the OOB Interaction Batch"
+  Author="Styons Software"
+  BaseTableName="USR_BATCHINTERACTION"
+  BatchTypeCatalogID="7DF5523A-8C9A-4A6A-A273-397525B6B70D"
+  >
+
+  <AddRow DataFormInstanceID="25ba9bbf-444e-4fdc-b989-3db1fb7eabe5" DataFormTemplateID="bded7cee-0233-48d2-b2e3-60cd109b0756">
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_INTERACTIONBATCHEXTENSION">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure dbo.USR_USP_DATAFORMTEMPLATE_ADD_INTERACTIONBATCHEXTENSION
+(  
+  @ID                uniqueidentifier        output
+ ,@CHANGEAGENTID     uniqueidentifier = null
+ ,@USR_ISMISSIONCRITICAL bit              = 0
+)
+as
+begin
+  set nocount on;
+    if @ID is null
+      set @ID = newid()
+    if @CHANGEAGENTID is null  
+        exec dbo.USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+    declare @CURRENTDATE datetime
+    set @CURRENTDATE = getdate()
+    begin try
+    insert into USR_BATCHINTERACTION(
+      ID,
+      ISMISSIONCRITICAL,
+      ADDEDBYID,
+      CHANGEDBYID,
+      DATEADDED,
+      DATECHANGED)
+    values(
+      @ID,
+      @USR_ISMISSIONCRITICAL,
+      @CHANGEAGENTID,
+      @CHANGEAGENTID,
+      @CURRENTDATE,
+      @CURRENTDATE)
+      
+  End try
+  begin catch
+    exec dbo.USP_RAISE_ERROR;
+    return 1;
+  end catch  
+
+  return 0
+end
+        ]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </AddRow>
+  
+  <EditRow DataFormInstanceID="f205a8eb-55f4-442c-a447-5419e7722978" DataFormTemplateID="d6af54d5-9bea-4fe5-9d6b-c2171ad610e8">
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_INTERACTIONBATCHEXTENSION">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure dbo.USR_USP_DATAFORMTEMPLATE_EDITLOAD_INTERACTIONBATCHEXTENSION
+(
+  @ID uniqueidentifier,
+    @TSLONG bigint = 0 output,
+  @DATALOADED bit = 0 output,
+  @USR_ISMISSIONCRITICAL BIT = null output
+)
+as
+  set nocount on;
+
+  set @DATALOADED = 0;
+  set @TSLONG = 0;
+
+  -- populate the output parameters, which correspond to fields on the form.  Note that
+  -- we set @DATALOADED = 1 to indicate that the load was successful.  Otherwise, the system
+  -- will display a "no data loaded" message.  Also note that we fetch the TSLONG so that concurrency
+  -- can be considered.
+    select
+    @DATALOADED = 1,
+    @TSLONG = TSLONG,
+    @USR_ISMISSIONCRITICAL = ISMISSIONCRITICAL
+  from
+    USR_BATCHINTERACTION
+  where
+    ID = @ID
+    
+return 0;  
+        ]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+    
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITSAVE_INTERACTIONBATCHEXTENSION">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure dbo.USR_USP_DATAFORMTEMPLATE_EDITSAVE_INTERACTIONBATCHEXTENSION
+(  
+  @ID uniqueidentifier,
+  @USR_ISMISSIONCRITICAL BIT,
+  @CHANGEAGENTID uniqueidentifier = null
+)
+as                 
+  set nocount on;
+  
+  if @CHANGEAGENTID is null  
+    exec dbo.USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+        
+  declare @CURRENTDATE datetime
+  set @CURRENTDATE = getdate()  
+  
+  begin try
+    --save parameters with correspond to fields on the form.
+    update USR_BATCHINTERACTION set
+      ISMISSIONCRITICAL = @USR_ISMISSIONCRITICAL,
+      CHANGEDBYID = @CHANGEAGENTID,
+      DATECHANGED = @CURRENTDATE
+    where
+      ID = @ID
+  End try
+  begin catch
+    exec dbo.USP_RAISE_ERROR;
+    return 1;
+  end catch                   
+        ]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </EditRow>
+  
+  <CommitRow>
+    <AddRow ContextRecordType="REPLACE_WITH_CONTEXTRECORDTYPE"  DataFormInstanceID="4ef75deb-36e7-4c32-903f-52a0f65d13c2" DataFormTemplateID="e6eb6561-f19c-49f9-84e9-a3b80c7738d5" RecordIDParameter="REPLACE_WITH_CONTEXTRECORDTYPEID">
+      <SaveImplementation SPName="USP_DATAFORMTEMPLATE_COMMITADD_INTERACTIONBATCHEXTENSION">
+        <c:CreateProcedureSQL>
+          <![CDATA[
+create procedure dbo.USP_DATAFORMTEMPLATE_COMMITADD_INTERACTIONBATCHEXTENSION
+(  
+  @ID uniqueidentifier output,
+    @REPLACE_WITH_CONTEXTRECORDTYPEID uniqueidentifier,
+  @CHANGEAGENTID uniqueidentifier = null,
+  @USR_ISMISSIONCRITICAL bit = null
+)
+as
+  set nocount on;
+  
+  if @CHANGEAGENTID is null  
+    exec dbo.USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+        
+  declare @CURRENTDATE datetime
+  set @CURRENTDATE = getdate()  
+  
+  begin try
+    INSERT INTO ATTRIBUTE6C5038DA319843148EE122091296F66E
+      (ID, BOOLEANCODE, COMMENT, STARTDATE, ENDDATE, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    VALUES
+      (@ID, @USR_ISMISSIONCRITICAL, 'Created from batch', null, null, @changeagentid, @changeagentid, @currentdate, @currentdate)
+  end try
+  begin catch
+    exec dbo.USP_RAISE_ERROR;
+    return 1;
+  end catch
+  
+return 0;  
+          ]]>
+        </c:CreateProcedureSQL>
+      </SaveImplementation>
+    </AddRow>
+  </CommitRow>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="USR_ISMISSIONCRITICAL" Caption="Mission critical?" DataType="Boolean"/>
+    </FormFields>
+  </FormMetaData>
+</BatchTypeExtensionSpec>

@@ -1,0 +1,15 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="2fbe4bf4-374a-43d2-b2dd-65fea3c4f617"
+  Name="USR BATCHINTERACTION"
+  Description="Stores information about usr batchinteraction records"
+  Author="Styons Software"
+  Tablename="USR_BATCHINTERACTION"
+  IsBuiltIn="false"
+  PrimaryKeyAsForeignKeyTablename="BATCHINTERACTION"
+  >
+  <Fields>
+    <BooleanField Name="ISMISSIONCRITICAL"/>
+  </Fields>
+</TableSpec>

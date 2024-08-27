@@ -1,0 +1,77 @@
+<ViewDataFormTemplateSpec
+  xmlns="bb_appfx_viewdataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="5e7c52e5-fdff-4786-952a-9b78adfe31e6"
+  Name="Constituent Info Box View Data Form"
+  Description="Show an info pop-up box with just an OK button"
+  Author="Styons Software"
+  DataFormInstanceID="188ed3d2-ad8b-4b0d-a053-8916b8f4365e"
+  RecordType="Constituent"
+  c:SecurityUIFolder="Constituent Info Box"
+  >
+  <SPDataForm SPName="USR_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENTINFOBOX">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_VIEW_CONSTITUENTINFOBOX
+(
+  @ID         uniqueidentifier
+ ,@DATALOADED bit              = 0    output
+ ,@MESSAGE    nvarchar(4000)   = null output
+)
+as
+begin
+  set nocount on
+  set @DATALOADED = 1
+  select
+    @MESSAGE = 'Constituent name is ' + con.name + ', '
+    + char(13) + char(10) + 'and their primary address is: ' + addr.addressblock
+    + char(13) + char(10) + 'and the current time is: ' + CONVERT(NVARCHAR,GETDATE(), 20)
+  from
+    constituent con
+    join address addr on addr.constituentid = con.id and addr.isprimary = 1
+  where con.id = @id
+  return 0
+end
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataForm>
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="MESSAGE" Caption="Message" DataType="String" MaxLength="4000" />
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentInfoBoxViewDataFormUIModel" />
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ConstituentInfoBoxViewDataForm.html" />
+      </WebUI>
+    </WebUIComponent>
+
+    <UIActions>
+      <UIAction ActionID="ANY_UNIQUE_THING" Caption="Timer" Description="Start a timer?">
+        <Timer Interval="1" />
+      </UIAction>
+    </UIActions>
+  </FormMetaData>
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterPageActionGroups>
+          <AlterPageActionGroup PageActionGroupID="7da57a8d-4066-4ffc-9aae-891811d6a969">
+            <AlterActions>
+              <AddAction Sequence="900">
+                <Action ID="39ebf823-3937-495b-a046-aa1396df1e9d" Caption="Info">
+                  <ShowDataForm DataFormID="188ed3d2-ad8b-4b0d-a053-8916b8f4365e" xmlns="bb_appfx_commontypes">
+                    <ActionContext>
+                      <PageContextID />
+                    </ActionContext>
+                  </ShowDataForm>
+                </Action>
+              </AddAction>
+            </AlterActions>
+          </AlterPageActionGroup>
+        </AlterPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</ViewDataFormTemplateSpec>

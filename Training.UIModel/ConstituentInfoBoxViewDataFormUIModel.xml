@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ConstituentInfoBox.View.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ConstituentInfoBoxViewDataFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ConstituentInfoBoxViewDataForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

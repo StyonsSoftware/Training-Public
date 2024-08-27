@@ -1,0 +1,53 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="b5277d40-c7b5-46fa-8e3b-9702207f9806"
+  Name="BBIS Log Add Data Form"
+  Description="Add a record to the BBIS log table.  Used as an endpoint by BBIS."
+  Author="Styons Software"
+  DataFormInstanceID="858e867c-77a1-4816-9588-74e09900b25c"
+  RecordType="BBIS Log"
+  c:SecurityUIFolder="BBIS Log"
+  FormHeader="Add a bbis log"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_BBISLOG">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_USP_DATAFORMTEMPLATE_ADD_BBISLOG
+(
+  @ID            uniqueidentifier = null output
+ ,@CHANGEAGENTID uniqueidentifier = null
+ ,@LOGMESSAGE    nvarchar(4000)   = ''
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @now datetime = getdate()
+
+  begin try
+    insert into USR_BBISLOG
+      (ID, LOGMESSAGE, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    values
+      (@ID, @LOGMESSAGE, @CHANGEAGENTID, @CHANGEAGENTID, @now, @now)
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="LOGMESSAGE" DataType="String" MaxLength="4000"/>
+    </FormFields>
+  </FormMetaData>
+</AddDataFormTemplateSpec>
