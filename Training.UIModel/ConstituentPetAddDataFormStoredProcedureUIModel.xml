@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ConstituentPet.Add.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ConstituentPetAddDataFormStoredProcedureUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ConstituentPetAddDataFormStoredProcedure.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\training\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

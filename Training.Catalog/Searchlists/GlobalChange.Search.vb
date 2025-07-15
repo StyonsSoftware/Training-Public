@@ -13,9 +13,11 @@ Public NotInheritable Class GlobalChangeSearch
             .AppendLine("  GC.ID AS GLOBALCHANGEID")
             .AppendLine(" ,GC.[NAME] AS GLOBALCHANGENAME")
             .AppendLine(" ,GCC.DISPLAYNAME AS GLOBALCHANGECATALOGDISPLAYNAME")
+            .AppendLine(" ,CA_ADDEDBY.USERNAME AS ADDEDBYUSERNAME")
             .AppendLine("FROM")
             .AppendLine("  GLOBALCHANGE GC")
             .AppendLine("  JOIN GLOBALCHANGECATALOG GCC ON GCC.ID = GC.GLOBALCHANGECATALOGID")
+            .AppendLine("  LEFT JOIN CHANGEAGENT CA_ADDEDBY ON CA_ADDEDBY.ID = GC.ADDEDBYID")
             .AppendLine("WHERE 1=1")
             If Not String.IsNullOrEmpty(GLOBALCHANGENAME) Then
                 .AppendLine("  AND GC.[NAME] LIKE '%" + GLOBALCHANGENAME + "%'")

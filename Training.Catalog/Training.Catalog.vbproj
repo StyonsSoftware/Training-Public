@@ -76,6 +76,9 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="File upload\ConstituentPetCLR.Add.vb">
+      <DependentUpon>ConstituentPetCLR.Add.xml</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="Record operations\RecordOperationSpec.RecordOperation1.vb" />
     <Compile Include="Searchlists\GlobalChange.Search.vb">
@@ -147,6 +150,12 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="File upload\ConstituentPetCLR.Add.xml" />
+    <EmbeddedResource Include="Images\catdog_16.png" />
+    <EmbeddedResource Include="Images\catdog_32.png" />
+    <EmbeddedResource Include="File upload\ConstituentPet.Add.xml" />
+    <EmbeddedResource Include="File upload\ConstituentPet.Package.xml" />
+    <EmbeddedResource Include="File upload\USR_SSC_CONSTITUENTPET.xml" />
     <EmbeddedResource Include="View forms\ConstituentInfoBox.View.xml" />
     <EmbeddedResource Include="SQL Functions\UFN_BUILDURL_FOR_PAGEID_RECORDID.xml" />
     <EmbeddedResource Include="Tables\USR_CONSTITUENT.Table.xml" />
@@ -196,6 +205,8 @@
     <EmbeddedResource Include="BBIS\BBISLog.Add.xml" />
     <EmbeddedResource Include="Batch\USR_BATCHINTERACTION.Table.xml" />
     <EmbeddedResource Include="Batch\InteractionBatchExtension.xml" />
+    <EmbeddedResource Include="Add forms\NamingOpportunityAddForm.Extension.xml" />
+    <EmbeddedResource Include="Add forms\StepAddForm2.Extension DOES NOT WORK.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

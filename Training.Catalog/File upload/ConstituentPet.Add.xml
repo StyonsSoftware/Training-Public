@@ -1,0 +1,88 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="71638530-465f-4a01-ad1e-ffdc5e6c1041"
+  Name="Constituent Pet Add Data Form (Stored Procedure)"
+  Description="A stored-procedure based data form for adding constituent pet records"
+  Author="Styons Software"
+  DataFormInstanceID="fc0bf5fd-8763-4bff-b65d-06053344eaf9"
+  RecordType="Constituent Pet"
+  c:SecurityUIFolder="SSC\Training\Constituent Pet"
+  FormHeader="Add a constituent pet"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_SSC_USP_DATAFORMTEMPLATE_ADD_CONSTITUENTPET">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+create procedure USR_SSC_USP_DATAFORMTEMPLATE_ADD_CONSTITUENTPET
+(
+  @ID               uniqueidentifier = null output
+ ,@CONSTITUENTID    uniqueidentifier
+ ,@CHANGEAGENTID    uniqueidentifier = null
+ ,@PETNAME          nvarchar(1000)   = ''
+ ,@PETIMAGE         varbinary(max)   = null
+ ,@PETIMAGEFILENAME nvarchar(500)    = ''
+)
+as
+begin
+  set nocount on
+  set @ID = isnull(@id,newid())
+  if @CHANGEAGENTID is null
+    exec USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID output
+  declare @now datetime = getdate()
+
+  begin try
+    insert into USR_SSC_CONSTITUENTPET
+      (ID, CONSTITUENTID, PETNAME, PETIMAGE, PETIMAGEFILENAME, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    values
+      (@ID, @CONSTITUENTID, @PETNAME, @PETIMAGE, @PETIMAGEFILENAME, @CHANGEAGENTID, @CHANGEAGENTID, @now, @now)
+  end try
+  begin catch
+    exec USP_RAISE_ERROR
+    return 1
+  end catch
+  return 0
+end
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="PETNAME" Caption="Pet name" DataType="String" MaxLength="1000"/>
+      <FormField FieldID="PETIMAGE" Caption="Pet image" DataType="Binary">
+        <File FileNameFieldID="PETIMAGEFILENAME"/>
+      </FormField>
+      <FormField FieldID="PETIMAGEFILENAME" Caption="Pet image file" Required="true" MaxLength="500" Multiline="false" DataType="String"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentPetAddDataFormStoredProcedureUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ConstituentPetAddDataFormStoredProcedure.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterOrAddPageActionGroups>
+          <AlterOrAddPageActionGroup Caption="Demo" ID="7da57a8d-4066-4ffc-9aae-891811d6a969">
+            <AddAction>
+              <Action ID="7bf7ba2d-5615-4892-a093-0f792129347a" Caption="Constituent Pet (SP)" ImageKey="CATALOG:Training.Catalog.dll,Training.Catalog.catdog_16.png">
+                <ShowAddDataForm DataFormID="fc0bf5fd-8763-4bff-b65d-06053344eaf9" xmlns="bb_appfx_commontypes">
+                  <ActionContext>
+                    <PageContextID/>
+                  </ActionContext>
+                </ShowAddDataForm>
+              </Action>
+            </AddAction>
+          </AlterOrAddPageActionGroup>
+        </AlterOrAddPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</AddDataFormTemplateSpec>

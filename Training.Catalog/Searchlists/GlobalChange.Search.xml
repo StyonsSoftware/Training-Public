@@ -28,8 +28,9 @@
   <Output TranslationField="GLOBALCHANGENAME" PrimaryKeyField="GLOBALCHANGEID">
     <OutputFields>
       <OutputField FieldID="GLOBALCHANGEID" Caption="ID" DataType="Guid" IsHidden="true"/>
-      <OutputField FieldID="GLOBALCHANGENAME" Caption="Global change" DataType="String"/>
+      <OutputField FieldID="GLOBALCHANGENAME" Caption="Global change" DataType="String" />
       <OutputField FieldID="GLOBALCHANGECATALOGDISPLAYNAME" Caption="Global change type" DataType="String"/>
+      <OutputField FieldID="ADDEDBYUSERNAME" Caption="Added by" DataType="String"/>
     </OutputFields>
   </Output>
 </SearchListSpec>

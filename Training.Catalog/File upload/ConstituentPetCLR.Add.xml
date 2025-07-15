@@ -1,0 +1,52 @@
+<AddDataFormTemplateSpec 
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="55805f82-7e85-41bc-95d1-10652956bffa" 
+  Name="Constituent Pet Add Data Form (CLR)"
+  Description="A stored-procedure based data form for adding constituent pet records"
+  Author="Styons Software"
+  DataFormInstanceID="3f2dddfd-f4ba-46b3-b54e-de188bcdcca1" 
+  RecordType="Constituent PetCL R"
+  c:SecurityUIFolder="Constituent PetCL R"
+  FormHeader="Add a constituent petcl r"
+  >
+  <CLRDataForm AssemblyName="Training.Catalog" ClassName="Training.Catalog.ConstituentPetCLRAddDataForm"/>
+
+  <Context ContextRecordType="Constituent" RecordIDParameter="CONSTITUENTID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="PETNAME" Caption="Pet name" DataType="String" MaxLength="1000"/>
+      <FormField FieldID="PETIMAGE" Caption="Pet image" DataType="Binary">
+        <File FileNameFieldID="PETIMAGEFILENAME"/>
+      </FormField>
+      <FormField FieldID="PETIMAGEFILENAME" Caption="Pet image file" Required="true" MaxLength="500" Multiline="false" DataType="String"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.ConstituentPetAddDataFormStoredProcedureUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/ConstituentPetAddDataFormStoredProcedure.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+  <AlterExistingPages xmlns="bb_appfx_pagedefinition">
+    <AlterPages>
+      <AlterPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+        <AlterOrAddPageActionGroups>
+          <AlterOrAddPageActionGroup Caption="Demo" ID="7da57a8d-4066-4ffc-9aae-891811d6a969">
+            <AddAction>
+              <Action ID="fbcaab59-31e7-422a-b2ea-ed0937fabf8f" Caption="Constituent Pet (CLR)" ImageKey="CATALOG:Training.Catalog.dll,Training.Catalog.catdog_16.png">
+                <ShowAddDataForm DataFormID="3f2dddfd-f4ba-46b3-b54e-de188bcdcca1" xmlns="bb_appfx_commontypes">
+                  <ActionContext>
+                    <PageContextID/>
+                  </ActionContext>
+                </ShowAddDataForm>
+              </Action>
+            </AddAction>
+          </AlterOrAddPageActionGroup>
+        </AlterOrAddPageActionGroups>
+      </AlterPage>
+    </AlterPages>
+  </AlterExistingPages>
+</AddDataFormTemplateSpec>

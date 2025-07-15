@@ -1,0 +1,19 @@
+﻿<div id="#MAP#NamingOpportunityAddFormAddDataForm">
+  <h2 id="#MAP#FORMHEADER_value"></h2>
+  <table>
+    <tr id="#MAP#FIELD1_container">
+      <td></td>
+      <td>
+        <input id="#MAP#FIELD1_value" type="checkbox" style="width: auto;" />
+        <label for="#MAP#FIELD1_value"></label>
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+  You CAN just put a <script> tag directly in here, but that code will not reliably fire after the form renders.
+  so if your goal is to manipulate fields on the form, you need to use an external file, and hook into the "render" function
+  that Blackbaud provides in the UIModel's javascript namespace.
+  That render method will wait until the form is done rendering, so that the fields you want to manipulate are actually there.
+  -->
+<!--SCRIPT:/browser/htmlforms/custom/training/NamingOpportunityAddFormAddDataForm.js-->

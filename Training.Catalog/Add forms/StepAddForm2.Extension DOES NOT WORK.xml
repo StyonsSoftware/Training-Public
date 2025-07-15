@@ -1,0 +1,70 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="d7fd772b-b8c8-414b-9eb7-3433739ded48"
+  Name="Step Add Form2 Add Data Form"
+  Description="A data form for adding step add form2 records"
+  Author="Styons Software"
+  DataFormInstanceID="d4d5ccb3-10ec-4e1d-83b5-94c309a6a2e3"
+  RecordType="Interaction"
+  c:SecurityUIFolder="Training"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_STEPADDFORM2">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_STEPADDFORM2
+(
+  @ID            UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@INTERACTIONID UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID UNIQUEIDENTIFIER = NULL
+ ,@EVENTID       UNIQUEIDENTIFIER = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @ID = ISNULL(@ID,NEWID())
+  IF @CHANGEAGENTID IS NULL
+    EXEC USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID OUTPUT
+  DECLARE @NOW DATETIME = GETDATE()
+
+  BEGIN TRY
+    --Extensions always fire *after* their parent form.
+    --So we can safely assume that the new interaction exists.
+    --note that the "@INTERACTIONID" is the *context* of this extension.
+    --you can control the name of the context id in the "<Context" tag below.
+    IF @EVENTID IS NOT NULL
+    BEGIN
+      --This will FAIL with a constraint violation:
+      --CK_INTERACTION_EVENTIDNOTPRESENTWHENSTEP
+      UPDATE INTERACTION
+      SET
+        EVENTID     = @EVENTID
+       ,DATECHANGED = @NOW
+       ,CHANGEDBYID = @CHANGEAGENTID
+      WHERE ID = @INTERACTIONID
+    END
+  END TRY
+  BEGIN CATCH
+    EXEC USP_RAISE_ERROR
+    RETURN 1
+  END CATCH
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Interaction" RecordIDParameter="INTERACTIONID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="EVENTID" Caption="Event" DataType="Guid">
+        <SearchList SearchListID="21452a39-7c7d-4334-8b89-6c0ea619acec" EnableQuickFind="true"/>
+      </FormField>
+    </FormFields>
+  </FormMetaData>
+  
+  <c:DataFormExtension DataFormInstanceID="b6dc6978-cbb4-49ca-9a33-43e0ff635671" RenderStyle="Tab" TabCaption="Event"/>
+</AddDataFormTemplateSpec>

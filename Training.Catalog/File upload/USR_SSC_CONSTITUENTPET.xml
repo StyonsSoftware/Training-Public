@@ -1,0 +1,24 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="549d3125-aff3-4780-8a9e-926d822bdb5d"
+  Name="Constituent Pet"
+  Description="Stores information about pets, including pictures"
+  Author="Styons Software"
+  Tablename="USR_SSC_CONSTITUENTPET"
+  IsBuiltIn="false"
+  >
+  <Fields>
+    <ForeignKeyField Name="CONSTITUENTID" ForeignTable="CONSTITUENT" Cardinality="ManyToOne" Description="Constituent owner of the pet.  One person can have more than one pet."/>
+    <TextField Name="PETNAME" Length="1000" Description="Name of the pet"/>
+    <BinaryField Name="PETIMAGE" Required="true" Description="Picture of the pet"/>
+    <TextField Name="PETIMAGEFILENAME" Length="500" Required="true" Description="File name of the pet picture"/>
+  </Fields>
+  <Indexes>
+    <Index>
+      <IndexFields>
+        <IndexField Name="CONSTITUENTID"/>
+      </IndexFields>
+    </Index>
+  </Indexes>
+</TableSpec>

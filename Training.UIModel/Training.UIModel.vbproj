@@ -62,6 +62,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Blackbaud\SDK\DLLReferences\Blackbaud.AppFx.AddressValidation.Server.dll</HintPath>
     </Reference>
+    <Reference Include="Blackbaud.AppFx.NamingOpportunity.UIModel, Version=4.0.186.3501, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Blackbaud\sdkversions\37\SDK\DLLReferences\Blackbaud.AppFx.NamingOpportunity.UIModel.dll</HintPath>
+    </Reference>
     <Reference Include="Blackbaud.AppFx.ProspectResearch.UIModel, Version=4.0.186.3403, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Blackbaud\sdkversions\34\SDK\DLLReferences\Blackbaud.AppFx.ProspectResearch.UIModel.dll</HintPath>
@@ -159,6 +163,10 @@
       <DependentUpon>ConstituentInteractionViewFormExtensionUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ConstituentInteractionViewFormExtensionUIModel.vb" />
+    <Compile Include="ConstituentPetAddDataFormStoredProcedureUIModel.CodeGen.vb">
+      <DependentUpon>ConstituentPetAddDataFormStoredProcedureUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConstituentPetAddDataFormStoredProcedureUIModel.vb" />
     <Compile Include="CopyEventStubEditDataFormUIModel.CodeGen.vb">
       <DependentUpon>CopyEventStubEditDataFormUIModel.vb</DependentUpon>
     </Compile>
@@ -184,6 +192,10 @@
     </Compile>
     <Compile Include="ImageDemoViewDataFormUIModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="NamingOpportunityAddFormAddDataFormUIModel.CodeGen.vb">
+      <DependentUpon>NamingOpportunityAddFormAddDataFormUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NamingOpportunityAddFormAddDataFormUIModel.vb" />
     <Compile Include="OrderOfOperationsEditDataFormUIModel.CodeGen.vb">
       <DependentUpon>OrderOfOperationsEditDataFormUIModel.vb</DependentUpon>
     </Compile>
@@ -210,6 +222,21 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\File upload\ConstituentPet.Add.xml">
+      <Link>LinkedSpecs\ConstituentPet.Add.xml</Link>
+    </None>
+    <Content Include="ConstituentPetAddDataFormStoredProcedureUIModel.xml">
+      <DependentUpon>ConstituentPetAddDataFormStoredProcedureUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\ConstituentPetAddDataFormStoredProcedure.html" />
+    <None Include="..\Training.Catalog\Add forms\NamingOpportunityAddForm.Extension.xml">
+      <Link>LinkedSpecs\NamingOpportunityAddForm.Extension.xml</Link>
+    </None>
+    <Content Include="htmlforms\custom\training\NamingOpportunityAddFormAddDataForm.html" />
+    <Content Include="htmlforms\custom\training\NamingOpportunityAddFormAddDataForm.js" />
+    <Content Include="NamingOpportunityAddFormAddDataFormUIModel.xml">
+      <DependentUpon>NamingOpportunityAddFormAddDataFormUIModel.vb</DependentUpon>
+    </Content>
     <None Include="..\Training.Catalog\View forms\ConstituentInfoBox.View.xml">
       <Link>LinkedSpecs\ConstituentInfoBox.View.xml</Link>
     </None>

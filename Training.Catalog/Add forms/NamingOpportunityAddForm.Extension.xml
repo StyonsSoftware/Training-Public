@@ -1,0 +1,61 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="89327343-4573-4803-a4ec-aa66897efc90"
+  Name="Naming Opportunity Add Form Add Data Form"
+  Description="Extends the OOB 'Naming Opportunity Add Form' with custom fields"
+  Author="Styons Software"
+  DataFormInstanceID="9e4bfd9b-fb67-4255-81ce-b52d0a436ab7"
+  RecordType="Naming Opportunity"
+  c:SecurityUIFolder="Naming Opportunities"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_NAMINGOPPORTUNITYADDFORM">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_NAMINGOPPORTUNITYADDFORM
+(
+  @ID                  UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@NAMINGOPPORTUNITYID UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID       UNIQUEIDENTIFIER = NULL
+ ,@FIELD1              BIT              = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @ID = ISNULL(@ID,NEWID())
+  IF @CHANGEAGENTID IS NULL
+    EXEC USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID OUTPUT
+  DECLARE @NOW DATETIME = GETDATE()
+
+  BEGIN TRY
+    SELECT 'DEMO'
+  END TRY
+  BEGIN CATCH
+    EXEC USP_RAISE_ERROR
+    RETURN 1
+  END CATCH
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <Context ContextRecordType="Naming Opportunity" RecordIDParameter="NAMINGOPPORTUNITYID"/>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="FIELD1" DataType="Boolean"/>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.NamingOpportunityAddFormAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/training/NamingOpportunityAddFormAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+
+  <DataFormExtension DataFormInstanceID="0de72747-ef6a-4c70-a13c-bf0c8c5ce5f2" RenderStyle="AfterParent" TabCaption="Extended fields" xmlns="bb_appfx_commontypes"/>
+</AddDataFormTemplateSpec>

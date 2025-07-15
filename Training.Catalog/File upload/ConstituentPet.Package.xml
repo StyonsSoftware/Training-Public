@@ -1,0 +1,18 @@
+<PackageSpec
+  xmlns="bb_appfx_package"
+  xmlns:c="bb_appfx_commontypes"
+  ID="210c2011-3a24-4dac-8a9b-d9fd3094f557"
+  Name="Constituent Pet Package"
+  Description="Loads the Constituent Pet customization"
+  Author="Styons Software"
+  >
+  <!--Note that the constituent pet customization includes a picture of the pet, and is suitable to use for training related to managing binary files-->
+  <DependencyList xmlns="bb_appfx_commontypes">
+    <!--Tables-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.USR_SSC_CONSTITUENTPET.Table.xml"/>
+
+    <!--Add forms-->
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentPet.Add.xml"/>
+    <Dependency CatalogAssembly="Training.Catalog.dll" CatalogItem="Training.Catalog.ConstituentPetCLR.Add.xml"/>
+  </DependencyList>
+</PackageSpec>
