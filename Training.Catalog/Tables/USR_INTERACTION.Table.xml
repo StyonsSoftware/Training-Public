@@ -1,0 +1,25 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="6aaaa1d8-33f5-4bda-98ae-853adf383385"
+  Name="Interaction extension (1-1)"
+  Description="A one-to-one extension of the OOB 'Interaction' table."
+  Author="Styons Software"
+  Tablename="USR_INTERACTION"
+  IsBuiltIn="false"
+  PrimaryKeyAsForeignKeyTablename="INTERACTION"
+  >
+  <!--The 'PrimaryKeyAsForeignKeyTablename' tag means that this new table will have a 1-1 relationship with the OOB Interaction table.
+  Importantly, it also means that the ID column of this table will be the *same* as the ID in the INTERACTION table.
+  So if you wanted to join them together, you'd do this:
+  
+  SELECT *
+  FROM
+    INTERACTION I
+    LEFT JOIN USR_INTERACTION UI ON UI.ID = I.ID /*exact same value in their IDs*/
+  -->
+
+  <Fields>
+    <ForeignKeyField Name="EVENTID" ForeignTable="EVENT" OnDelete="SetToNull" Description="Event associated with this interad"/>
+  </Fields>
+</TableSpec>

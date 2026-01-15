@@ -33,16 +33,26 @@ BEGIN
     --So we can safely assume that the new interaction exists.
     --note that the "@INTERACTIONID" is the *context* of this extension.
     --you can control the name of the context id in the "<Context" tag below.
-    IF @EVENTID IS NOT NULL
+   
+    --Update / Insert a record in the custom table to reflect their choice
+    IF EXISTS(SELECT * FROM USR_INTERACTION WHERE ID = @INTERACTIONID)
     BEGIN
-      --This will FAIL with a constraint violation:
-      --CK_INTERACTION_EVENTIDNOTPRESENTWHENSTEP
-      UPDATE INTERACTION
+      UPDATE USR_INTERACTION
       SET
         EVENTID     = @EVENTID
        ,DATECHANGED = @NOW
        ,CHANGEDBYID = @CHANGEAGENTID
-      WHERE ID = @INTERACTIONID
+      WHERE ID = @INTERACTIONID    
+    END
+    ELSE
+    BEGIN
+      IF @EVENTID IS NOT NULL
+      BEGIN
+        INSERT INTO USR_INTERACTION
+          (ID, EVENTID, DATEADDED, DATECHANGED, ADDEDBYID, CHANGEDBYID)
+        VALUES
+          (@INTERACTIONID, @EVENTID, @NOW, @NOW, @CHANGEAGENTID, @CHANGEAGENTID)
+      END
     END
   END TRY
   BEGIN CATCH

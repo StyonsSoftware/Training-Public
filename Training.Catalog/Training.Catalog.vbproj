@@ -150,6 +150,8 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Images\orange_grid_32.png" />
+    <EmbeddedResource Include="Tables\USR_INTERACTION.Table.xml" />
     <EmbeddedResource Include="File upload\ConstituentPetCLR.Add.xml" />
     <EmbeddedResource Include="Images\catdog_16.png" />
     <EmbeddedResource Include="Images\catdog_32.png" />
@@ -206,7 +208,8 @@
     <EmbeddedResource Include="Batch\USR_BATCHINTERACTION.Table.xml" />
     <EmbeddedResource Include="Batch\InteractionBatchExtension.xml" />
     <EmbeddedResource Include="Add forms\NamingOpportunityAddForm.Extension.xml" />
-    <EmbeddedResource Include="Add forms\StepAddForm2.Extension DOES NOT WORK.xml" />
+    <EmbeddedResource Include="Add forms\StepAddForm2.Extension.xml" />
+    <EmbeddedResource Include="Datalist\CheckboxListFilter.Datalist.xml" />
     <Content Include="EncryptedFieldDemo\SQL\LookupExample.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

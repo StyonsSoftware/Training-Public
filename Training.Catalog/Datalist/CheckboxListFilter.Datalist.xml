@@ -1,0 +1,106 @@
+<DataListSpec
+  xmlns="bb_appfx_datalist"
+  xmlns:c="bb_appfx_commontypes"
+  ID="7b190f5c-773f-4dd4-b97a-35aee8dc165a"
+  Name="Checkbox List Filter Data List"
+  Description="A data list that uses a checkbox list style filter"
+  Author="Styons Software"
+  c:SecurityUIFolder="SSC\Training"
+  >
+  <SPDataList SPName="USR_USP_DATALIST_CHECKBOXLISTFILTER">
+    <c:CreateProcedureSQL>
+      <![CDATA[
+CREATE PROCEDURE USR_USP_DATALIST_CHECKBOXLISTFILTER
+(
+  @ADDRESSINCLUDECODE TINYINT = NULL
+ ,@ADDRESSTYPECODES   XML     = NULL
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  IF @ADDRESSINCLUDECODE = 1
+  BEGIN
+    DECLARE @ADDRESSTYPECODEIDS TABLE
+    (
+      ADDRESSTYPECODEID UNIQUEIDENTIFIER
+    )
+    INSERT INTO @ADDRESSTYPECODEIDS
+    SELECT
+      T.c.value('(ADDRESSTYPECODEID)[1]','uniqueidentifier')
+    from
+      @ADDRESSTYPECODES.nodes('/ADDRESSTYPECODES/ITEM') T(c)     
+    where 1 = T.c.value('(ADDRESSTYPECODEINCLUDE)[1]','bit')
+  
+    SELECT
+      A.ADDRESSBLOCK    AS ADDRESSBLOCK
+     ,A.CITY            AS CITY
+     ,A.POSTCODE        AS POSTCODE
+     ,ATC.[DESCRIPTION] AS ADDRESSTYPECODEDESCRIPTION
+     ,A.ID              AS ADDRESSID
+    FROM
+      [ADDRESS] A
+      LEFT JOIN ADDRESSTYPECODE ATC ON ATC.ID = A.ADDRESSTYPECODEID
+      JOIN @ADDRESSTYPECODEIDS CBX ON CBX.ADDRESSTYPECODEID = A.ADDRESSTYPECODEID
+  END
+  ELSE
+  BEGIN
+    SELECT
+      A.ADDRESSBLOCK    AS ADDRESSBLOCK
+     ,A.CITY            AS CITY
+     ,A.POSTCODE        AS POSTCODE
+     ,ATC.[DESCRIPTION] AS ADDRESSTYPECODEDESCRIPTION
+     ,A.ID              AS ADDRESSID
+    FROM
+      [ADDRESS] A
+      LEFT JOIN ADDRESSTYPECODE ATC ON ATC.ID = A.ADDRESSTYPECODEID
+  END
+END
+]]>
+    </c:CreateProcedureSQL>
+  </SPDataList>
+  <Parameters>
+    <FormMetaData xmlns="bb_appfx_commontypes">
+      <FormFields>
+        <FormField FieldID="ADDRESSINCLUDECODE" DataType="TinyInt" Caption="Address types to include">
+          <ValueList>
+            <Items>
+              <Item>
+                <Value>0</Value>
+                <Label>All address types</Label>
+              </Item>
+              <Item>
+                <Value>1</Value>
+                <Label>Selected address types</Label>
+              </Item>
+            </Items>
+          </ValueList>
+        </FormField>
+        <FormField FieldID="ADDRESSTYPECODES" DataType="XML" Caption="Address types">
+          <Collection>
+            <Fields>
+              <FormField FieldID="ADDRESSTYPECODEDESCRIPTION" DataType="String"/>
+              <FormField FieldID="ADDRESSTYPECODEINCLUDE" DataType="Boolean"/>
+              <FormField FieldID="ADDRESSTYPECODEID" DataType="Guid" Hidden="true"/>
+            </Fields>
+          </Collection>
+        </FormField>
+      </FormFields>
+
+      <WebUIComponent>
+        <UIModel AssemblyName="Training.UIModel.dll" ClassName="Training.UIModel.CheckboxListFilterDataListUIModel"/>
+        <WebUI>
+          <ExternalResource Url="browser/htmlforms/custom/training/CheckboxListFilterDataList.html"/>
+        </WebUI>
+      </WebUIComponent>
+    </FormMetaData>
+  </Parameters>
+  <Output>
+    <OutputFields>
+      <OutputField FieldID="ADDRESSBLOCK" Caption="Address" DataType="String"/>
+      <OutputField FieldID="CITY" Caption="City" DataType="String"/>
+      <OutputField FieldID="POSTCODE" Caption="Post code" DataType="String"/>
+      <OutputField FieldID="ADDRESSTYPECODEDESCRIPTION" Caption="Address type" DataType="String"/>
+      <OutputField IsHidden="true" DataType="Guid" FieldID="ADDRESSID" Caption="ID"/>
+    </OutputFields>
+  </Output>
+</DataListSpec>

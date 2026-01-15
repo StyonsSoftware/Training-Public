@@ -1,12 +1,12 @@
 <DataListSpec 
-    xmlns="bb_appfx_datalist"
-    xmlns:c="bb_appfx_commontypes"
-    ID="80758453-2497-4ae0-8bcc-f7f70064ef4b"
-    Name="All Addresses Data List"
-    Description="A data list showing all addresses"
-    Author="Styons Software"
-    c:SecurityUIFolder="All Addresses"
-    >
+  xmlns="bb_appfx_datalist"
+  xmlns:c="bb_appfx_commontypes"
+  ID="80758453-2497-4ae0-8bcc-f7f70064ef4b"
+  Name="All Addresses Data List"
+  Description="A data list showing all addresses"
+  Author="Styons Software"
+  c:SecurityUIFolder="SSC\Training"
+  >
   <SPDataList SPName="USR_USP_DATALIST_ALLADDRESSES">
     <c:CreateProcedureSQL>
       <![CDATA[

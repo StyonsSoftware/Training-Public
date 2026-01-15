@@ -6,10 +6,17 @@
   Description="A page for displaying information about datalist demo records"
   Author="Styons Software"
   >
-  <PageHeader Caption="Datalist Demo" ImageKey="REPLACE_WITH_IMAGEKEY"/>
+  <PageHeader Caption="Datalist Demos" ImageKey="CATALOG:Training.Catalog,Training.Catalog.orange_grid_32.png"/>
   <Tabs>
-    <Tab ID="c392c501-54c9-412e-82dc-135ef11d4d36" Caption="Tab caption">
+    <Tab ID="c392c501-54c9-412e-82dc-135ef11d4d36" Caption="Datalist demos">
       <Sections>
+        <Section ID="1a2522f7-0f8e-4a7f-a4f1-292c41103817" Caption="Checkbox list filters">
+          <DataList ID="7b190f5c-773f-4dd4-b97a-35aee8dc165a">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+        </Section>
         <Section ID="2ee24fc9-de0b-4298-90e5-19464750ac49" Caption="Section caption">
           <DataList ID="cbf417e9-3071-40fc-9a73-2f270e122147">
             <RenderStyle>

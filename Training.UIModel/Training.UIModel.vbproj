@@ -123,6 +123,13 @@
       <DependentUpon>AllAddressesDataListUIModel.vb</DependentUpon>
     </Compile>
     <Compile Include="AllAddressesDataListUIModel.vb" />
+    <Compile Include="CheckboxListFilterDataListADDRESSTYPECODESUIModel.CodeGen.vb">
+      <DependentUpon>CheckboxListFilterDataListUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CheckboxListFilterDataListUIModel.CodeGen.vb">
+      <DependentUpon>CheckboxListFilterDataListUIModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CheckboxListFilterDataListUIModel.vb" />
     <Compile Include="CollectionDrivenSDLAddDataFormLOCATIONSUIModel.CodeGen.vb">
       <DependentUpon>CollectionDrivenSDLAddDataFormUIModel.vb</DependentUpon>
     </Compile>
@@ -222,6 +229,13 @@
     <None Include="postbuild.bat" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Training.Catalog\Datalist\CheckboxListFilter.Datalist.xml">
+      <Link>LinkedSpecs\CheckboxListFilter.Datalist.xml</Link>
+    </None>
+    <Content Include="CheckboxListFilterDataListUIModel.xml">
+      <DependentUpon>CheckboxListFilterDataListUIModel.vb</DependentUpon>
+    </Content>
+    <Content Include="htmlforms\custom\training\CheckboxListFilterDataList.html" />
     <None Include="..\Training.Catalog\File upload\ConstituentPet.Add.xml">
       <Link>LinkedSpecs\ConstituentPet.Add.xml</Link>
     </None>
